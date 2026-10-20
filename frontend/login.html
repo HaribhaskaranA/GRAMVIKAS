@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - GRAMVIKAS AI</title>
+  <meta name="description" content="Every Citizen Informed. Every Village Progress Tracked.">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/jpeg" href="/assets/favicon.jpeg">
+  
+  <!-- Google Fonts: Inter, Noto Sans Tamil, Noto Sans Devanagari -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5.3 CDN & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- App Styles -->
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <style>
+    body {
+      background-color: var(--bg-app);
+      background-image: radial-gradient(circle at 10% 20%, rgba(248, 231, 201, 0.45) 0%, transparent 20%),
+                        radial-gradient(circle at 90% 80%, rgba(6, 78, 59, 0.08) 0%, transparent 25%);
+      min-height: 100vh;
+    }
+    .login-container-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 12px 35px -5px rgba(6, 78, 59, 0.15);
+      background: var(--bg-surface);
+    }
+    .login-branding-panel {
+      background-color: var(--color-primary);
+      color: var(--color-champagne);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 3rem 2.5rem;
+      position: relative;
+    }
+    .login-branding-panel::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      background: radial-gradient(circle at top right, rgba(248, 231, 201, 0.12), transparent 70%);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container min-vh-100 d-flex flex-column justify-content-center py-4 py-md-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10 col-xl-9">
+
+        <div class="login-container-card">
+          <div class="row g-0">
+
+            <!-- LEFT BRANDING PANEL (Emerald Ink #064E3B & Champagne #F8E7C9) -->
+            <div class="col-lg-5 login-branding-panel d-none d-lg-flex">
+              <div>
+                <div class="d-flex align-items-center gap-3 mb-4">
+                  <div style="width: 52px; height: 52px; border-radius: 12px; overflow: hidden; border: 2px solid var(--color-champagne); box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                    <img src="/assets/logo.jpeg" alt="GRAMVIKAS Logo" style="width: 100%; height: 100%; object-fit: cover;">
+                  </div>
+                  <div>
+                    <h3 class="fw-bold mb-0 text-white" style="letter-spacing: 0.5px; color: var(--color-champagne) !important;">GRAMVIKAS AI</h3>
+                    <span class="small text-uppercase" style="color: var(--color-champagne-border); font-weight: 600; letter-spacing: 1px;">கிராம விகாஸ் &bull; Rural Portal</span>
+                  </div>
+                </div>
+
+                <p class="mb-4 text-white-50" style="font-size: 0.95rem; line-height: 1.6;">
+                  “Every Citizen Informed. Every Village Progress Tracked.”
+                </p>
+
+                <!-- High-Contrast Feature Badges -->
+                <div class="d-flex flex-column gap-3 mb-4">
+                  <div class="p-2 px-3 rounded d-flex align-items-center gap-2" style="background: rgba(248, 231, 201, 0.12); border: 1px solid rgba(248, 231, 201, 0.25);">
+                    <i class="bi bi-flower1" style="color: var(--color-champagne); font-size: 1.2rem;"></i>
+                    <span class="small text-white">AI Crop Doctor &mdash; 67 Disease Models</span>
+                  </div>
+                  <div class="p-2 px-3 rounded d-flex align-items-center gap-2" style="background: rgba(248, 231, 201, 0.12); border: 1px solid rgba(248, 231, 201, 0.25);">
+                    <i class="bi bi-buildings" style="color: var(--color-champagne); font-size: 1.2rem;"></i>
+                    <span class="small text-white">13-Stage Transparent Village Works</span>
+                  </div>
+                  <div class="p-2 px-3 rounded d-flex align-items-center gap-2" style="background: rgba(248, 231, 201, 0.12); border: 1px solid rgba(248, 231, 201, 0.25);">
+                    <i class="bi bi-telephone-outbound" style="color: var(--color-champagne); font-size: 1.2rem;"></i>
+                    <span class="small text-white">Multilingual Village Voice Broadcasts</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Active Nav Pill Preview / WCAG Trust Banner -->
+              <div class="pt-3 border-top" style="border-color: rgba(248, 231, 201, 0.2) !important;">
+                <div class="d-flex align-items-center justify-content-between">
+                  <span class="badge" style="background-color: var(--color-champagne); color: var(--color-primary); font-weight: 700;">
+                    <i class="bi bi-shield-check me-1"></i> HIGH TRUST SECURE
+                  </span>
+                  <span class="small" style="color: var(--color-champagne-border);">v3.0 Emerald</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT LOGIN FORM PANEL -->
+            <div class="col-12 col-lg-7 p-4 p-sm-5 bg-white">
+              <!-- Mobile Top Logo (Visible only on < lg screens) -->
+              <div class="text-center mb-4 d-lg-none">
+                <div class="d-inline-flex align-items-center justify-content-center mb-2" style="width: 58px; height: 58px; border-radius: 12px; overflow: hidden; border: 2px solid var(--color-primary);">
+                  <img src="/assets/logo.jpeg" alt="GRAMVIKAS Logo" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <h3 class="fw-bold mb-0" style="color: var(--color-primary);">GRAMVIKAS AI</h3>
+                <p class="text-muted small">“Every Citizen Informed. Every Village Progress Tracked.”</p>
+              </div>
+
+              <div class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
+                <h4 class="fw-bold mb-0" style="color: var(--color-primary);">Sign In to Account</h4>
+                <span class="badge" style="background: rgba(6, 78, 59, 0.12); color: var(--color-primary); font-weight: 700; font-size: 0.75rem;"><i class="bi bi-shield-check"></i> LIVE GOVERNANCE PORTAL</span>
+              </div>
+
+              <form id="login-form" class="d-flex flex-column gap-3">
+                <div>
+                  <label class="form-label small fw-semibold">Email Address</label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-light text-muted"><i class="bi bi-envelope"></i></span>
+                    <input type="email" class="form-control" id="login-email" placeholder="name@gramvikas.in" value="citizen@gramvikas.in" required>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <label class="form-label small fw-semibold mb-0">Password</label>
+                    <a href="#" id="link-forgot-password" class="small text-decoration-none fw-semibold" style="color: var(--color-primary);">Forgot password?</a>
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-text bg-light text-muted"><i class="bi bi-lock"></i></span>
+                    <input type="password" class="form-control" id="login-password" placeholder="••••••••" value="Citizen@123" required>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-gv-primary py-2 fw-bold mt-1" id="btn-login-submit">
+                  <i class="bi bi-box-arrow-in-right me-1"></i> Sign In to Portal
+                </button>
+              </form>
+
+              <!-- 1-Click Demo Accounts Selector -->
+              <div class="mt-4 pt-3 border-top">
+                <span class="small fw-bold text-muted text-uppercase d-block mb-2" style="letter-spacing: 0.5px; font-size: 0.72rem;">
+                  Instant Demo Access (Click to autofill):
+                </span>
+                <div class="d-flex flex-column gap-2">
+                  <button type="button" class="btn btn-sm btn-outline-secondary text-start d-flex justify-content-between align-items-center btn-fill-demo" data-email="citizen@gramvikas.in" data-pass="Citizen@123">
+                    <span><i class="bi bi-person text-success me-1"></i> <strong>Citizen:</strong> Muthuvel K</span>
+                    <span class="badge bg-light text-dark border">citizen@</span>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary text-start d-flex justify-content-between align-items-center btn-fill-demo" data-email="official@gramvikas.in" data-pass="Official@123">
+                    <span><i class="bi bi-patch-check text-primary me-1"></i> <strong>Verified Official:</strong> Dr. Selvi (BDO)</span>
+                    <span class="badge bg-light text-dark border">official@</span>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary text-start d-flex justify-content-between align-items-center btn-fill-demo" data-email="pending@gramvikas.in" data-pass="Pending@123">
+                    <span><i class="bi bi-clock-history text-warning me-1"></i> <strong>Pending Official:</strong> R. Anbarasan</span>
+                    <span class="badge bg-light text-dark border">pending@</span>
+                  </button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary text-start d-flex justify-content-between align-items-center btn-fill-demo" data-email="admin@gramvikas.in" data-pass="Admin@123">
+                    <span><i class="bi bi-shield-lock text-danger me-1"></i> <strong>System Admin:</strong> State Gov Admin</span>
+                    <span class="badge bg-light text-dark border">admin@</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="text-center mt-4 pt-2 border-top">
+                <span class="small text-muted">Don't have an account yet?</span>
+                <a href="/register" class="small fw-bold ms-1 text-decoration-none" style="color: var(--color-primary);">Register here &rarr;</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { auth } from "/js/auth.js";
+    import { showToast } from "/js/components/toast.js";
+    import { openModal } from "/js/components/modal.js";
+    import { api } from "/js/api.js";
+
+    // Auto fill buttons
+    document.querySelectorAll(".btn-fill-demo").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.getElementById("login-email").value = btn.getAttribute("data-email");
+        document.getElementById("login-password").value = btn.getAttribute("data-pass");
+        showToast(`Filled credentials for ${btn.getAttribute("data-email")}`, "info", 1500);
+      });
+    });
+
+    // Login Form Submit
+    document.getElementById("login-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById("btn-login-submit");
+      btn.disabled = true;
+      btn.innerHTML = `<span class="spinner-border spinner-border-sm me-1"></span> Signing In...`;
+
+      try {
+        const email = document.getElementById("login-email").value;
+        const pass = document.getElementById("login-password").value;
+        const user = await auth.login(email, pass);
+        showToast(`Welcome back, ${user.full_name}!`, "success");
+        const landing = auth.getRoleLandingPath(user);
+        setTimeout(() => window.location.href = landing, 600);
+      } catch (err) {
+        showToast(err.message, "error");
+        btn.disabled = false;
+        btn.innerHTML = `<i class="bi bi-box-arrow-in-right me-1"></i> Sign In to Portal`;
+      }
+    });
+
+    // Forgot password modal
+    document.getElementById("link-forgot-password").addEventListener("click", (e) => {
+      e.preventDefault();
+      openModal({
+        title: "Reset Password (Demo OTP Flow)",
+        bodyHtml: `
+          <div class="d-flex flex-column gap-3">
+            <p class="small text-muted mb-0">Enter your registered email address to receive a verification OTP.</p>
+            <input type="email" class="form-control" id="reset-email" placeholder="name@gramvikas.in" value="citizen@gramvikas.in">
+            <div class="alert alert-info py-2 px-3 small mb-0">
+              <i class="bi bi-info-circle me-1"></i> For this demonstration, your verification code is pre-set to <strong>123456</strong>.
+            </div>
+            <input type="text" class="form-control" id="reset-otp" placeholder="Enter 6-digit OTP (e.g. 123456)" value="123456">
+            <input type="password" class="form-control" id="reset-new-pass" placeholder="Enter new password (min 6 chars)" value="NewPass@123">
+          </div>
+        `,
+        confirmText: "Update Password",
+        onConfirm: async () => {
+          const email = document.getElementById("reset-email")?.value;
+          const otp = document.getElementById("reset-otp")?.value;
+          const newPass = document.getElementById("reset-new-pass")?.value;
+          if (!email || !otp || !newPass) {
+            alert("All fields are required.");
+            return false;
+          }
+          try {
+            await api.post("/api/auth/reset-password", { email, otp, new_password: newPass });
+            showToast("Password updated successfully! You may now sign in.", "success");
+            document.getElementById("login-password").value = newPass;
+            return true;
+          } catch (err) {
+            alert("Reset error: " + err.message);
+            return false;
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

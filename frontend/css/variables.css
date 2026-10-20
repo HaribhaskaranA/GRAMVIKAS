@@ -1,0 +1,108 @@
+/* ==============================================================================
+   GRAMVIKAS AI - DESIGN SYSTEM & ACCESSIBILITY VARIABLES
+   Emerald Ink (#064E3B) & Champagne (#F8E7C9) Palette
+   ============================================================================== */
+
+:root {
+  /* Brand Palette - Emerald Ink & Champagne */
+  --color-primary: #064E3B;         /* Emerald Ink */
+  --color-primary-dark: #04392B;    /* Primary Hover / Darker Shade */
+  --color-primary-light: #0B6B52;   /* Medium Emerald */
+  
+  --color-champagne: #F8E7C9;        /* Champagne Accent */
+  --color-champagne-border: #D9B982; /* Deep Border / Accent Text */
+  --color-champagne-light: #FCF5E9;  /* Soft Warm Champagne Tint */
+  --color-champagne-dark: #C9A466;   /* Rich Gold / Deep Accent */
+
+  /* Legacy & Semantic Brand Aliases mapped to Emerald & Champagne */
+  --color-emerald: #064E3B;
+  --color-navy: #064E3B;             /* Emerald Ink replaces Navy */
+  --color-navy-dark: #04392B;        /* Darker Emerald */
+  --color-navy-light: #0A5C46;
+  --color-green: #064E3B;            /* Emerald Ink */
+  --color-green-dark: #04392B;
+  --color-green-light: #EBF7F2;      /* Light Emerald Surface */
+  --color-saffron: #D9B982;          /* Champagne Deep Border / Accent */
+  --color-saffron-dark: #B89255;
+  --color-saffron-light: #F8E7C9;     /* Champagne */
+
+  /* Neutrals & Surfaces */
+  --bg-app: #FAF7F2;                 /* Soft Warm Cream */
+  --bg-surface: #FFFFFF;             /* Crisp Card Surface */
+  --bg-surface-alt: #F4EFE6;         /* Warm Surface Tint */
+  --border-color: #E8DFD1;           /* Warm Neutral Border */
+  --border-color-dark: #D4C5B0;
+
+  /* Typography */
+  --text-primary: #1F2937;
+  --text-heading: #064E3B;           /* Primary Headings & Strong Text */
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --text-inverse: #FFFFFF;
+  --text-champagne: #F8E7C9;
+  --font-family-base: 'Inter', 'Noto Sans Tamil', 'Noto Sans Devanagari', system-ui, -apple-system, sans-serif;
+  --font-scale: 1rem; /* Dynamically adjusted via A-, A, A+ buttons */
+
+  /* Status Tokens */
+  --status-success: #059669;
+  --status-warning: #D97706;
+  --status-danger: #DC2626;
+  --status-info: #0284C7;
+  --status-purple: #7C3AED;
+
+  /* Dimensions */
+  --sidebar-width: 268px;
+  --header-height: 68px;
+  --bottom-nav-height: 64px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 3px 0 rgba(6, 78, 59, 0.05);
+  --shadow-md: 0 4px 8px -1px rgba(6, 78, 59, 0.08), 0 2px 4px -1px rgba(6, 78, 59, 0.04);
+  --shadow-lg: 0 10px 18px -3px rgba(6, 78, 59, 0.12), 0 4px 6px -2px rgba(6, 78, 59, 0.06);
+}
+
+/* Font Scaler Variations */
+body.font-sm {
+  --font-scale: 0.875rem;
+}
+
+body.font-md {
+  --font-scale: 1rem;
+}
+
+body.font-lg {
+  --font-scale: 1.15rem;
+}
+
+/* High Contrast & Focus Accessibility */
+*:focus-visible {
+  outline: 3px solid var(--color-champagne-border) !important;
+  outline-offset: 2px !important;
+}
+
+/* Low-Bandwidth Mode */
+body.low-bandwidth img:not(.essential-icon),
+body.low-bandwidth .project-cover-img,
+body.low-bandwidth .hero-bg,
+body.low-bandwidth .leaflet-tile-container {
+  display: none !important;
+}
+
+body.low-bandwidth .low-bandwidth-placeholder {
+  display: flex !important;
+  background: var(--bg-surface-alt);
+  color: var(--text-muted);
+  border: 1px dashed var(--border-color);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+}
+
+body.low-bandwidth * {
+  animation: none !important;
+  transition: none !important;
+}

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="100%" height="100%">
+  <defs>
+    <linearGradient id="schemeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#04392B"/>
+      <stop offset="100%" stop-color="#064E3B"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="240" fill="url(#schemeGrad)"/>
+  
+  <!-- Pillar / Government Building Outline -->
+  <rect x="50" y="190" width="300" height="15" rx="3" fill="#F8E7C9"/>
+  <rect x="70" y="175" width="260" height="15" rx="2" fill="#F8E7C9"/>
+  <!-- Columns -->
+  <rect x="90" y="95" width="22" height="80" rx="3" fill="#F8E7C9" opacity="0.8"/>
+  <rect x="145" y="95" width="22" height="80" rx="3" fill="#F8E7C9" opacity="0.8"/>
+  <rect x="233" y="95" width="22" height="80" rx="3" fill="#F8E7C9" opacity="0.8"/>
+  <rect x="288" y="95" width="22" height="80" rx="3" fill="#F8E7C9" opacity="0.8"/>
+  <!-- Pediment / Roof -->
+  <polygon points="60,95 200,35 340,95" fill="#F8E7C9"/>
+
+  <!-- Golden Rupee Coin in Center -->
+  <circle cx="200" cy="135" r="46" fill="#F8E7C9" stroke="#D9B982" stroke-width="4"/>
+  <circle cx="200" cy="135" r="38" fill="none" stroke="#064E3B" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="200" y="152" fill="#064E3B" font-family="system-ui, sans-serif" font-weight="900" font-size="44" text-anchor="middle">₹</text>
+
+  <!-- Welfare Subsidy Star -->
+  <polygon points="330,45 335,58 348,60 338,70 341,83 330,76 319,83 322,70 312,60 325,58" fill="#F8E7C9"/>
+</svg>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - GRAMVIKAS AI</title>
+  <meta name="description" content="Register as Citizen or Official on GRAMVIKAS AI">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/jpeg" href="/assets/favicon.jpeg">
+  
+  <!-- Google Fonts: Inter, Noto Sans Tamil, Noto Sans Devanagari -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5.3 CDN & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- App Styles -->
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <style>
+    body {
+      background-color: var(--bg-app);
+      background-image: radial-gradient(circle at 10% 20%, rgba(248, 231, 201, 0.45) 0%, transparent 20%),
+                        radial-gradient(circle at 90% 80%, rgba(6, 78, 59, 0.08) 0%, transparent 25%);
+      min-height: 100vh;
+    }
+    #register-role-tabs .nav-link {
+      color: var(--text-secondary);
+      border-radius: var(--radius-sm);
+      transition: all 0.15s ease-in-out;
+    }
+    #register-role-tabs .nav-link.active {
+      background-color: var(--color-primary) !important;
+      color: var(--color-champagne) !important;
+      box-shadow: 0 2px 6px rgba(6, 78, 59, 0.25);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container min-vh-100 d-flex flex-column justify-content-center py-4 py-md-5">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+
+        <!-- Brand Banner with Logo -->
+        <div class="text-center mb-4">
+          <div class="d-inline-flex align-items-center justify-content-center mb-2" style="width: 58px; height: 58px; border-radius: 12px; overflow: hidden; border: 2px solid var(--color-primary); box-shadow: 0 4px 12px rgba(6, 78, 59, 0.2);">
+            <img src="/assets/logo.jpeg" alt="GRAMVIKAS Logo" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <h2 class="fw-bold mb-1" style="color: var(--color-primary);">GRAMVIKAS AI</h2>
+          <p class="text-muted small">Create your citizen or government official account</p>
+        </div>
+
+        <!-- Registration Card with Tabs -->
+        <div class="card-gv p-4 p-sm-5 shadow-sm">
+          <!-- Role Selector Nav Tabs -->
+          <ul class="nav nav-pills nav-fill mb-4 p-1 rounded border bg-light" id="register-role-tabs" role="tablist">
+            <li class="nav-item">
+              <button class="nav-link active fw-bold small py-2" id="tab-citizen-btn" data-role="citizen">
+                <i class="bi bi-person me-1"></i> Rural Citizen
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link fw-bold small py-2" id="tab-official-btn" data-role="official">
+                <i class="bi bi-patch-check me-1"></i> Government Official
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link fw-bold small py-2" id="tab-admin-btn" data-role="admin">
+                <i class="bi bi-shield-lock me-1"></i> System Admin
+              </button>
+            </li>
+          </ul>
+
+          <!-- Citizen Form -->
+          <form id="form-register-citizen" class="d-flex flex-column gap-3">
+            <h6 class="fw-bold mb-1 border-bottom pb-2" style="color: var(--color-primary);">Citizen Registration Details</h6>
+            <div class="row g-2">
+              <div class="col-sm-6">
+                <label class="form-label small fw-semibold">Full Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control form-control-sm" id="reg-cit-name" placeholder="Muthuvel K" required>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label small fw-semibold">Phone Number <span class="text-danger">*</span></label>
+                <input type="tel" class="form-control form-control-sm" id="reg-cit-phone" placeholder="9840123456" required>
+              </div>
+            </div>
+
+            <div class="row g-2">
+              <div class="col-sm-6">
+                <label class="form-label small fw-semibold">Email Address <span class="text-danger">*</span></label>
+                <input type="email" class="form-control form-control-sm" id="reg-cit-email" placeholder="muthu@gmail.com" required>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label small fw-semibold">Password <span class="text-danger">*</span></label>
+                <input type="password" class="form-control form-control-sm" id="reg-cit-password" placeholder="••••••••" required>
+              </div>
+            </div>
+
+            <div class="row g-2">
+              <div class="col-sm-4">
+                <label class="form-label small fw-semibold">Village Panchayat <span class="text-danger">*</span></label>
+                <input type="text" class="form-control form-control-sm" id="reg-cit-village" value="Melmaruvathur" required>
+              </div>
+              <div class="col-sm-4">
+                <label class="form-label small fw-semibold">Block / Taluk <span class="text-danger">*</span></label>
+                <input type="text" class="form-control form-control-sm" id="reg-cit-block" value="Cheyyur" required>
+              </div>
+              <div class="col-sm-4">
+                <label class="form-label small fw-semibold">District <span class="text-danger">*</span></label>
+                <input type="text" class="form-control form-control-sm" id="reg-cit-district" value="Chengalpattu" required>
+              </div>
+            </div>
+
+            <div class="row g-2">
+              <div class="col-sm-4">
+                <label class="form-label small fw-semibold">Age</label>
+                <input type="number" class="form-control form-control-sm" id="reg-cit-age" value="38" min="18" max="100">
+              </div>
+              <div class="col-sm-4">
+                <label class="form-label small fw-semibold">Gender</label>
+                <select class="form-select form-select-sm" id="reg-cit-gender">
+                  <option value="male" selected>Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="col-sm-4">
+                <label class="form-label small fw-semibold">Ration Card Type</label>
+                <select class="form-select form-select-sm" id="reg-cit-ration">
+                  <option value="PHH" selected>PHH (Priority Household)</option>
+                  <option value="AAY">AAY (Antyodaya)</option>
+                  <option value="NPHH">NPHH (Non-Priority)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row g-2">
+              <div class="col-sm-4">
+                <label class="form-label small fw-semibold">Occupation</label>
+                <input type="text" class="form-control form-control-sm" id="reg-cit-occupation" value="Farmer">
+              </div>
+              <div class="col-sm-4">
+                <label class="form-label small fw-semibold">Landholding (Acres)</label>
+                <input type="number" step="0.5" class="form-control form-control-sm" id="reg-cit-land" value="2.0">
+              </div>
+              <div class="col-sm-4">
+                <label class="form-label small fw-semibold">Annual Income (₹)</label>
+                <input type="number" class="form-control form-control-sm" id="reg-cit-income" value="65000">
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-gv-primary py-2 mt-2 fw-bold" id="btn-submit-citizen">
+              <i class="bi bi-person-check-fill me-1"></i> Complete Citizen Registration
+            </button>
+          </form>
+
+          <!-- Official Form -->
+          <form id="form-register-official" class="d-flex flex-column gap-3" style="display: none !important;">
+            <div class="card-highlight-champagne p-3 rounded small mb-2">
+              <i class="bi bi-info-circle-fill me-1"></i>
+              <strong>Government Official Registration:</strong> All official accounts require clearance by the Block Development Officer (BDO) or System Administrator before gaining full platform management access.
+            </div>
+
+            <h6 class="fw-bold mb-1 border-bottom pb-2" style="color: var(--color-primary);">Official Verification Details</h6>
+            <div class="row g-2">
+              <div class="col-sm-6">
+                <label class="form-label small fw-semibold">Officer Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control form-control-sm" id="reg-off-name" placeholder="Dr. S. Radhakrishnan" required>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label small fw-semibold">Official Email <span class="text-danger">*</span></label>
+                <input type="email" class="form-control form-control-sm" id="reg-off-email" placeholder="officer@tn.gov.in" required>
+              </div>
+            </div>
+
+            <div class="row g-2">
+              <div class="col-sm-6">
+                <label class="form-label small fw-semibold">Official Mobile <span class="text-danger">*</span></label>
+                <input type="tel" class="form-control form-control-sm" id="reg-off-phone" placeholder="9443123456" required>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label small fw-semibold">Password <span class="text-danger">*</span></label>
+                <input type="password" class="form-control form-control-sm" id="reg-off-password" placeholder="••••••••" required>
+              </div>
+            </div>
+
+            <div class="row g-2">
+              <div class="col-sm-6">
+                <label class="form-label small fw-semibold">Designation / Role <span class="text-danger">*</span></label>
+                <input type="text" class="form-control form-control-sm" id="reg-off-designation" placeholder="e.g. Block Development Officer (BDO)" value="Block Development Officer" required>
+              </div>
+              <div class="col-sm-6">
+                <label class="form-label small fw-semibold">Department <span class="text-danger">*</span></label>
+                <input type="text" class="form-control form-control-sm" id="reg-off-dept" placeholder="e.g. Rural Development & Panchayat Raj" value="Rural Development & Panchayat Raj" required>
+              </div>
+            </div>
+
+            <div class="row g-2">
+              <div class="col-sm-4">
+                <label class="form-label small fw-semibold">Jurisdiction Level</label>
+                <select class="form-select form-select-sm" id="reg-off-level">
+                  <option value="block" selected>Block Level</option>
+                  <option value="village">Village Level (VAO)</option>
+                  <option value="district">District Level</option>
+                </select>
+              </div>
+              <div class="col-sm-4">
+                <label class="form-label small fw-semibold">Assigned Area Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control form-control-sm" id="reg-off-area" value="Cheyyur Block" required>
+              </div>
+              <div class="col-sm-4">
+                <label class="form-label small fw-semibold">District <span class="text-danger">*</span></label>
+                <input type="text" class="form-control form-control-sm" id="reg-off-district" value="Chengalpattu" required>
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label small fw-semibold">Employee ID / Staff Number <span class="text-danger">*</span></label>
+              <input type="text" class="form-control form-control-sm font-monospace" id="reg-off-empid" placeholder="e.g. TN-GOV-RD-2026-948" required>
+            </div>
+
+            <button type="submit" class="btn btn-gv-primary py-2 mt-2 fw-bold" id="btn-submit-official">
+              <i class="bi bi-shield-check me-1"></i> Submit Official Verification Request
+            </button>
+          </form>
+
+          <!-- Admin Tab Info -->
+          <div id="admin-role-info" style="display: none !important;">
+            <div class="p-4 border rounded text-center bg-light">
+              <i class="bi bi-shield-lock-fill text-danger" style="font-size: 2.5rem;"></i>
+              <h5 class="fw-bold mt-2" style="color: var(--color-primary);">Root Administrator Access Restricted</h5>
+              <p class="small text-muted mb-3">
+                State Root Administrator privileges are provisioned via secure configuration. For demo testing, please sign in directly with the pre-seeded root governance administrator account.
+              </p>
+              <div class="p-3 border rounded bg-white font-monospace small mb-3">
+                <strong>Email:</strong> admin@gramvikas.in<br>
+                <strong>Password:</strong> Admin@123
+              </div>
+              <a href="/login" class="btn btn-gv-primary btn-sm">
+                <i class="bi bi-box-arrow-in-right me-1"></i> Proceed to Login Page
+              </a>
+            </div>
+          </div>
+
+          <div class="text-center mt-4 pt-2 border-top">
+            <span class="small text-muted">Already have an account?</span>
+            <a href="/login" class="small fw-bold ms-1 text-decoration-none" style="color: var(--color-primary);">Sign in here &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { auth } from "/js/auth.js";
+    import { showToast } from "/js/components/toast.js";
+
+    // Tab switcher
+    const citForm = document.getElementById("form-register-citizen");
+    const offForm = document.getElementById("form-register-official");
+    const adminInfo = document.getElementById("admin-role-info");
+
+    document.querySelectorAll("#register-role-tabs button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#register-role-tabs button").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const role = btn.getAttribute("data-role");
+
+        citForm.style.setProperty("display", role === "citizen" ? "flex" : "none", "important");
+        offForm.style.setProperty("display", role === "official" ? "flex" : "none", "important");
+        adminInfo.style.setProperty("display", role === "admin" ? "block" : "none", "important");
+      });
+    });
+
+    // Handle Citizen Register
+    citForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById("btn-submit-citizen");
+      btn.disabled = true;
+      btn.innerHTML = `<span class="spinner-border spinner-border-sm me-1"></span> Registering...`;
+
+      try {
+        const payload = {
+          full_name: document.getElementById("reg-cit-name").value,
+          phone: document.getElementById("reg-cit-phone").value,
+          email: document.getElementById("reg-cit-email").value,
+          password: document.getElementById("reg-cit-password").value,
+          village: document.getElementById("reg-cit-village").value,
+          block: document.getElementById("reg-cit-block").value,
+          district: document.getElementById("reg-cit-district").value,
+          age: parseInt(document.getElementById("reg-cit-age").value) || 35,
+          gender: document.getElementById("reg-cit-gender").value,
+          annual_income: parseFloat(document.getElementById("reg-cit-income").value) || 0,
+          landholding_acres: parseFloat(document.getElementById("reg-cit-land").value) || 0,
+          occupation: document.getElementById("reg-cit-occupation").value,
+          ration_card_type: document.getElementById("reg-cit-ration").value,
+          has_disability: false,
+          preferred_language: "ta"
+        };
+
+        const user = await auth.registerCitizen(payload);
+        showToast("Registration successful! Welcome to GRAMVIKAS AI.", "success");
+        setTimeout(() => window.location.href = auth.getRoleLandingPath(user), 600);
+      } catch (err) {
+        showToast(err.message, "error");
+        btn.disabled = false;
+        btn.innerHTML = `<i class="bi bi-person-check-fill me-1"></i> Complete Citizen Registration`;
+      }
+    });
+
+    // Handle Official Register
+    offForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById("btn-submit-official");
+      btn.disabled = true;
+      btn.innerHTML = `<span class="spinner-border spinner-border-sm me-1"></span> Submitting Verification...`;
+
+      try {
+        const payload = {
+          full_name: document.getElementById("reg-off-name").value,
+          email: document.getElementById("reg-off-email").value,
+          phone: document.getElementById("reg-off-phone").value,
+          password: document.getElementById("reg-off-password").value,
+          designation: document.getElementById("reg-off-designation").value,
+          department: document.getElementById("reg-off-dept").value,
+          assigned_level: document.getElementById("reg-off-level").value,
+          assigned_area: document.getElementById("reg-off-area").value,
+          district: document.getElementById("reg-off-district").value,
+          employee_id_number: document.getElementById("reg-off-empid").value
+        };
+
+        const user = await auth.registerOfficial(payload);
+        showToast("Official application registered! Clearance pending.", "info");
+        setTimeout(() => window.location.href = "/verification-pending", 600);
+      } catch (err) {
+        showToast(err.message, "error");
+        btn.disabled = false;
+        btn.innerHTML = `<i class="bi bi-shield-check me-1"></i> Submit Official Verification Request`;
+      }
+    });
+  </script>
+</body>
+</html>
