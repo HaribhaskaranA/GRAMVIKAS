@@ -1,0 +1,2649 @@
+/**
+ * GRAMVIKAS AI - Offline & Client-Side Resilient Fallback Data Mirror.
+ * Used when running serverless or when network connectivity is slow/offline.
+ */
+
+export const FALLBACK_DATA = {
+  "users": [
+    {
+      "id": "11111111-1111-1111-1111-111111111111",
+      "email": "citizen@gramvikas.in",
+      "hashed_password": "$2b$12$6jCUj.DAZIhOrrhbIdC/L.f0XFFZ48./ti9qkuExpkY4qp/HkBV5m",
+      "full_name": "Muthuvel K",
+      "phone": "+91 98401 23456",
+      "role": "citizen",
+      "is_active": true,
+      "created_at": "2026-10-16T21:38:13.695233",
+      "citizen_profile": {
+        "village": "Melmaruvathur",
+        "gram_panchayat": "Melmaruvathur Panchayat",
+        "block": "Cheyyur",
+        "district": "Chengalpattu",
+        "state": "Tamil Nadu",
+        "pincode": "603319",
+        "age": 42,
+        "gender": "male",
+        "annual_income": 75000.0,
+        "occupation": "farmer",
+        "landholding_acres": 1.8,
+        "social_category": "OBC",
+        "ration_card_type": "PHH",
+        "has_disability": false,
+        "preferred_language": "ta",
+        "low_bandwidth_mode": false
+      }
+    },
+    {
+      "id": "22222222-2222-2222-2222-222222222222",
+      "email": "official@gramvikas.in",
+      "hashed_password": "$2b$12$US6Tw6eObevsTypWfzx9NuKBYbFVQ0u9tP5Y0XsD7RMimSOlZJ0sG",
+      "full_name": "Dr. Selvi Ramanathan",
+      "phone": "+91 98409 87654",
+      "role": "official",
+      "is_active": true,
+      "created_at": "2026-10-16T21:38:13.695233",
+      "official_profile": {
+        "designation": "Block Development Officer (BDO)",
+        "department": "Rural Development & Panchayat Raj",
+        "assigned_level": "Block",
+        "assigned_area": "Cheyyur Block",
+        "district": "Chengalpattu",
+        "employee_id_number": "TN-GOV-RD-2018-842",
+        "verification_status": "approved",
+        "verified_at": "2026-10-16T21:38:13.695233",
+        "rejection_reason": null
+      }
+    },
+    {
+      "id": "33333333-3333-3333-3333-333333333333",
+      "email": "pending@gramvikas.in",
+      "hashed_password": "$2b$12$waSuESJe1GYQebPAZ870WerxuwLeFGwSPTO84RsL4tAk/XReOFg0G",
+      "full_name": "R. Anbarasan",
+      "phone": "+91 98405 55666",
+      "role": "official",
+      "is_active": true,
+      "created_at": "2026-10-17T21:38:13.695217",
+      "official_profile": {
+        "designation": "Panchayat Secretary",
+        "department": "Rural Development & Panchayat Raj",
+        "assigned_level": "Panchayat",
+        "assigned_area": "Madurantakam South",
+        "district": "Chengalpattu",
+        "employee_id_number": "TN-GOV-RD-2024-911",
+        "verification_status": "pending",
+        "verified_at": null,
+        "rejection_reason": null
+      }
+    },
+    {
+      "id": "44444444-4444-4444-4444-444444444444",
+      "email": "admin@gramvikas.in",
+      "hashed_password": "$2b$12$saD99cp6jVceqyBcSsyxCuAOp1j3ndy5Yr2ElCrnmW28I4GfHoAq2",
+      "full_name": "State Governance Admin",
+      "phone": "+91 98400 00001",
+      "role": "admin",
+      "is_active": true,
+      "created_at": "2026-10-16T21:38:13.695233"
+    }
+  ],
+  "schemes": [
+    {
+      "id": "a1111111-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+      "slug": "pm-kisan-samman-nidhi",
+      "title_en": "PM-KISAN Samman Nidhi",
+      "title_ta": "பிரதம மந்திரி கிசான் சம்மான் நிதி",
+      "title_hi": "पीएम किसान सम्मान निधि",
+      "department": "Ministry of Agriculture & Farmers Welfare",
+      "level": "central",
+      "category": "Agriculture",
+      "short_summary_en": "Direct income support of ₹6,000 per year for landholding farmer families across India in 3 equal installments.",
+      "short_summary_ta": "விவசாய குடும்பங்களுக்கு ஆண்டுக்கு ₹6,000 மூன்று தவணைகளில் நேரடி வங்கி பரிமாற்றம்.",
+      "short_summary_hi": "भूमिधारक किसान परिवारों को प्रति वर्ष ₹6,000 की प्रत्यक्ष आय सहायता 3 समान किस्तों में।",
+      "detailed_description_en": "Under the PM-KISAN scheme, all landholding farmer families with cultivable landholding in their names are eligible for financial assistance of Rs. 6000/- per year, payable in three equal four-monthly installments of Rs. 2000/- directly into their Aadhaar-linked bank accounts.",
+      "detailed_description_ta": "இத்திட்டத்தின் கீழ் சொந்த நிலம் வைத்துள்ள சிறு மற்றும் குறு விவசாய குடும்பங்களுக்கு தலா ₹2,000 வீதம் 3 தவணைகளில் ₹6,000 நேரடியாக அவர்களின் ஆதார் இணைக்கப்பட்ட வங்கிக் கணக்கில் வரவு வைக்கப்படுகிறது.",
+      "detailed_description_hi": "इस योजना के तहत खेती योग्य भूमि वाले सभी किसान परिवारों को तीन समान किस्तों में सालाना ₹6000 की आर्थिक मदद सीधे बैंक खाते में भेजी जाती है।",
+      "financial_benefit_amount": 6000.0,
+      "benefit_frequency": "annual",
+      "official_portal_url": "https://pmkisan.gov.in",
+      "helpline_number": "155261",
+      "is_active": true,
+      "is_demo": true,
+      "created_at": "2026-10-16T21:38:13.695233",
+      "criteria": {
+        "min_age": 18,
+        "max_age": 100,
+        "allowed_genders": [
+          "all"
+        ],
+        "max_annual_income": null,
+        "max_landholding_acres": 5.0,
+        "allowed_occupations": [
+          "farmer"
+        ],
+        "allowed_social_categories": [
+          "all"
+        ],
+        "allowed_ration_cards": [
+          "all"
+        ],
+        "requires_disability": false,
+        "required_documents": [
+          "Aadhaar Card",
+          "Land Ownership Record (Patta/Chitta)",
+          "Active Bank Passbook",
+          "Mobile Number linked to Aadhaar"
+        ],
+        "application_steps_en": [
+          "Visit Village Administrative Officer (VAO) or nearby e-Seva Centre",
+          "Submit Patta copy and complete Aadhaar biometric/OTP eKYC",
+          "Track beneficiary approval status online via PM-KISAN portal"
+        ],
+        "application_steps_ta": [
+          "கிராம நிர்வாக அலுவலர் (VAO) அல்லது அருகில் உள்ள இ-சேவை மையத்தை அணுகவும்",
+          "பட்டா நகல் மற்றும் ஆதார் eKYC சமர்ப்பிக்கவும்",
+          "இணையதளத்தில் நிலையை சரிபார்க்கவும்"
+        ],
+        "application_steps_hi": [
+          "ग्राम प्रशासनिक अधिकारी (VAO) या ई-सेवा केंद्र पर जाएं",
+          "पट्टा प्रति और आधार ईकेवाईसी जमा करें",
+          "पीएम-किसान पोर्टल पर स्थिति जांचें"
+        ]
+      }
+    },
+    {
+      "id": "a2222222-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+      "slug": "kalaignar-kanavu-illam",
+      "title_en": "Kalaignar Kanavu Illam Scheme",
+      "title_ta": "கலைஞர் கனவு இல்லம் திட்டம்",
+      "title_hi": "कलैग्नार कनावु इल्लम आवास योजना",
+      "department": "Rural Development & Panchayat Raj, Tamil Nadu",
+      "level": "state",
+      "category": "Housing",
+      "short_summary_en": "Pukka concrete house subsidy of ₹3.5 Lakhs to transform thatched and hut houses into climate-resilient homes.",
+      "short_summary_ta": "குடிசைகளை கான்கிரீட் வீடுகளாக மாற்ற ₹3.5 லட்சம் நிதி உதவி வழங்கும் திட்டம்.",
+      "short_summary_hi": "तमिलनाडु में कच्चे घरों को पक्के घरों में बदलने के लिए ₹3.5 लाख की वित्तीय सहायता।",
+      "detailed_description_en": "Kalaignar Kanavu Illam is Tamil Nadus flagship rural housing scheme aiming to make the state hut-free. Eligible rural beneficiaries living in kutcha dwellings receive Rs. 3,50,000 along with MGNREGA construction person-days and toilet assistance under SBM-G.",
+      "detailed_description_ta": "தமிழகத்தின் ஊரகப் பகுதிகளில் குடிசைகளை அகற்றி கான்கிரீட் வீடுகள் கட்ட ₹3,50,000 நிதி வழங்கப்படுகிறது. இத்துடன் மகாத்மா காந்தி திட்ட மனிதநாட்கள் ஊதியமும் வழங்கப்படும்.",
+      "detailed_description_hi": "तमिलनाडु में ग्रामीण झोपड़ियों को पक्के मकानों में बदलने के लिए ₹3.5 लाख का अनुदान।",
+      "financial_benefit_amount": 350000.0,
+      "benefit_frequency": "one_time",
+      "official_portal_url": "https://tnrd.tn.gov.in",
+      "helpline_number": "1800-425-4567",
+      "is_active": true,
+      "is_demo": true,
+      "created_at": "2026-10-16T21:38:13.695233",
+      "criteria": {
+        "min_age": 21,
+        "max_age": 90,
+        "allowed_genders": [
+          "all"
+        ],
+        "max_annual_income": 150000.0,
+        "max_landholding_acres": 2.5,
+        "allowed_occupations": [
+          "farmer",
+          "daily_wage",
+          "artisan",
+          "other"
+        ],
+        "allowed_social_categories": [
+          "all"
+        ],
+        "allowed_ration_cards": [
+          "AAY",
+          "PHH"
+        ],
+        "requires_disability": false,
+        "required_documents": [
+          "Smart Ration Card (PHH / AAY)",
+          "Aadhaar Card",
+          "Gram Panchayat House Site Patta / Title Deed",
+          "Income Certificate",
+          "Bank Account Passbook"
+        ],
+        "application_steps_en": [
+          "Apply during Special Gram Sabha meeting or BDO office",
+          "Field verification by Block Overseer and Panchayat Secretary",
+          "Geo-tagging of existing hut and sanction order issue",
+          "Direct DBT installment transfers upon construction stage verification"
+        ],
+        "application_steps_ta": [
+          "சிறப்பு கிராம சபை கூட்டம் அல்லது வட்டார வளர்ச்சி அலுவலகத்தில் விண்ணப்பிக்கவும்",
+          "ஊராட்சி செயலாளர் கள ஆய்வு செய்து சான்றளிப்பார்",
+          "குடிசை புவிசார் குறியீடு (Geo-tag) செய்யப்பட்டு நிதி விடுவிக்கப்படும்"
+        ],
+        "application_steps_hi": [
+          "विशेष ग्राम सभा या बीडीओ कार्यालय में आवेदन करें",
+          "पंचायत सचिव द्वारा स्थलीय सत्यापन",
+          "चरणबद्ध निर्माण प्रगति पर बैंक खाते में राशि ट्रांसफर"
+        ]
+      }
+    },
+    {
+      "id": "a3333333-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+      "slug": "mgnrega-100-day-employment",
+      "title_en": "Mahatma Gandhi NREGA (100-Day Work)",
+      "title_ta": "மகாத்மா காந்தி தேசிய ஊரக வேலை உறுதித் திட்டம்",
+      "title_hi": "महात्मा गांधी राष्ट्रीय ग्रामीण रोजगार गारंटी अधिनियम",
+      "department": "Ministry of Rural Development",
+      "level": "central",
+      "category": "Employment",
+      "short_summary_en": "Guaranteed 100 days of wage employment in a financial year to every rural adult household willing to do manual work.",
+      "short_summary_ta": "கிராமப்புற குடும்பங்களுக்கு 100 நாட்கள் சட்டப்பூர்வ ஊதிய வேலைவாய்ப்பு.",
+      "short_summary_hi": "ग्रामीण परिवारों को एक वित्तीय वर्ष में 100 दिनों के अकुशल शारीरिक कार्य की कानूनी गारंटी।",
+      "detailed_description_en": "The scheme guarantees at least 100 days of unskilled manual employment to adult members of any rural household willing to work. Wage rates in Tamil Nadu are updated annually with direct electronic transfers via DBT within 15 days of muster roll closure.",
+      "detailed_description_ta": "ஒவ்வொரு கிராமப்புற குடும்பத்திற்கும் ஆண்டிற்கு 100 நாட்கள் வேலைவாய்ப்பு உத்தரவாதம் அளிக்கப்படுகிறது. ஊதியம் நேரடியாக வங்கிக் கணக்கில் செலுத்தப்படும்.",
+      "detailed_description_hi": "ग्रामीण वयस्क सदस्यों को वर्ष में 100 दिन का अकुशल श्रम रोजगार गारंटी।",
+      "financial_benefit_amount": 319.0,
+      "benefit_frequency": "daily",
+      "official_portal_url": "https://nrega.nic.in",
+      "helpline_number": "1800-111-555",
+      "is_active": true,
+      "is_demo": true,
+      "created_at": "2026-10-16T21:38:13.695233",
+      "criteria": {
+        "min_age": 18,
+        "max_age": 80,
+        "allowed_genders": [
+          "all"
+        ],
+        "max_annual_income": null,
+        "max_landholding_acres": null,
+        "allowed_occupations": [
+          "all"
+        ],
+        "allowed_social_categories": [
+          "all"
+        ],
+        "allowed_ration_cards": [
+          "all"
+        ],
+        "requires_disability": false,
+        "required_documents": [
+          "Aadhaar Card",
+          "Smart Ration Card",
+          "Bank Passbook or Post Office Savings Account",
+          "2 Passport size photos"
+        ],
+        "application_steps_en": [
+          "Submit Form 1 application to Gram Panchayat office",
+          "Receive MGNREGA Job Card within 15 calendar days",
+          "Submit written work requisition to Panchayat President or Secretary",
+          "Receive daily wages credited to Aadhaar-seeded bank account every week"
+        ],
+        "application_steps_ta": [
+          "படிவம் 1-ஐ கிராம ஊராட்சி அலுவலகத்தில் சமர்ப்பிக்கவும்",
+          "15 நாட்களுக்குள் வேலை அட்டை (Job Card) பெறவும்",
+          "வேலை கேட்டு விண்ணப்பம் அளித்து ஊதிய பலன் பெறவும்"
+        ],
+        "application_steps_hi": [
+          "ग्राम पंचायत कार्यालय में प्रपत्र 1 जमा करें",
+          "15 दिनों के भीतर जॉब कार्ड प्राप्त करें",
+          "काम की मांग करें और 15 दिनों के भीतर काम पाएं"
+        ]
+      }
+    },
+    {
+      "id": "a4444444-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+      "slug": "tn-pudhumai-penn-scheme",
+      "title_en": "Pudhumai Penn Scheme (Higher Education)",
+      "title_ta": "புதுமைப் பெண் திட்டம்",
+      "title_hi": "पुधुमै पेन योजना (उच्च शिक्षा वित्तीय सहायता)",
+      "department": "Social Welfare & Women Empowerment, Tamil Nadu",
+      "level": "state",
+      "category": "Education",
+      "short_summary_en": "Monthly assistance of ₹1,000 for girl students pursuing undergraduate degrees who studied in government schools (Class 6-12).",
+      "short_summary_ta": "அரசுப் பள்ளிகளில் 6 முதல் 12 வரை படித்த மாணவிகளுக்கு பட்டப்படிப்பு முடியும் வரை மாதம் ₹1,000.",
+      "short_summary_hi": "सरकारी स्कूलों (कक्षा 6-12) से पढ़ी छात्राओं को स्नातक की पढ़ाई पूरी करने तक प्रतिमाह ₹1,000।",
+      "detailed_description_en": "Moovalur Ramamirtham Ammaiyar Higher Education Assurance Scheme provides Rs. 1,000 per month directly to girl students enrolled in recognized higher education institutions who studied in Tamil Nadu Government schools from classes 6 to 12.",
+      "detailed_description_ta": "அரசு பள்ளிகளில் படித்து உயர்கல்வி பயிலும் மாணவிகளின் இடைநிற்றலை தடுத்து, பெண்கல்வியை ஊக்குவிக்க மாதம் ₹1,000 வழங்கப்படுகிறது.",
+      "detailed_description_hi": "सरकारी स्कूलों से पढ़ी छात्राओं को कॉलेज स्तर पर आर्थिक सहायता प्रदान करने हेतु ₹1,000 प्रति माह।",
+      "financial_benefit_amount": 12000.0,
+      "benefit_frequency": "annual",
+      "official_portal_url": "https://pudhumaipenn.tn.gov.in",
+      "helpline_number": "044-25670845",
+      "is_active": true,
+      "is_demo": true,
+      "created_at": "2026-10-16T21:38:13.695233",
+      "criteria": {
+        "min_age": 17,
+        "max_age": 26,
+        "allowed_genders": [
+          "female"
+        ],
+        "max_annual_income": null,
+        "max_landholding_acres": null,
+        "allowed_occupations": [
+          "student"
+        ],
+        "allowed_social_categories": [
+          "all"
+        ],
+        "allowed_ration_cards": [
+          "all"
+        ],
+        "requires_disability": false,
+        "required_documents": [
+          "Government School Transfer Certificate / Bonafide (Class 6-12)",
+          "College Admission Bonafide / ID Card",
+          "Aadhaar Card",
+          "Personal Bank Account (Aadhaar Seeded)"
+        ],
+        "application_steps_en": [
+          "Register through the college nodal officer on Pudhumai Penn Portal",
+          "Upload school bonafide certificates verifying Govt school education",
+          "Direct monthly credit of Rs 1,000 to student account via PFMS"
+        ],
+        "application_steps_ta": [
+          "கல்லூரி ஒருங்கிணைப்பாளர் மூலம் புதுமைப் பெண் தளத்தில் பதியவும்",
+          "6 முதல் 12 வரை அரசுப் பள்ளி சான்றிதழ் சமர்ப்பிக்கவும்",
+          "மாதந்தோறும் வங்கி கணக்கில் ₹1,000 வரவு வைக்கப்படும்"
+        ],
+        "application_steps_hi": [
+          "कॉलेज नोडल अधिकारी के माध्यम से पुधुमै पेन पोर्टल पर पंजीकरण करें",
+          "सरकारी स्कूल बोनाफाइड अपलोड करें",
+          "मासिक ₹1,000 छात्र के खाते में प्राप्त करें"
+        ]
+      }
+    },
+    {
+      "id": "a5555555-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+      "slug": "jal-jeevan-mission-fhtc",
+      "title_en": "Jal Jeevan Mission - Har Ghar Jal",
+      "title_ta": "ஜல் ஜீவன் மிஷன் - கிராமப்புற குடிநீர் திட்டம்",
+      "title_hi": "जल जीवन मिशन - हर घर जल",
+      "department": "Department of Drinking Water & Sanitation",
+      "level": "central",
+      "category": "Drinking Water",
+      "short_summary_en": "Functional Household Tap Connection (FHTC) providing 55 liters per capita per day potable water to every rural home.",
+      "short_summary_ta": "ஒவ்வொரு கிராம வீட்டிற்கும் தலா 55 லிட்டர் பாதுகாக்கப்பட்ட குடிநீர் குழாய் இணைப்பு.",
+      "short_summary_hi": "प्रत्येक ग्रामीण घर में 55 लीटर प्रति व्यक्ति प्रतिदिन की दर से नल से स्वच्छ पेयजल आपूर्ति।",
+      "detailed_description_en": "Jal Jeevan Mission aims to ensure potable water supply in adequate quantity (55 lpcd) and prescribed quality on a long-term basis to every rural household through individual Functional Household Tap Connections.",
+      "detailed_description_ta": "கிராமப்புறங்களில் உள்ள அனைத்து வீடுகளுக்கும் பாதுகாக்கப்பட்ட தூய குடிநீரை குழாய் மூலம் வழங்க மத்திய மற்றும் மாநில அரசுகள் இணைந்து செயல்படுத்தும் திட்டம்.",
+      "detailed_description_hi": "ग्रामीण क्षेत्रों में हर घर तक शुद्ध पेयजल नल से पहुंचाने की महत्वाकांक्षी राष्ट्रीय योजना।",
+      "financial_benefit_amount": 0.0,
+      "benefit_frequency": "one_time",
+      "official_portal_url": "https://jaljeevanmission.gov.in",
+      "helpline_number": "1800-180-1551",
+      "is_active": true,
+      "is_demo": true,
+      "created_at": "2026-10-16T21:38:13.695233",
+      "criteria": {
+        "min_age": 18,
+        "max_age": 100,
+        "allowed_genders": [
+          "all"
+        ],
+        "max_annual_income": null,
+        "max_landholding_acres": null,
+        "allowed_occupations": [
+          "all"
+        ],
+        "allowed_social_categories": [
+          "all"
+        ],
+        "allowed_ration_cards": [
+          "all"
+        ],
+        "requires_disability": false,
+        "required_documents": [
+          "Aadhaar Card",
+          "House Tax Receipt / Property Document",
+          "Ration Card"
+        ],
+        "application_steps_en": [
+          "Register request with Village Water and Sanitation Committee (VWSC)",
+          "Site inspection and pipeline pressure feasibility check",
+          "Connection installed without upfront infrastructure cost"
+        ],
+        "application_steps_ta": [
+          "கிராம குடிநீர் மற்றும் சுகாதார குழுவிடம் கோரிக்கை பதியவும்",
+          "கள ஆய்வு மற்றும் குழாய் இணைப்பு வழங்கப்படுதல்"
+        ],
+        "application_steps_hi": [
+          "ग्राम जल एवं स्वच्छता समिति में पंजीकरण करें",
+          "निरीक्षण उपरांत निःशुल्क कनेक्शन प्राप्त करें"
+        ]
+      }
+    },
+    {
+      "id": "a6666666-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+      "slug": "cmchis-health-insurance-tn",
+      "title_en": "Chief Ministers Comprehensive Health Insurance (CMCHIS)",
+      "title_ta": "முதலமைச்சரின் விரிவான மருத்துவக் காப்பீட்டுத் திட்டம்",
+      "title_hi": "मुख्यमंत्री व्यापक स्वास्थ्य बीमा योजना",
+      "department": "Health & Family Welfare Department, Tamil Nadu",
+      "level": "state",
+      "category": "Health",
+      "short_summary_en": "Cashless hospital coverage up to ₹5 Lakhs per family per year across 1,000+ empanelled government and private hospitals.",
+      "short_summary_ta": "ஆண்டுக்கு ₹5 லட்சம் வரை கட்டணமில்லா மருத்துவ சிகிச்சை வழங்கும் காப்பீடு.",
+      "short_summary_hi": "प्रति परिवार प्रति वर्ष ₹5 लाख तक का कैशलेस अस्पताल उपचार कवर।",
+      "detailed_description_en": "CMCHIS provides cashless hospitalization for specific complications and diagnostic procedures up to Rs. 5,00,000 per family per annum. Covers rural households with annual family income below Rs. 1,20,000 and special occupational groups.",
+      "detailed_description_ta": "ஆண்டு வருமானம் ₹1,20,000-க்கு குறைவாக உள்ள குடும்பங்களுக்கு அரசு மற்றும் தனியார் மருத்துவமனைகளில் ₹5 லட்சம் வரை கட்டணமில்லா நவீன சிகிச்சை.",
+      "detailed_description_hi": "वार्षिक ₹5 लाख तक का कैशलेस स्वास्थ्य कवर सरकारी और निजी अस्पतालों में।",
+      "financial_benefit_amount": 500000.0,
+      "benefit_frequency": "annual",
+      "official_portal_url": "https://cmchistn.com",
+      "helpline_number": "1800-425-3993",
+      "is_active": true,
+      "is_demo": true,
+      "created_at": "2026-10-16T21:38:13.695233",
+      "criteria": {
+        "min_age": 0,
+        "max_age": 120,
+        "allowed_genders": [
+          "all"
+        ],
+        "max_annual_income": 120000.0,
+        "max_landholding_acres": null,
+        "allowed_occupations": [
+          "all"
+        ],
+        "allowed_social_categories": [
+          "all"
+        ],
+        "allowed_ration_cards": [
+          "AAY",
+          "PHH"
+        ],
+        "requires_disability": false,
+        "required_documents": [
+          "Smart Ration Card",
+          "Aadhaar Card of all family members",
+          "Income Certificate issued by Revenue Authority"
+        ],
+        "application_steps_en": [
+          "Visit District Collectorate or designated e-Seva kiosk",
+          "Biometric enrollment for CMCHIS smart card",
+          "Present card at any empanelled hospital counter for cashless admission"
+        ],
+        "application_steps_ta": [
+          "மாவட்ட ஆட்சியர் அலுவலகம் அல்லது இ-சேவை மையத்தை அணுகவும்",
+          "முதலமைச்சர் காப்பீட்டு அட்டை பெற விரல்ரேகை பதிவு செய்யவும்",
+          "அங்கீகரிக்கப்பட்ட மருத்துவமனைகளில் கட்டணமில்லா சிகிச்சை பெறவும்"
+        ],
+        "application_steps_hi": [
+          "जिला कलेक्ट्रेट या ई-सेवा केंद्र पर बायोमेट्रिक पंजीकरण करें",
+          "स्मार्ट कार्ड प्राप्त करें और पैनलबद्ध अस्पतालों में कैशलेस इलाज पाएं"
+        ]
+      }
+    }
+  ],
+  "saved_schemes": [
+    {
+      "id": "ed0213ed-7535-4a91-b90f-46c7e9daf660",
+      "user_id": "11111111-1111-1111-1111-111111111111",
+      "scheme_id": "a1111111-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+      "notes": "Patta applied at VAO office; awaiting verification.",
+      "created_at": "2026-10-16T21:38:13.695233"
+    },
+    {
+      "id": "f10cf86f-9175-4a06-a8ec-a525d2fc9377",
+      "user_id": "11111111-1111-1111-1111-111111111111",
+      "scheme_id": "a2222222-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+      "notes": "Applied in Gram Sabha; Overseer inspection due.",
+      "created_at": "2026-10-16T21:38:13.695233"
+    }
+  ],
+  "projects": [
+    {
+      "id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+      "code": "TN-CGL-2026-WTR-01",
+      "title_en": "Overhead Water Tank & Distribution Pipeline",
+      "title_ta": "மேல்நிலை நீர்த்தேக்கத் தொட்டி மற்றும் குழாய் பதிக்கும் திட்டம்",
+      "title_hi": "ओवरहेड पानी की टंकी और वितरण पाइपलाइन परियोजना",
+      "village": "Melmaruvathur",
+      "gram_panchayat": "Melmaruvathur Panchayat",
+      "block": "Cheyyur",
+      "district": "Chengalpattu",
+      "state": "Tamil Nadu",
+      "latitude": 12.4346,
+      "longitude": 79.8297,
+      "category": "Drinking Water",
+      "sanctioned_budget": 4200000.0,
+      "spent_budget": 3150000.0,
+      "contractor_name": "Kavitha Civil Infrastructure Ltd",
+      "contractor_contact": "+91-9443211223",
+      "current_stage": "quality_testing",
+      "progress_percentage": 75,
+      "start_date": "2026-02-10",
+      "expected_completion_date": "2026-11-30",
+      "nodal_officer_id": "22222222-2222-2222-2222-222222222222",
+      "nodal_officer_name": "Dr. Selvi Ramanathan (BDO)",
+      "description_en": "Construction of 60,000-liter capacity RCC elevated service reservoir with 4.8 km ductile iron underground distribution pipelines connecting 420 rural households in Melmaruvathur.",
+      "description_ta": "மேல்மருவத்தூரில் 420 குடும்பங்களுக்கு தூய குடிநீர் வழங்கும் வகையில் 60,000 லிட்டர் மேல்நிலை நீர்த்தேக்கத் தொட்டி மற்றும் 4.8 கி.மீ பகிர்மான குழாய் பதிக்கும் பணி.",
+      "description_hi": "मेलमरुवथुर में 420 परिवारों के लिए 60,000 लीटर क्षमता की पानी की टंकी और 4.8 किमी पाइपलाइन निर्माण।",
+      "cover_image_url": "https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=800&q=80",
+      "is_demo": true,
+      "created_at": "2026-10-16T21:38:13.695233",
+      "milestones": [
+        {
+          "id": "bc7e6e7b-8f8f-4ce9-aa03-23d5e59a172f",
+          "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "planning",
+          "stage_number": 1,
+          "title": "Site Identification & Hydrogeological Survey",
+          "description": "Standard rural milestone 1 for Site Identification & Hydrogeological Survey",
+          "is_completed": true,
+          "target_date": "2026-07-04",
+          "completed_date": "2026-07-04"
+        },
+        {
+          "id": "eb7f680b-8899-4d7b-9ec1-9855a6869911",
+          "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "budget_approved",
+          "stage_number": 2,
+          "title": "Administrative & Technical Sanction",
+          "description": "Standard rural milestone 2 for Administrative & Technical Sanction",
+          "is_completed": true,
+          "target_date": "2026-07-19",
+          "completed_date": "2026-07-19"
+        },
+        {
+          "id": "aeb67459-de6c-40a6-9214-53741047d84a",
+          "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "tender_floated",
+          "stage_number": 3,
+          "title": "E-Tender Publication",
+          "description": "Standard rural milestone 3 for E-Tender Publication",
+          "is_completed": true,
+          "target_date": "2026-08-03",
+          "completed_date": "2026-08-03"
+        },
+        {
+          "id": "5e896b25-a324-4049-a997-6125e4775be4",
+          "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "contractor_assigned",
+          "stage_number": 4,
+          "title": "Contractor Assigned & Work Order",
+          "description": "Standard rural milestone 4 for Contractor Assigned & Work Order",
+          "is_completed": true,
+          "target_date": "2026-08-18",
+          "completed_date": "2026-08-18"
+        },
+        {
+          "id": "3749ed20-b5ca-420e-b73a-25b8119d3d69",
+          "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "foundation_work",
+          "stage_number": 5,
+          "title": "Excavation & RCC Foundation",
+          "description": "Standard rural milestone 5 for Excavation & RCC Foundation",
+          "is_completed": true,
+          "target_date": "2026-09-02",
+          "completed_date": "2026-09-02"
+        },
+        {
+          "id": "208bb89c-f708-43a4-a55d-443648c1b961",
+          "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "structure_laying",
+          "stage_number": 6,
+          "title": "Main Structure & Pipeline Laying",
+          "description": "Standard rural milestone 6 for Main Structure & Pipeline Laying",
+          "is_completed": true,
+          "target_date": "2026-09-17",
+          "completed_date": "2026-09-17"
+        },
+        {
+          "id": "8b82ba0b-6013-4e00-9192-03156f4d402c",
+          "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "mid_term_inspection",
+          "stage_number": 7,
+          "title": "Assistant Executive Engineer Mid-Inspection",
+          "description": "Standard rural milestone 7 for Assistant Executive Engineer Mid-Inspection",
+          "is_completed": true,
+          "target_date": "2026-10-02",
+          "completed_date": "2026-10-02"
+        },
+        {
+          "id": "554c36c3-d01e-4b21-acea-c54630353751",
+          "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "quality_testing",
+          "stage_number": 8,
+          "title": "Hydrostatic Pressure & Quality Testing",
+          "description": "Standard rural milestone 8 for Hydrostatic Pressure & Quality Testing",
+          "is_completed": false,
+          "target_date": "2026-10-17",
+          "completed_date": null
+        },
+        {
+          "id": "0520952a-1f21-4016-a390-084589dcd5e6",
+          "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "final_finishing",
+          "stage_number": 9,
+          "title": "Painting, Disinfection & Safety Signage",
+          "description": "Standard rural milestone 9 for Painting, Disinfection & Safety Signage",
+          "is_completed": false,
+          "target_date": "2026-11-01",
+          "completed_date": null
+        },
+        {
+          "id": "633ebb20-b278-4e14-81d8-2a4b88583013",
+          "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "completion_handover",
+          "stage_number": 10,
+          "title": "Trial Run & Panchayat Handover",
+          "description": "Standard rural milestone 10 for Trial Run & Panchayat Handover",
+          "is_completed": false,
+          "target_date": "2026-11-16",
+          "completed_date": null
+        },
+        {
+          "id": "92d17534-7698-4cf7-a4d4-248aa27ec771",
+          "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "official_signoff",
+          "stage_number": 11,
+          "title": "District Collector Sign-Off",
+          "description": "Standard rural milestone 11 for District Collector Sign-Off",
+          "is_completed": false,
+          "target_date": "2026-12-01",
+          "completed_date": null
+        },
+        {
+          "id": "ba8ba708-a281-4424-9d2c-38de3cbce574",
+          "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "public_audit",
+          "stage_number": 12,
+          "title": "Gram Sabha Social Audit",
+          "description": "Standard rural milestone 12 for Gram Sabha Social Audit",
+          "is_completed": false,
+          "target_date": "2026-12-16",
+          "completed_date": null
+        },
+        {
+          "id": "89209001-312e-4740-95dd-96f28930b40d",
+          "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "maintenance_active",
+          "stage_number": 13,
+          "title": "Active Maintenance & Public Dashboard",
+          "description": "Standard rural milestone 13 for Active Maintenance & Public Dashboard",
+          "is_completed": false,
+          "target_date": "2026-12-31",
+          "completed_date": null
+        }
+      ],
+      "updates": [
+        {
+          "id": "ac1a0745-64ba-45a9-aa5a-7fd455c40823",
+          "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "mid_term_inspection",
+          "update_notes": "Structural concrete strength passed 28-day cube test (32.4 MPa). Pipeline pressure testing underway in Sector 2.",
+          "photo_urls": [
+            "https://images.unsplash.com/photo-1590496793929-36417d3117de?auto=format&fit=crop&w=600&q=80"
+          ],
+          "expenditure_reported": 850000.0,
+          "official_name": "Dr. Selvi Ramanathan",
+          "created_at": "2026-10-16T21:38:13.695233"
+        }
+      ]
+    },
+    {
+      "id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+      "code": "TN-CGL-2026-RD-04",
+      "title_en": "Concrete Road Laying - South Colony Link",
+      "title_ta": "தெற்கு காலனி சிமெண்ட் சாலை அமைத்தல்",
+      "title_hi": "साउथ कॉलोनी लिंक कंक्रीट सड़क निर्माण",
+      "village": "Sothupakkam",
+      "gram_panchayat": "Sothupakkam Panchayat",
+      "block": "Cheyyur",
+      "district": "Chengalpattu",
+      "state": "Tamil Nadu",
+      "latitude": 12.4491,
+      "longitude": 79.8456,
+      "category": "Roads & Bridges",
+      "sanctioned_budget": 1850000.0,
+      "spent_budget": 1850000.0,
+      "contractor_name": "Sri Balaji Roadworks",
+      "contractor_contact": "+91-9842134567",
+      "current_stage": "public_audit",
+      "progress_percentage": 95,
+      "start_date": "2026-03-01",
+      "expected_completion_date": "2026-10-31",
+      "nodal_officer_id": "22222222-2222-2222-2222-222222222222",
+      "nodal_officer_name": "Dr. Selvi Ramanathan (BDO)",
+      "description_en": "Laying 1.2 km of all-weather CC road with side drainage channels connecting agricultural fields and bus stop.",
+      "description_ta": "விவசாய நிலங்களையும் பேருந்து நிலையத்தையும் இணைக்கும் 1.2 கி.மீ நீள சிமெண்ட் சாலை மற்றும் வடிகால் வசதி.",
+      "description_hi": "1.2 किमी पक्की कंक्रीट सड़क और दोनों ओर नाली निर्माण कार्य।",
+      "cover_image_url": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+      "is_demo": true,
+      "created_at": "2026-10-16T21:38:13.695233",
+      "milestones": [
+        {
+          "id": "806f3845-79c1-4e73-a0ae-dea4495fcb52",
+          "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "planning",
+          "stage_number": 1,
+          "title": "Site Identification & Hydrogeological Survey",
+          "description": "Standard rural milestone 1 for Site Identification & Hydrogeological Survey",
+          "is_completed": true,
+          "target_date": "2026-05-05",
+          "completed_date": "2026-05-05"
+        },
+        {
+          "id": "95b4a4a3-60dd-4571-8677-c45112bb103b",
+          "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "budget_approved",
+          "stage_number": 2,
+          "title": "Administrative & Technical Sanction",
+          "description": "Standard rural milestone 2 for Administrative & Technical Sanction",
+          "is_completed": true,
+          "target_date": "2026-05-20",
+          "completed_date": "2026-05-20"
+        },
+        {
+          "id": "077d990c-7548-4043-b0c1-9803d2d5b942",
+          "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "tender_floated",
+          "stage_number": 3,
+          "title": "E-Tender Publication",
+          "description": "Standard rural milestone 3 for E-Tender Publication",
+          "is_completed": true,
+          "target_date": "2026-06-04",
+          "completed_date": "2026-06-04"
+        },
+        {
+          "id": "f279b474-3a35-47a9-a263-02e2106e71cc",
+          "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "contractor_assigned",
+          "stage_number": 4,
+          "title": "Contractor Assigned & Work Order",
+          "description": "Standard rural milestone 4 for Contractor Assigned & Work Order",
+          "is_completed": true,
+          "target_date": "2026-06-19",
+          "completed_date": "2026-06-19"
+        },
+        {
+          "id": "8b1502d7-d471-4ddc-bd13-63706465fbd1",
+          "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "foundation_work",
+          "stage_number": 5,
+          "title": "Excavation & RCC Foundation",
+          "description": "Standard rural milestone 5 for Excavation & RCC Foundation",
+          "is_completed": true,
+          "target_date": "2026-07-04",
+          "completed_date": "2026-07-04"
+        },
+        {
+          "id": "0d2be13d-4067-4892-bd1f-c4f35f68165c",
+          "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "structure_laying",
+          "stage_number": 6,
+          "title": "Main Structure & Pipeline Laying",
+          "description": "Standard rural milestone 6 for Main Structure & Pipeline Laying",
+          "is_completed": true,
+          "target_date": "2026-07-19",
+          "completed_date": "2026-07-19"
+        },
+        {
+          "id": "be16efcf-1b26-4be0-abea-6a5373539b7a",
+          "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "mid_term_inspection",
+          "stage_number": 7,
+          "title": "Assistant Executive Engineer Mid-Inspection",
+          "description": "Standard rural milestone 7 for Assistant Executive Engineer Mid-Inspection",
+          "is_completed": true,
+          "target_date": "2026-08-03",
+          "completed_date": "2026-08-03"
+        },
+        {
+          "id": "cdd4ecaf-39ad-4e6f-8da6-36db59a77eec",
+          "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "quality_testing",
+          "stage_number": 8,
+          "title": "Hydrostatic Pressure & Quality Testing",
+          "description": "Standard rural milestone 8 for Hydrostatic Pressure & Quality Testing",
+          "is_completed": true,
+          "target_date": "2026-08-18",
+          "completed_date": "2026-08-18"
+        },
+        {
+          "id": "4d1d0095-1b00-4d00-a82e-214b2cd8836a",
+          "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "final_finishing",
+          "stage_number": 9,
+          "title": "Painting, Disinfection & Safety Signage",
+          "description": "Standard rural milestone 9 for Painting, Disinfection & Safety Signage",
+          "is_completed": true,
+          "target_date": "2026-09-02",
+          "completed_date": "2026-09-02"
+        },
+        {
+          "id": "2912c2ce-0875-428b-b1bb-7cc4d3c71f89",
+          "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "completion_handover",
+          "stage_number": 10,
+          "title": "Trial Run & Panchayat Handover",
+          "description": "Standard rural milestone 10 for Trial Run & Panchayat Handover",
+          "is_completed": true,
+          "target_date": "2026-09-17",
+          "completed_date": "2026-09-17"
+        },
+        {
+          "id": "8f75c842-d386-4636-bed3-8eeff3b4f51b",
+          "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "official_signoff",
+          "stage_number": 11,
+          "title": "District Collector Sign-Off",
+          "description": "Standard rural milestone 11 for District Collector Sign-Off",
+          "is_completed": true,
+          "target_date": "2026-10-02",
+          "completed_date": "2026-10-02"
+        },
+        {
+          "id": "e77d414f-33cf-4d5e-9fa3-04c72f5a8642",
+          "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "public_audit",
+          "stage_number": 12,
+          "title": "Gram Sabha Social Audit",
+          "description": "Standard rural milestone 12 for Gram Sabha Social Audit",
+          "is_completed": false,
+          "target_date": "2026-10-17",
+          "completed_date": null
+        },
+        {
+          "id": "bdd0af77-4146-4105-a36b-92adf0595727",
+          "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "maintenance_active",
+          "stage_number": 13,
+          "title": "Active Maintenance & Public Dashboard",
+          "description": "Standard rural milestone 13 for Active Maintenance & Public Dashboard",
+          "is_completed": false,
+          "target_date": "2026-11-01",
+          "completed_date": null
+        }
+      ],
+      "updates": [
+        {
+          "id": "68a7d77e-7da8-4693-b772-7956cb131dac",
+          "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "official_signoff",
+          "update_notes": "Road core cut samples verified. Edge curbs completed. Ready for Gram Sabha public audit presentation.",
+          "photo_urls": [
+            "https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=600&q=80"
+          ],
+          "expenditure_reported": 1850000.0,
+          "official_name": "Dr. Selvi Ramanathan",
+          "created_at": "2026-10-16T21:38:13.695233"
+        }
+      ]
+    },
+    {
+      "id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+      "code": "TN-CGL-2026-SOL-09",
+      "title_en": "Village Solar High-Mast & Streetlight Modernization",
+      "title_ta": "கிராம சூரிய மின்விளக்கு மற்றும் உயர்கோபுர விளக்கு திட்டம்",
+      "title_hi": "सौर स्ट्रीट लाइट और हाई-मास्ट पोल परियोजना",
+      "village": "Acharapakkam",
+      "gram_panchayat": "Acharapakkam Town Panchayat",
+      "block": "Madurantakam",
+      "district": "Chengalpattu",
+      "state": "Tamil Nadu",
+      "latitude": 12.4089,
+      "longitude": 79.8142,
+      "category": "Streetlights & Electricity",
+      "sanctioned_budget": 950000.0,
+      "spent_budget": 450000.0,
+      "contractor_name": "SunShine Green Tech",
+      "contractor_contact": "+91-9789012345",
+      "current_stage": "structure_laying",
+      "progress_percentage": 45,
+      "start_date": "2026-06-15",
+      "expected_completion_date": "2026-12-20",
+      "nodal_officer_id": "22222222-2222-2222-2222-222222222222",
+      "nodal_officer_name": "Dr. Selvi Ramanathan (BDO)",
+      "description_en": "Installation of 45 solar LED automatic dusk-to-dawn streetlights and 2 central high-mast lights at village junctions.",
+      "description_ta": "45 சூரிய ஒளி மின்விளக்குகள் மற்றும் 2 உயர்கோபுர விளக்குகள் அமைக்கும் பணி.",
+      "description_hi": "45 सौर एलईडी स्ट्रीट लाइट और 2 हाई-मास्ट लाइटों की स्थापना।",
+      "cover_image_url": "https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=800&q=80",
+      "is_demo": true,
+      "created_at": "2026-10-16T21:38:13.695233",
+      "milestones": [
+        {
+          "id": "9b32e95e-eedf-4202-83cc-c1a5ebd95116",
+          "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "planning",
+          "stage_number": 1,
+          "title": "Site Identification & Hydrogeological Survey",
+          "description": "Standard rural milestone 1 for Site Identification & Hydrogeological Survey",
+          "is_completed": true,
+          "target_date": "2026-08-03",
+          "completed_date": "2026-08-03"
+        },
+        {
+          "id": "aec40f1d-df6d-4d7e-9ec0-20c085c70bbc",
+          "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "budget_approved",
+          "stage_number": 2,
+          "title": "Administrative & Technical Sanction",
+          "description": "Standard rural milestone 2 for Administrative & Technical Sanction",
+          "is_completed": true,
+          "target_date": "2026-08-18",
+          "completed_date": "2026-08-18"
+        },
+        {
+          "id": "6b155052-44c7-47fb-8ef1-f40718125a72",
+          "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "tender_floated",
+          "stage_number": 3,
+          "title": "E-Tender Publication",
+          "description": "Standard rural milestone 3 for E-Tender Publication",
+          "is_completed": true,
+          "target_date": "2026-09-02",
+          "completed_date": "2026-09-02"
+        },
+        {
+          "id": "79729fe1-826b-4ccc-9eb8-f8e9cc176d9d",
+          "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "contractor_assigned",
+          "stage_number": 4,
+          "title": "Contractor Assigned & Work Order",
+          "description": "Standard rural milestone 4 for Contractor Assigned & Work Order",
+          "is_completed": true,
+          "target_date": "2026-09-17",
+          "completed_date": "2026-09-17"
+        },
+        {
+          "id": "bd46368f-8add-4359-8a71-3f679faf9d83",
+          "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "foundation_work",
+          "stage_number": 5,
+          "title": "Excavation & RCC Foundation",
+          "description": "Standard rural milestone 5 for Excavation & RCC Foundation",
+          "is_completed": true,
+          "target_date": "2026-10-02",
+          "completed_date": "2026-10-02"
+        },
+        {
+          "id": "9a722c09-2420-4419-875b-70304f749214",
+          "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "structure_laying",
+          "stage_number": 6,
+          "title": "Main Structure & Pipeline Laying",
+          "description": "Standard rural milestone 6 for Main Structure & Pipeline Laying",
+          "is_completed": false,
+          "target_date": "2026-10-17",
+          "completed_date": null
+        },
+        {
+          "id": "6d6c938b-1220-4d02-8002-b971e7671a04",
+          "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "mid_term_inspection",
+          "stage_number": 7,
+          "title": "Assistant Executive Engineer Mid-Inspection",
+          "description": "Standard rural milestone 7 for Assistant Executive Engineer Mid-Inspection",
+          "is_completed": false,
+          "target_date": "2026-11-01",
+          "completed_date": null
+        },
+        {
+          "id": "86fd798e-6a47-4664-adf3-f8b3e981beca",
+          "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "quality_testing",
+          "stage_number": 8,
+          "title": "Hydrostatic Pressure & Quality Testing",
+          "description": "Standard rural milestone 8 for Hydrostatic Pressure & Quality Testing",
+          "is_completed": false,
+          "target_date": "2026-11-16",
+          "completed_date": null
+        },
+        {
+          "id": "934f0399-6c2f-4555-b62e-be73847a168e",
+          "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "final_finishing",
+          "stage_number": 9,
+          "title": "Painting, Disinfection & Safety Signage",
+          "description": "Standard rural milestone 9 for Painting, Disinfection & Safety Signage",
+          "is_completed": false,
+          "target_date": "2026-12-01",
+          "completed_date": null
+        },
+        {
+          "id": "40f3f103-b5b6-42ae-851f-0b5625fdbe18",
+          "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "completion_handover",
+          "stage_number": 10,
+          "title": "Trial Run & Panchayat Handover",
+          "description": "Standard rural milestone 10 for Trial Run & Panchayat Handover",
+          "is_completed": false,
+          "target_date": "2026-12-16",
+          "completed_date": null
+        },
+        {
+          "id": "1d009cc2-b486-4b9e-a85d-7398bf74558f",
+          "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "official_signoff",
+          "stage_number": 11,
+          "title": "District Collector Sign-Off",
+          "description": "Standard rural milestone 11 for District Collector Sign-Off",
+          "is_completed": false,
+          "target_date": "2026-12-31",
+          "completed_date": null
+        },
+        {
+          "id": "af592322-4ef8-4e2a-8a67-9c08b35a620b",
+          "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "public_audit",
+          "stage_number": 12,
+          "title": "Gram Sabha Social Audit",
+          "description": "Standard rural milestone 12 for Gram Sabha Social Audit",
+          "is_completed": false,
+          "target_date": "2027-01-15",
+          "completed_date": null
+        },
+        {
+          "id": "54d70186-3810-4e8c-9ab8-cc6deaf33847",
+          "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "maintenance_active",
+          "stage_number": 13,
+          "title": "Active Maintenance & Public Dashboard",
+          "description": "Standard rural milestone 13 for Active Maintenance & Public Dashboard",
+          "is_completed": false,
+          "target_date": "2027-01-30",
+          "completed_date": null
+        }
+      ],
+      "updates": []
+    },
+    {
+      "id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+      "code": "TN-CGL-2026-ANG-12",
+      "title_en": "Model Anganwadi Child Nutrition Center Upgradation",
+      "title_ta": "மாதிரி அங்கன்வாடி குழந்தைகள் ஊட்டச்சத்து மைய புனரமைப்பு",
+      "title_hi": "मॉडल आंगनवाड़ी केंद्र का आधुनिकीकरण",
+      "village": "Melmaruvathur",
+      "gram_panchayat": "Melmaruvathur Panchayat",
+      "block": "Cheyyur",
+      "district": "Chengalpattu",
+      "state": "Tamil Nadu",
+      "latitude": 12.438,
+      "longitude": 79.8315,
+      "category": "Public Buildings",
+      "sanctioned_budget": 820000.0,
+      "spent_budget": 120000.0,
+      "contractor_name": "Panchayat Community Engineering Wing",
+      "contractor_contact": "+91-9442001122",
+      "current_stage": "tender_floated",
+      "progress_percentage": 15,
+      "start_date": "2026-08-01",
+      "expected_completion_date": "2027-01-31",
+      "nodal_officer_id": "22222222-2222-2222-2222-222222222222",
+      "nodal_officer_name": "Dr. Selvi Ramanathan (BDO)",
+      "description_en": "Smart classroom remodeling, child-friendly sanitary facilities, clean drinking RO water plant, and nutritional kitchen garden.",
+      "description_ta": "ஸ்மார்ட் வகுப்பறை, பாதுகாக்கப்பட்ட குடிநீர் மற்றும் ஊட்டச்சத்து தோட்டம் அமைத்தல்.",
+      "description_hi": "आंगनवाड़ी केंद्र में स्मार्ट क्लासरूम, आरओ जल संयंत्र और पोषण वाटिका का विकास।",
+      "cover_image_url": "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&q=80",
+      "is_demo": true,
+      "created_at": "2026-10-16T21:38:13.695233",
+      "milestones": [
+        {
+          "id": "60f8f7c3-ef10-491b-8876-b34cfc415be5",
+          "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "planning",
+          "stage_number": 1,
+          "title": "Site Identification & Hydrogeological Survey",
+          "description": "Standard rural milestone 1 for Site Identification & Hydrogeological Survey",
+          "is_completed": true,
+          "target_date": "2026-09-17",
+          "completed_date": "2026-09-17"
+        },
+        {
+          "id": "32fa135a-1207-4717-8a7f-88f31d2c50b9",
+          "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "budget_approved",
+          "stage_number": 2,
+          "title": "Administrative & Technical Sanction",
+          "description": "Standard rural milestone 2 for Administrative & Technical Sanction",
+          "is_completed": true,
+          "target_date": "2026-10-02",
+          "completed_date": "2026-10-02"
+        },
+        {
+          "id": "5d0b208d-81dd-4cad-9172-6dd1eda4c0a3",
+          "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "tender_floated",
+          "stage_number": 3,
+          "title": "E-Tender Publication",
+          "description": "Standard rural milestone 3 for E-Tender Publication",
+          "is_completed": false,
+          "target_date": "2026-10-17",
+          "completed_date": null
+        },
+        {
+          "id": "9fef8f89-9312-4deb-92c8-d8ae543c63e7",
+          "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "contractor_assigned",
+          "stage_number": 4,
+          "title": "Contractor Assigned & Work Order",
+          "description": "Standard rural milestone 4 for Contractor Assigned & Work Order",
+          "is_completed": false,
+          "target_date": "2026-11-01",
+          "completed_date": null
+        },
+        {
+          "id": "e720026d-2018-417e-9f9d-0650e5b7a85e",
+          "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "foundation_work",
+          "stage_number": 5,
+          "title": "Excavation & RCC Foundation",
+          "description": "Standard rural milestone 5 for Excavation & RCC Foundation",
+          "is_completed": false,
+          "target_date": "2026-11-16",
+          "completed_date": null
+        },
+        {
+          "id": "7da7f4e2-f5a7-4784-983a-ad4f6b8d18f1",
+          "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "structure_laying",
+          "stage_number": 6,
+          "title": "Main Structure & Pipeline Laying",
+          "description": "Standard rural milestone 6 for Main Structure & Pipeline Laying",
+          "is_completed": false,
+          "target_date": "2026-12-01",
+          "completed_date": null
+        },
+        {
+          "id": "9eddb526-3f7b-4bd1-b814-5eebf9c817d2",
+          "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "mid_term_inspection",
+          "stage_number": 7,
+          "title": "Assistant Executive Engineer Mid-Inspection",
+          "description": "Standard rural milestone 7 for Assistant Executive Engineer Mid-Inspection",
+          "is_completed": false,
+          "target_date": "2026-12-16",
+          "completed_date": null
+        },
+        {
+          "id": "0f63887f-580d-4244-a524-9025a93579f7",
+          "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "quality_testing",
+          "stage_number": 8,
+          "title": "Hydrostatic Pressure & Quality Testing",
+          "description": "Standard rural milestone 8 for Hydrostatic Pressure & Quality Testing",
+          "is_completed": false,
+          "target_date": "2026-12-31",
+          "completed_date": null
+        },
+        {
+          "id": "e8c8fa9a-549f-4894-ba14-9ae18fb47b97",
+          "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "final_finishing",
+          "stage_number": 9,
+          "title": "Painting, Disinfection & Safety Signage",
+          "description": "Standard rural milestone 9 for Painting, Disinfection & Safety Signage",
+          "is_completed": false,
+          "target_date": "2027-01-15",
+          "completed_date": null
+        },
+        {
+          "id": "e69fff90-c83b-450e-8c6c-99b4ea31e422",
+          "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "completion_handover",
+          "stage_number": 10,
+          "title": "Trial Run & Panchayat Handover",
+          "description": "Standard rural milestone 10 for Trial Run & Panchayat Handover",
+          "is_completed": false,
+          "target_date": "2027-01-30",
+          "completed_date": null
+        },
+        {
+          "id": "eebb83a3-8569-40e9-ac91-1459ea3124e4",
+          "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "official_signoff",
+          "stage_number": 11,
+          "title": "District Collector Sign-Off",
+          "description": "Standard rural milestone 11 for District Collector Sign-Off",
+          "is_completed": false,
+          "target_date": "2027-02-14",
+          "completed_date": null
+        },
+        {
+          "id": "cc3b1d83-602b-4b2a-b4cd-b14000874295",
+          "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "public_audit",
+          "stage_number": 12,
+          "title": "Gram Sabha Social Audit",
+          "description": "Standard rural milestone 12 for Gram Sabha Social Audit",
+          "is_completed": false,
+          "target_date": "2027-03-01",
+          "completed_date": null
+        },
+        {
+          "id": "025db615-0d86-4cea-aad1-3371e9c9211c",
+          "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "stage": "maintenance_active",
+          "stage_number": 13,
+          "title": "Active Maintenance & Public Dashboard",
+          "description": "Standard rural milestone 13 for Active Maintenance & Public Dashboard",
+          "is_completed": false,
+          "target_date": "2027-03-16",
+          "completed_date": null
+        }
+      ],
+      "updates": []
+    }
+  ],
+  "reports": [
+    {
+      "category": "drinking_water",
+      "title": "Broken pipe valve leaking clean drinking water",
+      "description": "Continuous water loss near the temple junction for over 3 days, needs immediate valve replacement.",
+      "village": "Melmaruvathur",
+      "block": "Cheyyur",
+      "district": "Chengalpattu",
+      "landmark": "Near Pillaiyar Temple",
+      "latitude": 12.43502,
+      "longitude": 79.83039,
+      "photo_urls": [],
+      "priority": "high",
+      "is_public": true,
+      "citizen_id": "11111111-1111-1111-1111-111111111111",
+      "citizen_name": "Muthuvel K",
+      "id": "5fffc27c-ca7a-46c9-a1b7-1ae6c234ed58",
+      "reference_id": "GV-REP-20261020-3435",
+      "current_status": "submitted",
+      "is_demo": true,
+      "created_at": "2026-10-20T16:02:00.625585",
+      "updated_at": "2026-10-20T16:02:00.625585",
+      "timeline": [
+        {
+          "id": "d2fc8910-a17a-47aa-9c61-e9b0595b5124",
+          "report_id": "5fffc27c-ca7a-46c9-a1b7-1ae6c234ed58",
+          "actor_name": "Muthuvel K",
+          "from_status": null,
+          "to_status": "submitted",
+          "action_note": "Issue grievance submitted with GPS location and details.",
+          "evidence_urls": [],
+          "created_at": "2026-10-20T16:02:00.625585"
+        }
+      ]
+    },
+    {
+      "id": "c1111111-cccc-cccc-cccc-cccccccccccc",
+      "reference_id": "GV-REP-20261015-1042",
+      "citizen_id": "11111111-1111-1111-1111-111111111111",
+      "citizen_name": "Muthuvel K",
+      "category": "drinking_water",
+      "title": "Handpump non-functional for past 2 weeks",
+      "description": "The public handpump near the Mariamman temple has dried cylinder and broken lever handle. Over 60 families are walking 1.5 km for daily water.",
+      "village": "Melmaruvathur",
+      "block": "Cheyyur",
+      "district": "Chengalpattu",
+      "landmark": "Opposite Mariamman Temple, West Street",
+      "latitude": 12.4352,
+      "longitude": 79.8285,
+      "photo_urls": [
+        "https://images.unsplash.com/photo-1584467735871-8e85353a8413?auto=format&fit=crop&w=600&q=80"
+      ],
+      "current_status": "in_progress",
+      "assigned_official_id": "22222222-2222-2222-2222-222222222222",
+      "assigned_official_name": "Dr. Selvi Ramanathan (BDO)",
+      "priority": "high",
+      "is_public": true,
+      "resolution_notes": "Replacement cylinder parts dispatched with field mechanics.",
+      "resolution_photo_urls": [],
+      "closed_at": null,
+      "is_demo": true,
+      "created_at": "2026-10-16T21:38:13.695233",
+      "updated_at": "2026-10-17T21:38:13.695217",
+      "timeline": [
+        {
+          "id": "02f74f21-4a40-4d10-a408-34f444d3d69d",
+          "report_id": "c1111111-cccc-cccc-cccc-cccccccccccc",
+          "actor_name": "Muthuvel K (Citizen)",
+          "from_status": null,
+          "to_status": "submitted",
+          "action_note": "Issue reported with GPS coordinates and clear landmark.",
+          "evidence_urls": [],
+          "created_at": "2026-10-16T21:38:13.695233"
+        },
+        {
+          "id": "1007aa46-3e9e-4774-b335-1190af4d2c5b",
+          "report_id": "c1111111-cccc-cccc-cccc-cccccccccccc",
+          "actor_name": "Dr. Selvi Ramanathan (BDO)",
+          "from_status": "submitted",
+          "to_status": "triaged",
+          "action_note": "Assigned to Cheyyur Rural Water Supply engineering field team.",
+          "evidence_urls": [],
+          "created_at": "2026-10-16T21:38:13.695233"
+        },
+        {
+          "id": "cf0c36b9-4b23-4b8d-b588-405f227d92fb",
+          "report_id": "c1111111-cccc-cccc-cccc-cccccccccccc",
+          "actor_name": "Cheyyur RWS Overseer",
+          "from_status": "triaged",
+          "to_status": "inspection_scheduled",
+          "action_note": "Field technician inspected site. Cylinder wear and seal leakage identified.",
+          "evidence_urls": [],
+          "created_at": "2026-10-17T21:38:13.695217"
+        },
+        {
+          "id": "251db085-4809-47b6-b1e3-815c21f107aa",
+          "report_id": "c1111111-cccc-cccc-cccc-cccccccccccc",
+          "actor_name": "Field Engineering Team",
+          "from_status": "inspection_scheduled",
+          "to_status": "in_progress",
+          "action_note": "Procured heavy-duty replacement kit. Assembly and flushing underway.",
+          "evidence_urls": [],
+          "created_at": "2026-10-17T21:38:13.695217"
+        }
+      ]
+    },
+    {
+      "id": "c2222222-cccc-cccc-cccc-cccccccccccc",
+      "reference_id": "GV-REP-20261016-8921",
+      "citizen_id": "11111111-1111-1111-1111-111111111111",
+      "citizen_name": "Muthuvel K",
+      "category": "roads_and_bridges",
+      "title": "Severe culvert damage causing water stagnation",
+      "description": "Monsoon runoff caused partial breach of the agricultural access culvert near the school canal. Tractors and two-wheelers unable to pass safely.",
+      "village": "Sothupakkam",
+      "block": "Cheyyur",
+      "district": "Chengalpattu",
+      "landmark": "Near Government Higher Secondary School Canal",
+      "latitude": 12.4475,
+      "longitude": 79.843,
+      "photo_urls": [
+        "https://images.unsplash.com/photo-1515162816999-a0c47dc192f7?auto=format&fit=crop&w=600&q=80"
+      ],
+      "current_status": "triaged",
+      "assigned_official_id": "22222222-2222-2222-2222-222222222222",
+      "assigned_official_name": "Dr. Selvi Ramanathan (BDO)",
+      "priority": "high",
+      "is_public": true,
+      "resolution_notes": null,
+      "resolution_photo_urls": [],
+      "closed_at": null,
+      "is_demo": true,
+      "created_at": "2026-10-16T21:38:13.695233",
+      "updated_at": "2026-10-17T21:38:13.695217",
+      "timeline": [
+        {
+          "id": "bb9ded8d-040c-433c-9c2c-a5bb4032e89d",
+          "report_id": "c2222222-cccc-cccc-cccc-cccccccccccc",
+          "actor_name": "Muthuvel K (Citizen)",
+          "from_status": null,
+          "to_status": "submitted",
+          "action_note": "Logged citizen grievance with photos of culvert subsidence.",
+          "evidence_urls": [],
+          "created_at": "2026-10-16T21:38:13.695233"
+        },
+        {
+          "id": "2356e11f-bf71-434c-9c02-af36d78727f9",
+          "report_id": "c2222222-cccc-cccc-cccc-cccccccccccc",
+          "actor_name": "Dr. Selvi Ramanathan (BDO)",
+          "from_status": "submitted",
+          "to_status": "triaged",
+          "action_note": "Marked HIGH priority due to upcoming harvest transport.",
+          "evidence_urls": [],
+          "created_at": "2026-10-17T21:38:13.695217"
+        }
+      ]
+    },
+    {
+      "id": "c3333333-cccc-cccc-cccc-cccccccccccc",
+      "reference_id": "GV-REP-20261017-3104",
+      "citizen_id": "11111111-1111-1111-1111-111111111111",
+      "citizen_name": "Muthuvel K",
+      "category": "streetlights_electricity",
+      "title": "3 LED Streetlights fused on Bus Stop Road",
+      "description": "Dark stretch of 300 meters near the bus shelter. Difficult for women and seniors walking back from fields in evening.",
+      "village": "Melmaruvathur",
+      "block": "Cheyyur",
+      "district": "Chengalpattu",
+      "landmark": "Main Road Bus Stop Junction",
+      "latitude": 12.436,
+      "longitude": 79.832,
+      "photo_urls": [],
+      "current_status": "submitted",
+      "assigned_official_id": null,
+      "assigned_official_name": null,
+      "priority": "normal",
+      "is_public": true,
+      "resolution_notes": null,
+      "resolution_photo_urls": [],
+      "closed_at": null,
+      "is_demo": true,
+      "created_at": "2026-10-17T21:38:13.695217",
+      "updated_at": "2026-10-17T21:38:13.695217",
+      "timeline": [
+        {
+          "id": "470027c6-e22e-4e0d-884e-6f4abd5a8f55",
+          "report_id": "c3333333-cccc-cccc-cccc-cccccccccccc",
+          "actor_name": "Muthuvel K (Citizen)",
+          "from_status": null,
+          "to_status": "submitted",
+          "action_note": "Submitted issue via web portal.",
+          "evidence_urls": [],
+          "created_at": "2026-10-17T21:38:13.695217"
+        }
+      ]
+    }
+  ],
+  "announcements": [
+    {
+      "id": "d1111111-dddd-dddd-dddd-dddddddddddd",
+      "publisher_name": "Dr. Selvi Ramanathan (BDO Cheyyur)",
+      "title_en": "Special Gram Sabha Meeting Notice - October 2026",
+      "title_ta": "சிறப்பு கிராம சபை கூட்டம் அறிவிப்பு - அக்டோபர் 2026",
+      "title_hi": "विशेष ग्राम सभा बैठक सूचना - अक्टूबर 2026",
+      "body_en": "All citizens of Melmaruvathur Panchayat are invited to attend the Gram Sabha meeting on Tuesday at 10:00 AM at the Panchayat Community Hall to audit village water projects and approve the new beneficiary list for Kalaignar Kanavu Illam.",
+      "body_ta": "மேல்மருவத்தூர் ஊராட்சியின் சிறப்பு கிராம சபை கூட்டம் வரும் செவ்வாய்க்கிழமை காலை 10:00 மணிக்கு ஊராட்சி மன்ற அலுவலகத்தில் நடைபெறும். குடிநீர் திட்ட சமூக தணிக்கை மற்றும் கலைஞர் கனவு இல்ல பயனாளி பட்டியல் ஒப்புதல் செய்யப்படும்.",
+      "body_hi": "मेलमरुवथुर पंचायत के सभी नागरिकों को मंगलवार सुबह 10:00 बजे पंचायत भवन में ग्राम सभा बैठक में भाग लेने के लिए आमंत्रित किया जाता है।",
+      "priority": "high",
+      "target_level": "panchayat",
+      "target_area": "Melmaruvathur",
+      "event_date": "2026-10-20T10:00:16.168630",
+      "expires_at": "2026-10-24T21:38:16.168640",
+      "is_verified": true,
+      "is_demo": true,
+      "created_at": "2026-10-16T21:38:13.695233"
+    },
+    {
+      "id": "d2222222-dddd-dddd-dddd-dddddddddddd",
+      "publisher_name": "District Disaster Management Authority",
+      "title_en": "Monsoon Rain Preparedness Alert & Emergency Contacts",
+      "title_ta": "வடகிழக்கு பருவமழை முன்னெச்சரிக்கை மற்றும் அவசர உதவி எண்கள்",
+      "title_hi": "पूर्वोत्तर मानसून वर्षा पूर्व चेतावनी और आपातकालीन संपर्क",
+      "body_en": "IMD forecasts moderate to heavy rainfall over Chengalpattu coastal belt. Block Emergency Control Room opened 24/7 at Cheyyur Taluk Office. Dial 1077 or 044-27420000 for immediate disaster assistance.",
+      "body_ta": "செங்கல்பட்டு மாவட்டத்தில் கனமழை எச்சரிக்கை விடுக்கப்பட்டுள்ளது. செய்யூர் வட்டார அவசர கட்டுப்பாட்டு அறை 24 மணி நேரமும் செயல்படுகிறது. அவசர உதவிக்கு 1077 அல்லது 044-27420000 எண்ணை அழைக்கவும்.",
+      "body_hi": "चेंगलपट्टू क्षेत्र में भारी बारिश की चेतावनी। चेय्यूर तालुका कार्यालय में 24/7 आपातकालीन नियंत्रण कक्ष खुला है। डायल करें 1077।",
+      "priority": "emergency",
+      "target_level": "district",
+      "target_area": "Chengalpattu",
+      "event_date": "2026-10-17T21:38:13.695217",
+      "expires_at": "2026-10-22T21:38:16.168651",
+      "is_verified": true,
+      "is_demo": true,
+      "created_at": "2026-10-16T21:38:13.695233"
+    }
+  ],
+  "voice_subscriptions": [
+    {
+      "id": "140607b3-77cb-477f-a56a-abd8dfb41667",
+      "user_id": "11111111-1111-1111-1111-111111111111",
+      "phone_number": "+919840123456",
+      "subscriber_name": "Muthuvel K",
+      "preferred_language": "ta",
+      "village": "Melmaruvathur",
+      "district": "Chengalpattu",
+      "consent_given": true,
+      "consent_recorded_at": "2026-10-16T21:38:13.695233",
+      "is_active": true
+    },
+    {
+      "id": "cb7f042b-63df-4306-8286-46d496d5e836",
+      "user_id": null,
+      "phone_number": "+919840998877",
+      "subscriber_name": "K. Murugesan",
+      "preferred_language": "ta",
+      "village": "Sothupakkam",
+      "district": "Chengalpattu",
+      "consent_given": true,
+      "consent_recorded_at": "2026-10-16T21:38:13.695233",
+      "is_active": true
+    }
+  ],
+  "voice_campaigns": [
+    {
+      "id": "e1111111-eeee-eeee-eeee-eeeeeeeeeeee",
+      "campaign_name": "Gram Sabha October Reminder",
+      "audio_script_text": "வணக்கம், மேல்மருவத்தூர் ஊராட்சியின் சிறப்பு கிராம சபை கூட்டம் வரும் செவ்வாய் காலை 10 மணிக்கு கூடுகிறது. குடிநீர் திட்ட பணிகள் பற்றி பேச பொதுமக்கள் அனைவரும் வருகை தர வேண்டுகிறோம்.",
+      "target_language": "ta",
+      "target_district": "Chengalpattu",
+      "target_block": "Cheyyur",
+      "approved_by_admin": true,
+      "scheduled_dispatch_time": "2026-10-17T21:38:13.695217",
+      "status": "completed",
+      "created_at": "2026-10-16T21:38:13.695233"
+    }
+  ],
+  "call_logs": [
+    {
+      "subscription_id": "cb7f042b-63df-4306-8286-46d496d5e836",
+      "campaign_id": "e1111111-eeee-eeee-eeee-eeeeeeeeeeee",
+      "campaign_name": "Gram Sabha October Reminder",
+      "phone_number": "+919840998877",
+      "call_status": "delivered",
+      "duration_seconds": 35,
+      "failure_reason": null,
+      "id": "d8c64074-0acd-48de-828f-2bda98ea40cc",
+      "attempt_timestamp": "2026-10-20T16:10:07.597108"
+    },
+    {
+      "subscription_id": "140607b3-77cb-477f-a56a-abd8dfb41667",
+      "campaign_id": "e1111111-eeee-eeee-eeee-eeeeeeeeeeee",
+      "campaign_name": "Gram Sabha October Reminder",
+      "phone_number": "+919840123456",
+      "call_status": "delivered",
+      "duration_seconds": 35,
+      "failure_reason": null,
+      "id": "010fde8a-0f1e-4218-9b25-152c68b4557f",
+      "attempt_timestamp": "2026-10-20T16:10:07.588634"
+    },
+    {
+      "subscription_id": "cb7f042b-63df-4306-8286-46d496d5e836",
+      "campaign_id": "e1111111-eeee-eeee-eeee-eeeeeeeeeeee",
+      "campaign_name": "Gram Sabha October Reminder",
+      "phone_number": "+919840998877",
+      "call_status": "delivered",
+      "duration_seconds": 35,
+      "failure_reason": null,
+      "id": "f9992787-071f-4e71-957e-e86b7b8515de",
+      "attempt_timestamp": "2026-10-20T16:08:48.471420"
+    },
+    {
+      "subscription_id": "140607b3-77cb-477f-a56a-abd8dfb41667",
+      "campaign_id": "e1111111-eeee-eeee-eeee-eeeeeeeeeeee",
+      "campaign_name": "Gram Sabha October Reminder",
+      "phone_number": "+919840123456",
+      "call_status": "delivered",
+      "duration_seconds": 35,
+      "failure_reason": null,
+      "id": "e09cd61a-0b81-445f-b817-a020a3f86006",
+      "attempt_timestamp": "2026-10-20T16:08:48.461765"
+    },
+    {
+      "id": "c18f9ef3-9fa2-478d-ba5e-11e4a68bbe93",
+      "subscription_id": "140607b3-77cb-477f-a56a-abd8dfb41667",
+      "campaign_id": "e1111111-eeee-eeee-eeee-eeeeeeeeeeee",
+      "campaign_name": "Gram Sabha October Reminder",
+      "phone_number": "+919840123456",
+      "call_status": "delivered",
+      "duration_seconds": 42,
+      "attempt_timestamp": "2026-10-16T21:38:13.695233",
+      "failure_reason": null
+    }
+  ],
+  "audit_logs": [
+    {
+      "id": "99dbc7b9-9e04-401f-a73d-a72bccae09d4",
+      "user_id": "44444444-4444-4444-4444-444444444444",
+      "user_name": "State Governance Admin",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "44444444-4444-4444-4444-444444444444",
+      "details": {
+        "role": "admin"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-20T16:08:38.527793"
+    },
+    {
+      "id": "d8c0e124-3e63-4f07-a559-58651cc3b922",
+      "user_id": "22222222-2222-2222-2222-222222222222",
+      "user_name": "Dr. Selvi Ramanathan",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "22222222-2222-2222-2222-222222222222",
+      "details": {
+        "role": "official"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-20T16:05:52.558037"
+    },
+    {
+      "id": "985ee080-e410-4705-ae2e-0f0a5b26504c",
+      "user_id": "11111111-1111-1111-1111-111111111111",
+      "user_name": "Muthuvel K",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "11111111-1111-1111-1111-111111111111",
+      "details": {
+        "role": "citizen"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-20T16:05:01.789634"
+    },
+    {
+      "id": "2abbe961-9c4a-4b09-aa15-a2c566c96d3e",
+      "user_id": "44444444-4444-4444-4444-444444444444",
+      "user_name": "State Governance Admin",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "44444444-4444-4444-4444-444444444444",
+      "details": {
+        "role": "admin"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-20T16:02:22.314477"
+    },
+    {
+      "id": "2c125caf-a7e3-4688-9e72-6621949bcce6",
+      "user_id": "22222222-2222-2222-2222-222222222222",
+      "user_name": "Dr. Selvi Ramanathan",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "22222222-2222-2222-2222-222222222222",
+      "details": {
+        "role": "official"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-20T16:02:22.011099"
+    },
+    {
+      "id": "ce684989-ef04-40bb-ae37-a6029571695c",
+      "user_id": "11111111-1111-1111-1111-111111111111",
+      "user_name": "Muthuvel K",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "11111111-1111-1111-1111-111111111111",
+      "details": {
+        "role": "citizen"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-20T16:02:20.085519"
+    },
+    {
+      "id": "946594e5-75b6-4608-b951-833092c71272",
+      "user_id": "11111111-1111-1111-1111-111111111111",
+      "user_name": "Muthuvel K",
+      "action": "REPORT_SUBMITTED",
+      "entity_type": "citizen_report",
+      "entity_id": "5fffc27c-ca7a-46c9-a1b7-1ae6c234ed58",
+      "details": {
+        "reference_id": "GV-REP-20261020-3435",
+        "category": "drinking_water"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-20T16:02:00.632525"
+    },
+    {
+      "id": "9d061327-0fa4-4484-9837-8228a1977d56",
+      "user_id": "11111111-1111-1111-1111-111111111111",
+      "user_name": "Muthuvel K",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "11111111-1111-1111-1111-111111111111",
+      "details": {
+        "role": "citizen"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-20T16:02:00.568970"
+    },
+    {
+      "id": "e914ec40-3877-4900-8280-31fb035d1147",
+      "user_id": "11111111-1111-1111-1111-111111111111",
+      "user_name": "Muthuvel K",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "11111111-1111-1111-1111-111111111111",
+      "details": {
+        "role": "citizen"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-20T15:45:47.947596"
+    },
+    {
+      "id": "27afbc76-6519-414a-bc38-9f3611baab0b",
+      "user_id": "44444444-4444-4444-4444-444444444444",
+      "user_name": "State Governance Admin",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "44444444-4444-4444-4444-444444444444",
+      "details": {
+        "role": "admin"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-20T15:39:21.742700"
+    },
+    {
+      "id": "31962c61-e27b-4614-bac1-46eba734304c",
+      "user_id": "22222222-2222-2222-2222-222222222222",
+      "user_name": "Dr. Selvi Ramanathan",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "22222222-2222-2222-2222-222222222222",
+      "details": {
+        "role": "official"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-20T15:39:21.422876"
+    },
+    {
+      "id": "52363ee4-fb63-40af-9be7-49fd7f35b14b",
+      "user_id": "11111111-1111-1111-1111-111111111111",
+      "user_name": "Muthuvel K",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "11111111-1111-1111-1111-111111111111",
+      "details": {
+        "role": "citizen"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-20T15:39:19.100746"
+    },
+    {
+      "id": "0c359145-c324-4bd5-8e46-f784860eabdc",
+      "user_id": "44444444-4444-4444-4444-444444444444",
+      "user_name": "State Governance Admin",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "44444444-4444-4444-4444-444444444444",
+      "details": {
+        "role": "admin"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-20T12:50:16.101192"
+    },
+    {
+      "id": "3c0d9e8a-aa7c-4f80-8477-496aba8b10ed",
+      "user_id": "22222222-2222-2222-2222-222222222222",
+      "user_name": "Dr. Selvi Ramanathan",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "22222222-2222-2222-2222-222222222222",
+      "details": {
+        "role": "official"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-20T12:50:15.181008"
+    },
+    {
+      "id": "7c66ed7d-786c-494c-8caa-5e895a5add02",
+      "user_id": "11111111-1111-1111-1111-111111111111",
+      "user_name": "Muthuvel K",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "11111111-1111-1111-1111-111111111111",
+      "details": {
+        "role": "citizen"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-20T12:50:04.925279"
+    },
+    {
+      "id": "baf78e6d-89b4-4009-a9b8-9c75a04c0089",
+      "user_id": "22222222-2222-2222-2222-222222222222",
+      "user_name": "Dr. Selvi Ramanathan",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "22222222-2222-2222-2222-222222222222",
+      "details": {
+        "role": "official"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-18T20:22:23.794255"
+    },
+    {
+      "id": "8601af1a-6828-458c-bc53-38b84e09dc12",
+      "user_id": "44444444-4444-4444-4444-444444444444",
+      "user_name": "State Governance Admin",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "44444444-4444-4444-4444-444444444444",
+      "details": {
+        "role": "admin"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-18T20:05:34.859084"
+    },
+    {
+      "id": "545973c2-3c73-4322-8542-f991fe672849",
+      "user_id": "22222222-2222-2222-2222-222222222222",
+      "user_name": "Dr. Selvi Ramanathan",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "22222222-2222-2222-2222-222222222222",
+      "details": {
+        "role": "official"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-18T20:05:34.552015"
+    },
+    {
+      "id": "44445683-7ee5-4c58-a309-dc3f1203d54a",
+      "user_id": "11111111-1111-1111-1111-111111111111",
+      "user_name": "Muthuvel K",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "11111111-1111-1111-1111-111111111111",
+      "details": {
+        "role": "citizen"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-18T20:05:33.450373"
+    },
+    {
+      "id": "8975cd24-bf05-4d6e-ab4d-d66eab44b117",
+      "user_id": "11111111-1111-1111-1111-111111111111",
+      "user_name": "Muthuvel K",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "11111111-1111-1111-1111-111111111111",
+      "details": {
+        "role": "citizen"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-18T19:52:20.288410"
+    },
+    {
+      "id": "916d6478-28e9-401f-9ef1-91a99e000b23",
+      "user_id": "44444444-4444-4444-4444-444444444444",
+      "user_name": "State Governance Admin",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "44444444-4444-4444-4444-444444444444",
+      "details": {
+        "role": "admin"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-18T19:33:22.227792"
+    },
+    {
+      "id": "90ae6299-7ac7-4a13-8f67-224f149b5abf",
+      "user_id": "22222222-2222-2222-2222-222222222222",
+      "user_name": "Dr. Selvi Ramanathan",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "22222222-2222-2222-2222-222222222222",
+      "details": {
+        "role": "official"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-18T19:33:21.912944"
+    },
+    {
+      "id": "ba369f6a-7ff3-42fe-ac24-097eac98cb0b",
+      "user_id": "11111111-1111-1111-1111-111111111111",
+      "user_name": "Muthuvel K",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "11111111-1111-1111-1111-111111111111",
+      "details": {
+        "role": "citizen"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-18T19:33:20.341505"
+    },
+    {
+      "id": "c146f785-5401-4ff6-8b64-9775aff06d19",
+      "user_id": "44444444-4444-4444-4444-444444444444",
+      "user_name": "State Governance Admin",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "44444444-4444-4444-4444-444444444444",
+      "details": {
+        "role": "admin"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-18T17:25:01.081814"
+    },
+    {
+      "id": "7ea8dc25-ee99-40b4-a0ad-3495d4880883",
+      "user_id": "22222222-2222-2222-2222-222222222222",
+      "user_name": "Dr. Selvi Ramanathan",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "22222222-2222-2222-2222-222222222222",
+      "details": {
+        "role": "official"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-18T17:25:00.611325"
+    },
+    {
+      "id": "72ece28d-c49d-4021-aa95-8eb3ba4ca646",
+      "user_id": "11111111-1111-1111-1111-111111111111",
+      "user_name": "Muthuvel K",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "11111111-1111-1111-1111-111111111111",
+      "details": {
+        "role": "citizen"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-18T17:24:55.329587"
+    },
+    {
+      "id": "93cf44e8-4de9-4928-933a-a5a6518d73b3",
+      "user_id": "11111111-1111-1111-1111-111111111111",
+      "user_name": "Muthuvel K",
+      "action": "USER_LOGIN",
+      "entity_type": "user",
+      "entity_id": "11111111-1111-1111-1111-111111111111",
+      "details": {
+        "role": "citizen"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-17T22:03:36.772903"
+    },
+    {
+      "id": "ca81c9dd-33ad-4f7c-af54-95f9ebc65e24",
+      "user_id": "44444444-4444-4444-4444-444444444444",
+      "user_name": "State Governance Admin",
+      "action": "DEMO_STORE_RESET",
+      "entity_type": "system",
+      "entity_id": "global",
+      "details": {},
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-17T21:38:16.175571"
+    },
+    {
+      "id": "9c1aaab7-cb36-449c-9339-93a7662df9ac",
+      "user_id": "44444444-4444-4444-4444-444444444444",
+      "user_name": "State Governance Admin",
+      "action": "OFFICIAL_VERIFIED",
+      "entity_type": "official_profile",
+      "entity_id": "22222222-2222-2222-2222-222222222222",
+      "details": {
+        "designation": "BDO Cheyyur",
+        "status": "approved"
+      },
+      "ip_address": "127.0.0.1",
+      "created_at": "2026-10-16T21:38:13.695233"
+    }
+  ]
+};
+
+export const BUILTIN_ACCOUNTS = [
+  {
+    "email": "citizen@gramvikas.in",
+    "password": "Citizen@123",
+    "role": "citizen",
+    "user": {
+      "id": "11111111-1111-1111-1111-111111111111",
+      "email": "citizen@gramvikas.in",
+      "hashed_password": "$2b$12$6jCUj.DAZIhOrrhbIdC/L.f0XFFZ48./ti9qkuExpkY4qp/HkBV5m",
+      "full_name": "Muthuvel K",
+      "phone": "+91 98401 23456",
+      "role": "citizen",
+      "is_active": true,
+      "created_at": "2026-10-16T21:38:13.695233",
+      "citizen_profile": {
+        "village": "Melmaruvathur",
+        "gram_panchayat": "Melmaruvathur Panchayat",
+        "block": "Cheyyur",
+        "district": "Chengalpattu",
+        "state": "Tamil Nadu",
+        "pincode": "603319",
+        "age": 42,
+        "gender": "male",
+        "annual_income": 75000.0,
+        "occupation": "farmer",
+        "landholding_acres": 1.8,
+        "social_category": "OBC",
+        "ration_card_type": "PHH",
+        "has_disability": false,
+        "preferred_language": "ta",
+        "low_bandwidth_mode": false
+      }
+    }
+  },
+  {
+    "email": "official@gramvikas.in",
+    "password": "Official@123",
+    "role": "official",
+    "user": {
+      "id": "22222222-2222-2222-2222-222222222222",
+      "email": "official@gramvikas.in",
+      "hashed_password": "$2b$12$US6Tw6eObevsTypWfzx9NuKBYbFVQ0u9tP5Y0XsD7RMimSOlZJ0sG",
+      "full_name": "Dr. Selvi Ramanathan",
+      "phone": "+91 98409 87654",
+      "role": "official",
+      "is_active": true,
+      "created_at": "2026-10-16T21:38:13.695233",
+      "official_profile": {
+        "designation": "Block Development Officer (BDO)",
+        "department": "Rural Development & Panchayat Raj",
+        "assigned_level": "Block",
+        "assigned_area": "Cheyyur Block",
+        "district": "Chengalpattu",
+        "employee_id_number": "TN-GOV-RD-2018-842",
+        "verification_status": "approved",
+        "verified_at": "2026-10-16T21:38:13.695233",
+        "rejection_reason": null
+      }
+    }
+  },
+  {
+    "email": "pending@gramvikas.in",
+    "password": "Pending@123",
+    "role": "official",
+    "user": {
+      "id": "33333333-3333-3333-3333-333333333333",
+      "email": "pending@gramvikas.in",
+      "hashed_password": "$2b$12$waSuESJe1GYQebPAZ870WerxuwLeFGwSPTO84RsL4tAk/XReOFg0G",
+      "full_name": "R. Anbarasan",
+      "phone": "+91 98405 55666",
+      "role": "official",
+      "is_active": true,
+      "created_at": "2026-10-17T21:38:13.695217",
+      "official_profile": {
+        "designation": "Panchayat Secretary",
+        "department": "Rural Development & Panchayat Raj",
+        "assigned_level": "Panchayat",
+        "assigned_area": "Madurantakam South",
+        "district": "Chengalpattu",
+        "employee_id_number": "TN-GOV-RD-2024-911",
+        "verification_status": "pending",
+        "verified_at": null,
+        "rejection_reason": null
+      }
+    }
+  },
+  {
+    "email": "admin@gramvikas.in",
+    "password": "Admin@123",
+    "role": "admin",
+    "user": {
+      "id": "44444444-4444-4444-4444-444444444444",
+      "email": "admin@gramvikas.in",
+      "hashed_password": "$2b$12$saD99cp6jVceqyBcSsyxCuAOp1j3ndy5Yr2ElCrnmW28I4GfHoAq2",
+      "full_name": "State Governance Admin",
+      "phone": "+91 98400 00001",
+      "role": "admin",
+      "is_active": true,
+      "created_at": "2026-10-16T21:38:13.695233"
+    }
+  }
+];
+
+export const FALLBACK_DISEASES = [
+  {
+    "key": "Apple___Apple scab",
+    "crop": "Apple",
+    "disease": "Apple Scab (Venturia inaequalis)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Apple___Black rot",
+    "crop": "Apple",
+    "disease": "Black Rot (Diplodia seriata)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Apple___Cedar apple rust",
+    "crop": "Apple",
+    "disease": "Cedar Apple Rust (Gymnosporangium juniperi-virginianae)",
+    "severity": "Moderate",
+    "severity_ta": "நடுத்தரம் (Moderate)",
+    "severity_hi": "मध्यम (Moderate)"
+  },
+  {
+    "key": "Apple___healthy",
+    "crop": "Apple",
+    "disease": "Healthy Apple Crop",
+    "severity": "None",
+    "severity_ta": "இல்லை (Healthy)",
+    "severity_hi": "कोई नहीं (Healthy)"
+  },
+  {
+    "key": "Banana___Healthy",
+    "crop": "Banana",
+    "disease": "Healthy Banana Crop",
+    "severity": "None",
+    "severity_ta": "இல்லை (Healthy)",
+    "severity_hi": "कोई नहीं (Healthy)"
+  },
+  {
+    "key": "Banana___Sigatoka",
+    "crop": "Banana",
+    "disease": "Black/Yellow Sigatoka Leaf Spot (Pseudocercospora fijiensis)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Banana___Xanthomonas",
+    "crop": "Banana",
+    "disease": "Banana Bacterial Wilt (Xanthomonas vasicola pv. musacearum)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Blueberry___healthy",
+    "crop": "Blueberry",
+    "disease": "Healthy Blueberry Foliage",
+    "severity": "None",
+    "severity_ta": "இல்லை (Healthy)",
+    "severity_hi": "कोई नहीं (Healthy)"
+  },
+  {
+    "key": "Cherry (including sour)___Powdery mildew",
+    "crop": "Cherry",
+    "disease": "Cherry Powdery Mildew (Podosphaera clandestina)",
+    "severity": "Moderate",
+    "severity_ta": "நடுத்தரம் (Moderate)",
+    "severity_hi": "मध्यम (Moderate)"
+  },
+  {
+    "key": "Cherry (including sour)___healthy",
+    "crop": "Cherry",
+    "disease": "Healthy Cherry Tree",
+    "severity": "None",
+    "severity_ta": "இல்லை (Healthy)",
+    "severity_hi": "कोई नहीं (Healthy)"
+  },
+  {
+    "key": "Corn (maize)___Cercospora leaf spot Gray leaf spot",
+    "crop": "Corn (Maize)",
+    "disease": "Gray Leaf Spot (Cercospora zeae-maydis)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Corn (maize)___Common rust",
+    "crop": "Corn (Maize)",
+    "disease": "Common Corn Rust (Puccinia sorghi)",
+    "severity": "Moderate",
+    "severity_ta": "நடுத்தரம் (Moderate)",
+    "severity_hi": "मध्यम (Moderate)"
+  },
+  {
+    "key": "Corn (maize)___Northern Leaf Blight",
+    "crop": "Corn (Maize)",
+    "disease": "Northern Corn Leaf Blight (Exserohilum turcicum)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Corn (maize)___healthy",
+    "crop": "Corn (Maize)",
+    "disease": "Healthy Maize Crop",
+    "severity": "None",
+    "severity_ta": "இல்லை (Healthy)",
+    "severity_hi": "कोई नहीं (Healthy)"
+  },
+  {
+    "key": "Grape___Black rot",
+    "crop": "Grape",
+    "disease": "Grape Black Rot (Guignardia bidwellii)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Grape___Esca (Black Measles)",
+    "crop": "Grape",
+    "disease": "Grape Esca / Black Measles (Fomitiporia mediterranea / Phaeomoniella)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Grape___Leaf blight (Isariopsis Leaf Spot)",
+    "crop": "Grape",
+    "disease": "Grape Leaf Blight (Pseudocercospora vitis / Isariopsis)",
+    "severity": "Moderate",
+    "severity_ta": "நடுத்தரம் (Moderate)",
+    "severity_hi": "मध्यम (Moderate)"
+  },
+  {
+    "key": "Grape___healthy",
+    "crop": "Grape",
+    "disease": "Healthy Grape Vine",
+    "severity": "None",
+    "severity_ta": "இல்லை (Healthy)",
+    "severity_hi": "कोई नहीं (Healthy)"
+  },
+  {
+    "key": "Groundnut___Alternaria leaf spot",
+    "crop": "Groundnut / Peanut",
+    "disease": "Alternaria Leaf Spot (Alternaria arachidis)",
+    "severity": "Moderate",
+    "severity_ta": "நடுத்தரம் (Moderate)",
+    "severity_hi": "मध्यम (Moderate)"
+  },
+  {
+    "key": "Groundnut___Healthy",
+    "crop": "Groundnut / Peanut",
+    "disease": "Healthy Groundnut Crop",
+    "severity": "None",
+    "severity_ta": "இல்லை (Healthy)",
+    "severity_hi": "कोई नहीं (Healthy)"
+  },
+  {
+    "key": "Groundnut___Leaf spot",
+    "crop": "Groundnut / Peanut",
+    "disease": "Groundnut Tikka Leaf Spot (Cercospora arachidicola / Cercosporidium personatum)",
+    "severity": "Moderate",
+    "severity_ta": "நடுத்தரம் (Moderate)",
+    "severity_hi": "मध्यम (Moderate)"
+  },
+  {
+    "key": "Groundnut___Rosette",
+    "crop": "Groundnut / Peanut",
+    "disease": "Groundnut Rosette Virus (transmitted by aphids)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Groundnut___Rust",
+    "crop": "Groundnut / Peanut",
+    "disease": "Groundnut Rust (Puccinia arachidis)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Orange___Haunglongbing (Citrus greening)",
+    "crop": "Orange / Citrus",
+    "disease": "Citrus Greening / Huanglongbing (Candidatus Liberibacter asiaticus)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Paddy___Bacterial leaf blight",
+    "crop": "Paddy / Rice",
+    "disease": "Rice Bacterial Leaf Blight (Xanthomonas oryzae pv. oryzae)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Paddy___Bacterial leaf streak",
+    "crop": "Paddy / Rice",
+    "disease": "Bacterial Leaf Streak (Xanthomonas oryzae pv. oryzicola)",
+    "severity": "Moderate",
+    "severity_ta": "நடுத்தரம் (Moderate)",
+    "severity_hi": "मध्यम (Moderate)"
+  },
+  {
+    "key": "Paddy___Bacterial panicle blight",
+    "crop": "Paddy / Rice",
+    "disease": "Bacterial Panicle Blight (Burkholderia glumae)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Paddy___Blast",
+    "crop": "Paddy / Rice",
+    "disease": "Rice Leaf and Neck Blast (Magnaporthe oryzae)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Paddy___Brown spot",
+    "crop": "Paddy / Rice",
+    "disease": "Rice Brown Spot (Bipolaris oryzae / Helminthosporium)",
+    "severity": "Moderate",
+    "severity_ta": "நடுத்தரம் (Moderate)",
+    "severity_hi": "मध्यम (Moderate)"
+  },
+  {
+    "key": "Paddy___Dead heart",
+    "crop": "Paddy / Rice",
+    "disease": "Rice Yellow Stem Borer Damage (Dead Heart / White Earhead)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Paddy___Downy mildew",
+    "crop": "Paddy / Rice",
+    "disease": "Rice Downy Mildew / Crazy Top (Sclerophthora macrospora)",
+    "severity": "Moderate",
+    "severity_ta": "நடுத்தரம் (Moderate)",
+    "severity_hi": "मध्यम (Moderate)"
+  },
+  {
+    "key": "Paddy___Healthy",
+    "crop": "Paddy / Rice",
+    "disease": "Healthy Paddy Crop",
+    "severity": "None",
+    "severity_ta": "இல்லை (Healthy)",
+    "severity_hi": "कोई नहीं (Healthy)"
+  },
+  {
+    "key": "Paddy___Hispa",
+    "crop": "Paddy / Rice",
+    "disease": "Rice Hispa Beetle Damage (Dicladispa armigera)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Paddy___Tungro",
+    "crop": "Paddy / Rice",
+    "disease": "Rice Tungro Bacilliform & Spherical Virus (transmitted by Green Leafhopper)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Peach___Bacterial spot",
+    "crop": "Peach",
+    "disease": "Peach Bacterial Spot (Xanthomonas arboricola pv. pruni)",
+    "severity": "Moderate",
+    "severity_ta": "நடுத்தரம் (Moderate)",
+    "severity_hi": "मध्यम (Moderate)"
+  },
+  {
+    "key": "Peach___healthy",
+    "crop": "Peach",
+    "disease": "Healthy Peach Tree",
+    "severity": "None",
+    "severity_ta": "இல்லை (Healthy)",
+    "severity_hi": "कोई नहीं (Healthy)"
+  },
+  {
+    "key": "Pepper, bell___Bacterial spot",
+    "crop": "Bell Pepper / Capsicum",
+    "disease": "Bacterial Spot (Xanthomonas campestris pv. vesicatoria)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Pepper, bell___healthy",
+    "crop": "Bell Pepper / Capsicum",
+    "disease": "Healthy Bell Pepper Plant",
+    "severity": "None",
+    "severity_ta": "இல்லை (Healthy)",
+    "severity_hi": "कोई नहीं (Healthy)"
+  },
+  {
+    "key": "Potato___Early blight",
+    "crop": "Potato",
+    "disease": "Potato Early Blight (Alternaria solani)",
+    "severity": "Moderate",
+    "severity_ta": "நடுத்தரம் (Moderate)",
+    "severity_hi": "मध्यम (Moderate)"
+  },
+  {
+    "key": "Potato___Late blight",
+    "crop": "Potato",
+    "disease": "Potato Late Blight (Phytophthora infestans)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Potato___healthy",
+    "crop": "Potato",
+    "disease": "Healthy Potato Foliage",
+    "severity": "None",
+    "severity_ta": "இல்லை (Healthy)",
+    "severity_hi": "कोई नहीं (Healthy)"
+  },
+  {
+    "key": "Raspberry___healthy",
+    "crop": "Raspberry",
+    "disease": "Healthy Raspberry Cane",
+    "severity": "None",
+    "severity_ta": "இல்லை (Healthy)",
+    "severity_hi": "कोई नहीं (Healthy)"
+  },
+  {
+    "key": "Soybean___healthy",
+    "crop": "Soybean",
+    "disease": "Healthy Soybean Crop",
+    "severity": "None",
+    "severity_ta": "இல்லை (Healthy)",
+    "severity_hi": "कोई नहीं (Healthy)"
+  },
+  {
+    "key": "Squash___Powdery mildew",
+    "crop": "Squash / Pumpkin",
+    "disease": "Squash Powdery Mildew (Podosphaera xanthii)",
+    "severity": "Moderate",
+    "severity_ta": "நடுத்தரம் (Moderate)",
+    "severity_hi": "मध्यम (Moderate)"
+  },
+  {
+    "key": "Strawberry___Leaf scorch",
+    "crop": "Strawberry",
+    "disease": "Strawberry Leaf Scorch (Diplocarpon earlianum)",
+    "severity": "Moderate",
+    "severity_ta": "நடுத்தரம் (Moderate)",
+    "severity_hi": "मध्यम (Moderate)"
+  },
+  {
+    "key": "Strawberry___healthy",
+    "crop": "Strawberry",
+    "disease": "Healthy Strawberry Foliage",
+    "severity": "None",
+    "severity_ta": "இல்லை (Healthy)",
+    "severity_hi": "कोई नहीं (Healthy)"
+  },
+  {
+    "key": "Sugarcane___Banded chlorosis",
+    "crop": "Sugarcane",
+    "disease": "Sugarcane Banded Chlorosis (Cold / Temperature Shock Physiological Disorder)",
+    "severity": "Low",
+    "severity_ta": "குறைவு (Low)",
+    "severity_hi": "कम (Low)"
+  },
+  {
+    "key": "Sugarcane___Brown rust",
+    "crop": "Sugarcane",
+    "disease": "Sugarcane Brown Rust (Puccinia melanocephala)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Sugarcane___Brown spot",
+    "crop": "Sugarcane",
+    "disease": "Sugarcane Brown Spot (Cercospora longipes)",
+    "severity": "Moderate",
+    "severity_ta": "நடுத்தரம் (Moderate)",
+    "severity_hi": "मध्यम (Moderate)"
+  },
+  {
+    "key": "Sugarcane___Dried",
+    "crop": "Sugarcane",
+    "disease": "Sugarcane Drought Stress / Cane Stalk Desiccation",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Sugarcane___Grassy shoot",
+    "crop": "Sugarcane",
+    "disease": "Sugarcane Grassy Shoot Disease (Phytoplasma, vector: aphids)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Sugarcane___Healthy",
+    "crop": "Sugarcane",
+    "disease": "Healthy Sugarcane Crop",
+    "severity": "None",
+    "severity_ta": "இல்லை (Healthy)",
+    "severity_hi": "कोई नहीं (Healthy)"
+  },
+  {
+    "key": "Sugarcane___Pokkah boeng",
+    "crop": "Sugarcane",
+    "disease": "Sugarcane Pokkah Boeng (Fusarium moniliforme / sacchari)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Sugarcane___Sett rot",
+    "crop": "Sugarcane",
+    "disease": "Sugarcane Sett Rot / Pineapple Disease (Ceratocystis paradoxa)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Sugarcane___Smut",
+    "crop": "Sugarcane",
+    "disease": "Sugarcane Smut (Sporisorium scitamineum)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Sugarcane___Viral disease",
+    "crop": "Sugarcane",
+    "disease": "Sugarcane Mosaic / Bacilliform Virus",
+    "severity": "Moderate",
+    "severity_ta": "நடுத்தரம் (Moderate)",
+    "severity_hi": "मध्यम (Moderate)"
+  },
+  {
+    "key": "Sugarcane___Yellow leaf",
+    "crop": "Sugarcane",
+    "disease": "Sugarcane Yellow Leaf Disease (Sugarcane Yellow Leaf Virus - SCYLV)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Tomato___Bacterial spot",
+    "crop": "Tomato",
+    "disease": "Tomato Bacterial Spot (Xanthomonas perforans)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Tomato___Early blight",
+    "crop": "Tomato",
+    "disease": "Tomato Early Blight (Alternaria solani)",
+    "severity": "Moderate",
+    "severity_ta": "நடுத்தரம் (Moderate)",
+    "severity_hi": "मध्यम (Moderate)"
+  },
+  {
+    "key": "Tomato___Late blight",
+    "crop": "Tomato",
+    "disease": "Tomato Late Blight (Phytophthora infestans)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Tomato___Leaf Mold",
+    "crop": "Tomato",
+    "disease": "Tomato Leaf Mold (Passalora fulva / Cladosporium)",
+    "severity": "Moderate",
+    "severity_ta": "நடுத்தரம் (Moderate)",
+    "severity_hi": "मध्यम (Moderate)"
+  },
+  {
+    "key": "Tomato___Septoria leaf spot",
+    "crop": "Tomato",
+    "disease": "Septoria Leaf Spot (Septoria lycopersici)",
+    "severity": "Moderate",
+    "severity_ta": "நடுத்தரம் (Moderate)",
+    "severity_hi": "मध्यम (Moderate)"
+  },
+  {
+    "key": "Tomato___Spider mites Two-spotted spider mite",
+    "crop": "Tomato",
+    "disease": "Two-Spotted Spider Mite Infestation (Tetranychus urticae)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Tomato___Target Spot",
+    "crop": "Tomato",
+    "disease": "Tomato Target Spot (Corynespora cassiicola)",
+    "severity": "Moderate",
+    "severity_ta": "நடுத்தரம் (Moderate)",
+    "severity_hi": "मध्यम (Moderate)"
+  },
+  {
+    "key": "Tomato___Tomato Yellow Leaf Curl Virus",
+    "crop": "Tomato",
+    "disease": "Tomato Yellow Leaf Curl Virus - TYLCV (vector: Whitefly)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Tomato___Tomato mosaic virus",
+    "crop": "Tomato",
+    "disease": "Tomato Mosaic Virus (ToMV - mechanically transmitted)",
+    "severity": "High",
+    "severity_ta": "தீவிரம் (High)",
+    "severity_hi": "गंभीर (High)"
+  },
+  {
+    "key": "Tomato___healthy",
+    "crop": "Tomato",
+    "disease": "Healthy Tomato Plant",
+    "severity": "None",
+    "severity_ta": "இல்லை (Healthy)",
+    "severity_hi": "कोई नहीं (Healthy)"
+  }
+];
+
+export const BENCHMARK_SAMPLES = [
+  {
+    "key": "paddy_blast",
+    "class_key": "Paddy___Blast",
+    "crop_en": "Paddy / Rice",
+    "crop_ta": "நெல் பயிர்",
+    "crop_hi": "धान / चावल",
+    "disease_en": "Leaf Blast (குலை நோய்)",
+    "thumbnail": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=300&q=80"
+  },
+  {
+    "key": "tomato_early_blight",
+    "class_key": "Tomato___Early blight",
+    "crop_en": "Tomato",
+    "crop_ta": "தக்காளி பயிர்",
+    "crop_hi": "टमाटर",
+    "disease_en": "Early Blight (இலைக்கருகல்)",
+    "thumbnail": "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=300&q=80"
+  },
+  {
+    "key": "groundnut_tikka",
+    "class_key": "Groundnut___Leaf spot",
+    "crop_en": "Groundnut",
+    "crop_ta": "நிலக்கடலை பயிர்",
+    "crop_hi": "मूंगफली",
+    "disease_en": "Tikka Leaf Spot (டிக்கா நோய்)",
+    "thumbnail": "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=300&q=80"
+  },
+  {
+    "key": "rice_healthy",
+    "class_key": "Paddy___Healthy",
+    "crop_en": "Paddy / Rice",
+    "crop_ta": "நெல் பயிர்",
+    "crop_hi": "धान / चावल",
+    "disease_en": "Healthy Crop (ஆரோக்கிய பயிர்)",
+    "thumbnail": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=300&q=80"
+  }
+];
+
+export const LIVE_NEWS_FALLBACK = [
+  {
+    "id": "news-1",
+    "title_ta": "தமிழ்நாடு முதலமைச்சரின் உழவர் நலத்துறை புதிய மானிய திட்டம் அறிவிப்பு",
+    "title_en": "Tamil Nadu CM announces new agricultural input subsidy scheme for delta farmers",
+    "title_hi": "तमिलनाडु मुख्यमंत्री ने किसानों के लिए नई सब्सिडी योजना की घोषणा की",
+    "source": "TN Agri Dept Live",
+    "published_at": "2026-10-20T08:30:00Z",
+    "category": "Agriculture",
+    "link": "https://agritech.tnau.ac.in"
+  },
+  {
+    "id": "news-2",
+    "title_ta": "செங்கல்பட்டு மாவட்டத்தில் நெல் கொள்முதல் நிலையங்கள் திறப்பு",
+    "title_en": "Direct Paddy Procurement Centres opened across Chengalpattu district",
+    "title_hi": "चेंगलपट्टू जिले में धान खरीद केंद्र खोले गए",
+    "source": "District Collectorate Chengalpattu",
+    "published_at": "2026-10-19T14:15:00Z",
+    "category": "Procurement",
+    "link": "https://chengalpattu.nic.in"
+  },
+  {
+    "id": "news-3",
+    "title_ta": "பிரதமர் கிசான் 19வது தவணை உதவித்தொகை விவசாயிகளின் வங்கிக் கணக்கில் வரவு",
+    "title_en": "PM-KISAN 19th installment credited directly to eligible farmers bank accounts",
+    "title_hi": "पीएम किसान की 19वीं किस्त किसानों के बैंक खातों में जमा की गई",
+    "source": "Ministry of Agriculture",
+    "published_at": "2026-10-18T10:00:00Z",
+    "category": "Direct Benefit",
+    "link": "https://pmkisan.gov.in"
+  }
+];

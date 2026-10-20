@@ -3,6 +3,8 @@ GRAMVIKAS AI - Main FastAPI Application.
 Unified Server: Serves REST API (/api/*), uploads (/uploads/*), and Frontend SPA/MPA routes.
 """
 
+import os
+import tempfile
 from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse, JSONResponse
@@ -24,8 +26,16 @@ from backend.routers import (
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 FRONTEND_DIR = BASE_DIR / "frontend"
-UPLOADS_DIR = BASE_DIR / "backend" / "uploads"
-UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
+UPLOADS_DIR = settings.UPLOADS_PATH
+
+try:
+    UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
+except Exception:
+    UPLOADS_DIR = Path(tempfile.gettempdir()) / "uploads"
+    try:
+        UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
+    except Exception:
+        pass
 
 app = FastAPI(
     title="GRAMVIKAS AI API",
@@ -63,16 +73,23 @@ app.include_router(voice.router)
 app.include_router(admin.router)
 app.include_router(crop_doctor.router)
 
-# Mount Uploads directory
-app.mount("/uploads", StaticFiles(directory=str(UPLOADS_DIR)), name="uploads")
+# Mount Uploads directory safely
+try:
+    if UPLOADS_DIR.exists():
+        app.mount("/uploads", StaticFiles(directory=str(UPLOADS_DIR)), name="uploads")
+except Exception as e:
+    print(f"[Main] Notice: Could not mount /uploads: {e}")
 
-# Mount Frontend CSS and JS directories
-if (FRONTEND_DIR / "css").exists():
-    app.mount("/css", StaticFiles(directory=str(FRONTEND_DIR / "css")), name="css")
-if (FRONTEND_DIR / "js").exists():
-    app.mount("/js", StaticFiles(directory=str(FRONTEND_DIR / "js")), name="js")
-if (FRONTEND_DIR / "assets").exists():
-    app.mount("/assets", StaticFiles(directory=str(FRONTEND_DIR / "assets")), name="assets")
+# Mount Frontend CSS and JS directories safely
+try:
+    if (FRONTEND_DIR / "css").exists():
+        app.mount("/css", StaticFiles(directory=str(FRONTEND_DIR / "css")), name="css")
+    if (FRONTEND_DIR / "js").exists():
+        app.mount("/js", StaticFiles(directory=str(FRONTEND_DIR / "js")), name="js")
+    if (FRONTEND_DIR / "assets").exists():
+        app.mount("/assets", StaticFiles(directory=str(FRONTEND_DIR / "assets")), name="assets")
+except Exception as e:
+    print(f"[Main] Notice mounting static dirs: {e}")
 
 # Health Check
 @app.get("/api/health")

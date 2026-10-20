@@ -4,11 +4,11 @@
 
 const isLocalhost = typeof window !== 'undefined' && (
   window.location.hostname === 'localhost' ||
-  window.location.hostname === '127.0.0.1' ||
-  window.location.hostname === ''
+  window.location.hostname === '127.0.0.1'
 );
 
-export const API_BASE = isLocalhost ? 'http://127.0.0.1:8000' : (typeof window !== 'undefined' ? window.location.origin : '');
+// Always relative in production / Vercel to guarantee zero CORS issues
+export const API_BASE = isLocalhost ? 'http://127.0.0.1:8000' : '';
 
 export const CONFIG = {
   APP_NAME: "GRAMVIKAS AI",

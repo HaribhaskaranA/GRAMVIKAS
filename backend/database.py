@@ -6,10 +6,14 @@ Provides zero-config instant local execution with persistent state and realistic
 import json
 import uuid
 import os
+import tempfile
+from pathlib import Path
 from datetime import datetime, date, timedelta
 from typing import Dict, Any, List, Optional
 import bcrypt
 from backend.config import settings
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 def hash_password(password: str) -> str:
     pw_bytes = password.encode("utf-8")[:72]
@@ -31,29 +35,54 @@ class DatabaseAdapter:
     
     def __init__(self):
         self.is_demo = settings.is_demo_mode
-        self.store_file = settings.SQLITE_PATH.with_suffix(".json")
+        self.base_seed_file = BASE_DIR / "backend" / "gramvikas_local.json"
+        
+        # In Vercel serverless / read-only environment, write to /tmp
+        is_vercel = bool(os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME"))
+        if is_vercel:
+            self.store_file = Path(tempfile.gettempdir()) / "gramvikas_local.json"
+        else:
+            self.store_file = settings.SQLITE_PATH.with_suffix(".json")
+            
         self.data: Dict[str, Any] = {}
         self._initialize_store()
     
     def _initialize_store(self):
         """Loads existing state from json or seeds initial demo dataset."""
+        # 1. First check runtime writable store file
         if self.store_file.exists():
             try:
                 with open(self.store_file, "r", encoding="utf-8") as f:
                     self.data = json.load(f)
                     return
-            except Exception:
-                pass
+            except Exception as e:
+                print(f"[DB] Could not load from store_file {self.store_file}: {e}")
+
+        # 2. Check packaged seed file from repo
+        if self.base_seed_file.exists():
+            try:
+                with open(self.base_seed_file, "r", encoding="utf-8") as f:
+                    self.data = json.load(f)
+                    return
+            except Exception as e:
+                print(f"[DB] Could not load from base_seed_file {self.base_seed_file}: {e}")
         
         self.reset_to_seeds()
     
     def save_state(self):
-        """Persists current state to local JSON mirror."""
+        """Persists current state to local JSON mirror safely."""
         try:
             with open(self.store_file, "w", encoding="utf-8") as f:
                 json.dump(self.data, f, default=str, indent=2, ensure_ascii=False)
         except Exception as e:
-            print(f"[DB] Error saving local state: {e}")
+            # Fallback to /tmp if primary store_file is not writable
+            try:
+                tmp_file = Path(tempfile.gettempdir()) / "gramvikas_local.json"
+                with open(tmp_file, "w", encoding="utf-8") as f:
+                    json.dump(self.data, f, default=str, indent=2, ensure_ascii=False)
+                self.store_file = tmp_file
+            except Exception as ex:
+                print(f"[DB] Warning: Could not save local state: {ex}")
 
     def reset_to_seeds(self):
         """Builds rich, realistic Tamil Nadu rural development seed dataset."""

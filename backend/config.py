@@ -4,12 +4,31 @@ Automatic Zero-Config Demo Mode Detection.
 """
 
 import os
+import tempfile
 from pathlib import Path
 from pydantic import BaseModel
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-UPLOADS_DIR = BASE_DIR / "backend" / "uploads"
-UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
+
+# Vercel / Serverless read-only detection
+IS_VERCEL = bool(os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME"))
+
+if IS_VERCEL:
+    TMP_DIR = Path(tempfile.gettempdir())
+    UPLOADS_DIR = TMP_DIR / "uploads"
+    SQLITE_PATH = TMP_DIR / "gramvikas_local.db"
+else:
+    UPLOADS_DIR = BASE_DIR / "backend" / "uploads"
+    SQLITE_PATH = BASE_DIR / "backend" / "gramvikas_local.db"
+
+try:
+    UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
+except Exception:
+    UPLOADS_DIR = Path(tempfile.gettempdir()) / "uploads"
+    try:
+        UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
+    except Exception:
+        pass
 
 class Settings(BaseModel):
     PROJECT_NAME: str = "GRAMVIKAS AI"
@@ -39,7 +58,7 @@ class Settings(BaseModel):
     
     # File storage
     UPLOADS_PATH: Path = UPLOADS_DIR
-    SQLITE_PATH: Path = BASE_DIR / "backend" / "gramvikas_local.db"
+    SQLITE_PATH: Path = SQLITE_PATH
     
     @property
     def is_demo_mode(self) -> bool:
