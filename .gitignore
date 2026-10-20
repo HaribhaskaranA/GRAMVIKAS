@@ -1,10 +1,29 @@
-# Python
+# ==============================================================================
+# GRAMVIKAS AI - GIT IGNORE SPECIFICATION
+# ==============================================================================
+
+# 1. Environment & API Secrets (Strict Exclusion)
+.env
+.env.*
+!.env.example
+*.env
+*.env.local
+*.local
+credentials.json
+client_secret*.json
+secrets/
+*.pem
+*.key
+*.cert
+*.crt
+*.pfx
+
+# 2. Python Bytecode, Caches & Builds
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
-env/
 build/
 develop-eggs/
 dist/
@@ -21,25 +40,45 @@ wheels/
 .installed.cfg
 *.egg
 
-# Virtual Environment
+# 3. Virtual Environments
 venv/
 ENV/
+env/
 env.bak/
 venv.bak/
+.venv/
 
-# Environment Variables
-.env
-
-# Database & Uploads
+# 4. Databases, Local Storage & User Uploads
 *.sqlite
 *.sqlite3
 *.db
 backend/uploads/*
 !backend/uploads/.gitkeep
+backend/data/*.sqlite
 
-# IDEs
+# 5. Model Training Checkpoints & Temporary Dumps
+checkpoints/
+checkpoint/
+*.h5.tmp
+*.keras.tmp
+*.log
+*.zip
+*.tar.gz
+*.bak
+
+# 6. IDEs & Editors
 .vscode/
 .idea/
 *.sublime-project
 *.sublime-workspace
+*.swp
+*.swo
+
+# 7. Operating System Artifacts
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
