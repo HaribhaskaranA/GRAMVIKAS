@@ -2,10 +2,18 @@
  * GRAMVIKAS AI - Frontend Configuration & Constants
  */
 
+const isLocalhost = typeof window !== 'undefined' && (
+  window.location.hostname === 'localhost' ||
+  window.location.hostname === '127.0.0.1' ||
+  window.location.hostname === ''
+);
+
+export const API_BASE = isLocalhost ? 'http://127.0.0.1:8000' : (typeof window !== 'undefined' ? window.location.origin : '');
+
 export const CONFIG = {
   APP_NAME: "GRAMVIKAS AI",
   TAGLINE: "Every Citizen Informed. Every Village Progress Tracked.",
-  API_BASE: "", // Relative to current host for zero CORS issues
+  API_BASE: API_BASE,
   DEFAULT_LANGUAGE: "ta",
   SUPPORTED_LANGUAGES: ["en", "ta", "hi"],
   DEMO_USERS: {

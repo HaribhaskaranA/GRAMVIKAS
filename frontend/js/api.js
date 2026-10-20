@@ -3,11 +3,11 @@
  * Handles JWT injection, global errors, file uploads, and graceful fallbacks.
  */
 
-import { CONFIG } from "./config.js";
+import { CONFIG, API_BASE } from "./config.js";
 
 class ApiClient {
   constructor() {
-    this.baseUrl = CONFIG.API_BASE;
+    this.baseUrl = API_BASE || CONFIG.API_BASE || "";
   }
 
   getToken() {
@@ -35,11 +35,18 @@ class ApiClient {
       headers["Content-Type"] = "application/json";
     }
 
+    // AbortController timeout (10s default) to prevent infinite hangs
+    const timeoutMs = options.timeout || 10000;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
     try {
       const response = await fetch(url, {
         ...options,
-        headers
+        headers,
+        signal: options.signal || controller.signal
       });
+      clearTimeout(timeoutId);
 
       if (response.status === 401) {
         // Token expired or invalid
@@ -77,6 +84,11 @@ class ApiClient {
 
       return data;
     } catch (err) {
+      clearTimeout(timeoutId);
+      if (err.name === "AbortError") {
+        console.warn(`[API Timeout] ${endpoint} timed out after ${timeoutMs}ms`);
+        throw new Error("Request timed out. Please check your network connection.");
+      }
       console.error(`[API Error] ${endpoint}:`, err);
       throw err;
     }

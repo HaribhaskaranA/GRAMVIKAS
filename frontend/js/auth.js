@@ -67,11 +67,21 @@ class AuthManager {
       return null;
     }
     try {
-      const user = await api.get("/api/auth/me");
+      // 4-second timeout for session validation so cold starts do not block SPA hydration
+      const user = await Promise.race([
+        api.get("/api/auth/me"),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("Session check timeout")), 4000))
+      ]);
       this.currentUser = user;
       localStorage.setItem("gv_user", JSON.stringify(user));
       return user;
     } catch (err) {
+      console.warn("[Auth] Session validation failed or timed out:", err.message);
+      // If we have a cached user in localStorage, gracefully fall back to it so the UI does not hang
+      if (this.currentUser) {
+        console.log("[Auth] Resuming with cached user profile:", this.currentUser.email);
+        return this.currentUser;
+      }
       this.currentUser = null;
       api.setToken(null);
       localStorage.removeItem("gv_user");

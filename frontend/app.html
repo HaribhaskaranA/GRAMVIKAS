@@ -68,10 +68,36 @@
     import { router } from "/js/router.js";
     import { applyLanguage } from "/js/i18n.js";
 
-    window.addEventListener("DOMContentLoaded", () => {
-      applyLanguage();
-      router.handleCurrentRoute();
-    });
+    const startApp = async () => {
+      try {
+        applyLanguage();
+        await router.handleCurrentRoute();
+      } catch (err) {
+        console.error("[Boot Error] Failed to start GRAMVIKAS AI:", err);
+        const content = document.getElementById("app-content");
+        if (content) {
+          content.innerHTML = `
+            <div class="container py-5 text-center">
+              <div class="card-gv p-4 mx-auto" style="max-width: 500px;">
+                <div class="text-danger mb-3" style="font-size: 2.5rem;"><i class="bi bi-exclamation-triangle"></i></div>
+                <h4 class="fw-bold text-dark">Initialization Error</h4>
+                <p class="text-muted small">${err.message || "Failed to load application modules."}</p>
+                <div class="d-flex justify-content-center gap-2 mt-3">
+                  <button class="btn btn-gv-primary btn-sm" onclick="window.location.reload()">Reload Page</button>
+                  <a href="/login" class="btn btn-outline-secondary btn-sm">Go to Login</a>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+      }
+    };
+
+    if (document.readyState === "loading") {
+      window.addEventListener("DOMContentLoaded", startApp);
+    } else {
+      startApp();
+    }
   </script>
 </body>
 </html>
