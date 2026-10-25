@@ -71,9 +71,9 @@ class AppRouter {
     });
   }
 
-  navigate(path) {
+  async navigate(path) {
     window.history.pushState({}, "", path);
-    this.handleCurrentRoute();
+    return await this.handleCurrentRoute();
   }
 
   async handleCurrentRoute() {
@@ -93,20 +93,17 @@ class AppRouter {
     // Root redirect
     if (cleanPath === "/" || cleanPath === "/app.html") {
       const landing = auth.getRoleLandingPath(user);
-      this.navigate(landing);
-      return;
+      return await this.navigate(landing);
     }
 
     // Role-based route guards
     if (cleanPath.startsWith("/admin") && user?.role !== "admin") {
-      this.navigate(auth.getRoleLandingPath(user));
-      return;
+      return await this.navigate(auth.getRoleLandingPath(user));
     }
 
     if (cleanPath === "/official/dashboard" && user?.role === "official") {
       if (user.official_profile?.verification_status !== "approved") {
-        this.navigate("/verification-pending");
-        return;
+        return await this.navigate("/verification-pending");
       }
     }
 

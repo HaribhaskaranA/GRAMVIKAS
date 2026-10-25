@@ -5,7 +5,6 @@
 
 import { auth } from "../auth.js";
 import { getLanguage, setLanguage, t } from "../i18n.js";
-import { router } from "../router.js";
 
 export function renderNavigation(activePath = "") {
   const user = auth.getUser();

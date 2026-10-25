@@ -63,6 +63,46 @@
   <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+  <!-- Bootstrap Guard & Anti-Hang Watchdog -->
+  <script>
+    window.__appLoaded = false;
+    window.addEventListener("error", function(e) {
+      console.error("[Global Bootstrap Error]:", e);
+      var content = document.getElementById("app-content");
+      if (content && content.innerHTML.indexOf("Initializing GRAMVIKAS AI...") !== -1) {
+        content.innerHTML = '<div class="container py-5 text-center">' +
+          '<div class="card-gv p-4 mx-auto" style="max-width: 520px;">' +
+          '<div class="text-danger mb-3" style="font-size: 2.5rem;"><i class="bi bi-exclamation-triangle"></i></div>' +
+          '<h4 class="fw-bold text-dark">Initialization Notice</h4>' +
+          '<p class="text-muted small">' + (e.message || "A browser script exception occurred during startup.") + '</p>' +
+          '<div class="d-flex justify-content-center gap-2 mt-3">' +
+          '<a href="/citizen/home" class="btn btn-gv-primary btn-sm"><i class="bi bi-house-door me-1"></i> Open Citizen Dashboard</a>' +
+          '<a href="/login" class="btn btn-outline-secondary btn-sm"><i class="bi bi-box-arrow-in-right me-1"></i> Go to Login</a>' +
+          '</div></div></div>';
+      }
+    });
+
+    // 3.5s Fallback Watchdog: if browser hangs on loader, present manual entry
+    setTimeout(function() {
+      if (!window.__appLoaded) {
+        var content = document.getElementById("app-content");
+        if (content && content.innerHTML.indexOf("Initializing GRAMVIKAS AI...") !== -1) {
+          console.warn("[Watchdog] Session initialization exceeded 3.5s threshold. Rendering bypass options...");
+          content.innerHTML = '<div class="container py-5 text-center">' +
+            '<div class="card-gv p-4 mx-auto" style="max-width: 520px;">' +
+            '<div class="spinner-border text-success mb-3"></div>' +
+            '<h5 class="fw-bold text-dark">Connecting to GRAMVIKAS AI</h5>' +
+            '<p class="text-muted small">Server cold-start or session verification in progress. You can wait or proceed directly:</p>' +
+            '<div class="d-flex justify-content-center flex-wrap gap-2 mt-3">' +
+            '<a href="/citizen/home" class="btn btn-gv-primary btn-sm"><i class="bi bi-house-door me-1"></i> Open Citizen Dashboard</a>' +
+            '<a href="/login" class="btn btn-outline-secondary btn-sm"><i class="bi bi-box-arrow-in-right me-1"></i> Open Login</a>' +
+            '<button class="btn btn-outline-primary btn-sm" onclick="window.location.reload()"><i class="bi bi-arrow-clockwise me-1"></i> Reload</button>' +
+            '</div></div></div>';
+        }
+      }
+    }, 3500);
+  </script>
+
   <!-- Application Bootstrap Script -->
   <script type="module">
     import { router } from "/js/router.js";
@@ -72,6 +112,7 @@
       try {
         applyLanguage();
         await router.handleCurrentRoute();
+        window.__appLoaded = true;
       } catch (err) {
         console.error("[Boot Error] Failed to start GRAMVIKAS AI:", err);
         const content = document.getElementById("app-content");
@@ -83,8 +124,9 @@
                 <h4 class="fw-bold text-dark">Initialization Error</h4>
                 <p class="text-muted small">${err.message || "Failed to load application modules."}</p>
                 <div class="d-flex justify-content-center gap-2 mt-3">
-                  <button class="btn btn-gv-primary btn-sm" onclick="window.location.reload()">Reload Page</button>
+                  <a href="/citizen/home" class="btn btn-gv-primary btn-sm"><i class="bi bi-house-door me-1"></i> Open Citizen Dashboard</a>
                   <a href="/login" class="btn btn-outline-secondary btn-sm">Go to Login</a>
+                  <button class="btn btn-outline-primary btn-sm" onclick="window.location.reload()">Reload</button>
                 </div>
               </div>
             </div>
