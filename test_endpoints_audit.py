@@ -37,7 +37,7 @@ print(f"\n--- Found {len(endpoints_found)} API calls in views ---")
 results = []
 for fname, method, url in sorted(set(endpoints_found)):
     # Test with citizen, official, admin
-    # Substitute dummy ID if url ends with /
+    # Substitute dummy ID if url ends with. /
     test_url = url
     if test_url.endswith("/"):
         test_url = test_url + "test-id"
