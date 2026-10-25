@@ -4,6 +4,7 @@
  */
 
 import { api } from "../api.js";
+import { resolveMediaUrl } from "../config.js";
 import { auth } from "../auth.js";
 import { showToast } from "../components/toast.js";
 import { t, getLanguage } from "../i18n.js";
@@ -389,8 +390,8 @@ export async function renderAdminDashboard(container) {
                     ${photos.map(p => `
                       <div class="col-md-6 col-lg-4">
                         <div class="card h-100 border shadow-sm rounded overflow-hidden">
-                          <div class="position-relative bg-dark text-center" style="height: 180px; cursor: pointer;" onclick="window.adminOpenPhotoModal('${p.photo_url}', '${encodeURIComponent(p.work_description || p.caption || '')}')">
-                            <img src="${p.photo_url}" class="w-100 h-100" style="object-fit: cover;" alt="Work Photo" />
+                          <div class="position-relative bg-dark text-center" style="height: 180px; cursor: pointer;" onclick="window.adminOpenPhotoModal('${resolveMediaUrl(p.photo_url)}', '${encodeURIComponent(p.work_description || p.caption || '')}')">
+                            <img src="${resolveMediaUrl(p.photo_url)}" class="w-100 h-100" style="object-fit: cover;" alt="Work Photo" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1541888946425-d0fbb186f5f7?auto=format&fit=crop&w=800&q=80';" />
                             <div class="position-absolute top-0 end-0 m-2">
                               <span class="badge ${p.photo_type === 'completion_photo' ? 'bg-success' : 'bg-primary'} shadow-sm">
                                 <i class="bi ${p.photo_type === 'completion_photo' ? 'bi-patch-check-fill' : 'bi-arrow-repeat'} me-1"></i>
@@ -529,8 +530,8 @@ export async function renderAdminDashboard(container) {
                         <i class="bi bi-question-circle-fill text-warning me-1"></i> "${q.question_text}"
                       </p>
                       ${q.photo_url ? `
-                        <div class="mt-2 p-2 bg-light rounded d-inline-flex align-items-center gap-2 border" style="cursor: pointer;" onclick="window.adminOpenPhotoModal('${q.photo_url}', 'Referenced Photo for Complaint #${(q.report_id || q.complaint_id || 'REPORT').slice(-6)}')">
-                          <img src="${q.photo_url}" style="width: 44px; height: 44px; object-fit: cover; border-radius: 4px;" alt="Referenced Evidence" />
+                        <div class="mt-2 p-2 bg-light rounded d-inline-flex align-items-center gap-2 border" style="cursor: pointer;" onclick="window.adminOpenPhotoModal('${resolveMediaUrl(q.photo_url)}', 'Referenced Photo for Complaint #${(q.report_id || q.complaint_id || 'REPORT').slice(-6)}')">
+                          <img src="${resolveMediaUrl(q.photo_url)}" style="width: 44px; height: 44px; object-fit: cover; border-radius: 4px;" alt="Referenced Evidence" />
                           <span class="small text-primary text-decoration-underline"><i class="bi bi-image me-1"></i> ${currentLang === 'ta' ? 'வினவப்பட்ட புகைப்படம் காண்க' : 'View Inquired Photo'}</span>
                         </div>
                       ` : ''}

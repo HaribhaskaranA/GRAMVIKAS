@@ -13,6 +13,22 @@ const isLocalhost = typeof window !== 'undefined' && (
 // In production (Vercel), route all API requests to the active Render cloud backend
 export const API_BASE = isLocalhost ? 'http://127.0.0.1:8000' : RENDER_BACKEND_URL;
 
+/**
+ * Normalizes photo and media URLs: converts relative /uploads/ paths to absolute Render backend URLs,
+ * and leaves absolute URLs (Supabase storage, CDNs, Unsplash) untouched.
+ */
+export function resolveMediaUrl(url) {
+  if (!url) return 'https://images.unsplash.com/photo-1541888946425-d0fbb186f5f7?auto=format&fit=crop&w=800&q=80';
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) {
+    return url;
+  }
+  if (url.startsWith('/uploads/')) {
+    return RENDER_BACKEND_URL + url;
+  }
+  return url;
+}
+
+
 export const CONFIG = {
   APP_NAME: "GRAMVIKAS AI",
   TAGLINE: "Every Citizen Informed. Every Village Progress Tracked.",

@@ -12,6 +12,10 @@
       "dest": "https://gramvikas-ai-backend.onrender.com/api/$1"
     },
     {
+      "src": "/uploads/(.*)",
+      "dest": "https://gramvikas-ai-backend.onrender.com/uploads/$1"
+    },
+    {
       "src": "/assets/(.*)",
       "dest": "/frontend/assets/$1"
     },

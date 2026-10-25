@@ -104,9 +104,11 @@ class StorageService:
             with open(dest_path, "wb") as f:
                 f.write(content)
 
+            # Return absolute backend URL if in production so Vercel can fetch Render static files directly
+            base_prefix = "https://gramvikas-ai-backend.onrender.com" if settings.ENVIRONMENT == "production" else ""
             return {
                 "status": "success",
-                "url": f"/uploads/{saved_filename}",
+                "url": f"{base_prefix}/uploads/{saved_filename}",
                 "filename": saved_filename,
                 "storage_provider": "local",
                 "size_bytes": file_size

@@ -5,6 +5,7 @@
  */
 
 import { api } from "../api.js";
+import { resolveMediaUrl } from "../config.js";
 import { auth } from "../auth.js";
 import { getLanguage, t, localizeField } from "../i18n.js";
 import { showToast } from "../components/toast.js";
@@ -238,7 +239,7 @@ export async function renderOfficialDashboard(container) {
         existingPhotosContainer.style.display = "block";
         existingPhotosList.innerHTML = photos.map(p => `
           <div class="position-relative border rounded p-1 bg-light">
-            <img src="${p.photo_url}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;" alt="Work Photo">
+            <img src="${resolveMediaUrl(p.photo_url)}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;" alt="Work Photo">
             <span class="badge ${p.is_completion ? 'bg-success' : 'bg-primary'} position-absolute top-0 end-0" style="font-size: 0.6rem;">${p.is_completion ? 'Done' : 'Prog'}</span>
           </div>
         `).join("");

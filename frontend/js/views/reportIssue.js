@@ -4,6 +4,7 @@
  */
 
 import { api } from "../api.js";
+import { resolveMediaUrl } from "../config.js";
 import { auth } from "../auth.js";
 import { getLanguage, t } from "../i18n.js";
 import { showToast, copyToClipboard } from "../components/toast.js";
@@ -355,8 +356,8 @@ async function renderReportDetail(container, reportId) {
               ${workPhotos.map((p, pIdx) => `
                 <div class="col-md-6 col-lg-4">
                   <div class="card h-100 border shadow-sm rounded overflow-hidden">
-                    <div class="position-relative" style="height: 180px; background: #f1f5f9; cursor: pointer;" onclick="window.openWorkPhotoModal('${p.photo_url}', '${encodeURIComponent(p.description)}')">
-                      <img src="${p.photo_url}" alt="Work Evidence Photo" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div class="position-relative" style="height: 180px; background: #f1f5f9; cursor: pointer;" onclick="window.openWorkPhotoModal('${resolveMediaUrl(p.photo_url)}', '${encodeURIComponent(p.description)}')">
+                      <img src="${resolveMediaUrl(p.photo_url)}" alt="Work Evidence Photo" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1541888946425-d0fbb186f5f7?auto=format&fit=crop&w=800&q=80';">
                       <span class="badge ${p.is_completion ? 'bg-success' : 'bg-primary'} position-absolute top-0 start-0 m-2 shadow-sm">
                         <i class="bi ${p.is_completion ? 'bi-check-circle-fill' : 'bi-hourglass-split'} me-1"></i>
                         ${p.is_completion ? (lang === 'ta' ? 'பணி நிறைவு சான்று' : 'COMPLETION PHOTO') : (lang === 'ta' ? 'கள முன்னேற்றம்' : 'PROGRESS EVIDENCE')}
@@ -460,7 +461,7 @@ async function renderReportDetail(container, reportId) {
 
                     ${q.photo_url ? `
                       <div class="mb-2 p-2 bg-light rounded d-inline-flex align-items-center gap-2 border">
-                        <img src="${q.photo_url}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px;" alt="Referenced Photo">
+                        <img src="${resolveMediaUrl(q.photo_url)}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px;" alt="Referenced Photo">
                         <span class="small text-muted">${lang === 'ta' ? 'குறிப்பிடப்பட்ட களப் புகைப்படம்' : 'Referenced Completion Photo'}</span>
                       </div>
                     ` : ''}
