@@ -189,7 +189,7 @@ export async function renderCitizenHome(container) {
         <div class="d-flex align-items-center justify-content-between mb-1">
           <div>
             <h4 class="fw-bold mb-1" style="color: var(--color-primary);">
-              ${lang === 'ta' ? '🚜 உங்கள் கிராம சேவைகள் (படத்தை தொட்டு செல்லவும்)' : (lang === 'hi' ? '🚜 आपकी ग्राम सेवाएं (फोटो छूकर खोलें)' : '🚜 Village Services (Tap a Picture to Open)')}
+              ${lang === 'ta' ? 'உங்கள் கிராம சேவைகள் (படத்தை தொட்டு செல்லவும்)' : (lang === 'hi' ? 'आपकी ग्राम सेवाएं (फोटो छूकर खोलें)' : 'Village Services (Tap a Picture to Open)')}
             </h4>
             <p class="text-muted small mb-0">
               ${lang === 'ta' ? 'பயிர்களை சோதிக்க, திட்ட நிதி உதவி பெற மற்றும் ஊர் வளர்ச்சி பணிகளை கண்காணிக்க கீழே உள்ள படத்தை தொடவும்.' : (lang === 'hi' ? 'फसल जांच, सरकारी सहायता और गांव के काम देखने के लिए संबंधित फोटो पर क्लिक करें।' : 'Tap any picture card to check crops, verify welfare grants, or file village complaints.')}
