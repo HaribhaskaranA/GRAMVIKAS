@@ -1,6 +1,6 @@
 """
 GRAMVIKAS AI - Automated Comprehensive Route & API Verification Script
-Tests all routes and API endpoints called across frontend views to guarantee ZERO 404s.
+Tests all routes and API endpoints called across frontend views to guarantee ZERO 404s
 """
 
 import sys
