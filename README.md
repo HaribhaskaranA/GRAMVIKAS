@@ -1,4 +1,4 @@
-# GRAMVIKAS AI 🌾
+# GRAMVIKAS AI 
 > **“Every Citizen Informed. Every Village Progress Tracked.”**
 
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg?logo=fastapi)](https://fastapi.tiangolo.com)
