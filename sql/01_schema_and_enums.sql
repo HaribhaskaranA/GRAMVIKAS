@@ -1,6 +1,6 @@
 -- ==============================================================================
 -- GRAMVIKAS AI - DATABASE SCHEMA & ENUMS (POSTGRESQL / SUPABASE)
--- Migration 01: Core Schemas, Enums, Tables, Indexes, and Constraints
+-- Migration 01: Core Schemas, Enums, Tables, Indexes, and Constraints.
 -- ==============================================================================
 
 -- Enable UUID extension
