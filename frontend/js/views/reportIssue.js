@@ -259,7 +259,6 @@ async function renderMyReports(container) {
  * Report Detail & 6-Stage Timeline View (/reports/:id)
  */
 async function renderReportDetail(container, reportId) {
-async function renderReportDetail(container, reportId) {
   const lang = getLanguage();
   container.innerHTML = `
     <div class="text-center py-5">
