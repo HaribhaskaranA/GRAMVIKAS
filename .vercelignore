@@ -1,0 +1,8 @@
+backend/
+models/
+api/
+requirements.txt
+runtime.txt
+*.keras
+*.pyc
+__pycache__/

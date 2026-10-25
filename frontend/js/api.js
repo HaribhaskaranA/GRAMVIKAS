@@ -154,36 +154,37 @@ function resolveFallback(endpoint, options = {}) {
 
   if (path === "/api/crop-doctor/analyze" && method === "POST") {
     return {
-      prediction: {
-        disease_name: "Paddy Leaf Blast (குலை நோய்)",
-        disease_key: "Paddy___Blast",
-        crop: "Paddy / Rice",
-        confidence: 0.94,
-        confidence_tier: "high",
-        confidence_badge: "High Confidence / உயர் துல்லியம்",
-        model_version: "v3_finetuned_67class"
+      status: "success",
+      disease_name_en: "Paddy Leaf Blast",
+      disease_name_ta: "நெல் குலை நோய் (Paddy Leaf Blast)",
+      disease_name_hi: "धान का झुलसा रोग (Paddy Leaf Blast)",
+      confidence: 0.94,
+      confidence_percentage: 94.0,
+      confidence_level: "high",
+      engine_used: "Local 67-Class MobileNetV2 Neural Network",
+      diagnosis_summary: "Diamond-shaped or spindle lesions with grayish-white centres and dark brown margins.",
+      organic_remedy: "Spray Pseudomonas fluorescens @ 10g/litre or Neem seed kernel extract (NSKE 5%).",
+      chemical_remedy: "Spray Tricyclazole 75% WP @ 0.6g/litre or Isoprothiolane 40% EC @ 1.5ml/litre.",
+      prevention_advice: "Avoid excessive nitrogen fertilizers; maintain field sanitation and balanced potassium.",
+      symptoms: {
+        en: "Diamond-shaped or spindle lesions with grayish-white centres and dark brown margins.",
+        ta: "இலைகளில் நீள்வட்ட அல்லது வைர வடிவ கரும்பழுப்பு நிற ஓரங்களுடன் கூடிய புள்ளிகள் காணப்படும்.",
+        hi: "पत्तियों पर धुरी के आकार के धब्बे जिनके केंद्र भूरे-सफेद और किनारे गहरे भूरे होते हैं।"
       },
-      advisory: {
-        symptoms: {
-          en: "Diamond-shaped or spindle lesions with grayish-white centres and dark brown margins.",
-          ta: "இலைகளில் நீள்வட்ட அல்லது வைர வடிவ கரும்பழுப்பு நிற ஓரங்களுடன் கூடிய புள்ளிகள் காணப்படும்.",
-          hi: "पत्तियों पर धुरी के आकार के धब्बे जिनके केंद्र भूरे-सफेद और किनारे गहरे भूरे होते हैं।"
-        },
-        organic_control: {
-          en: "Spray Pseudomonas fluorescens @ 10g/litre or Neem seed kernel extract (NSKE 5%).",
-          ta: "சூடோமோனாஸ் ஃப்ளோரசன்ஸ் 10 கிராம்/லிட்டர் அல்லது வேப்பங்கொட்டை சாறு 5% தெளிக்கவும்.",
-          hi: "स्यूडोमोनास फ्लोरेसेंस 10 ग्राम/लीटर या नीम बीज अर्क 5% का छिड़काव करें।"
-        },
-        chemical_control: {
-          en: "Spray Tricyclazole 75% WP @ 0.6g/litre or Isoprothiolane 40% EC @ 1.5ml/litre.",
-          ta: "டிரைசைக்ளசோல் 75% WP 0.6 கிராம்/லிட்டர் தண்ணீரில் கலந்து தெளிக்கவும்.",
-          hi: "ट्राइसाइक्लाजोल 75% WP 0.6 ग्राम/लीटर की दर से छिड़काव करें।"
-        },
-        cultural_practices: {
-          en: "Avoid excessive nitrogen fertilizers; maintain field sanitation and balanced potassium.",
-          ta: "அதிகப்படியான தழைச்சத்து உரங்களை தவிர்க்கவும்; வயலில் நீர் தேங்காமல் சீராக பராமரிக்கவும்.",
-          hi: "अत्यधिक यूरिया के प्रयोग से बचें और खेत में उचित जल निकास बनाए रखें।"
-        }
+      organic_treatment: {
+        en: "Spray Pseudomonas fluorescens @ 10g/litre or Neem seed kernel extract (NSKE 5%).",
+        ta: "சூடோமோனாஸ் ஃப்ளோரசன்ஸ் 10 கிராம்/லிட்டர் அல்லது வேப்பங்கொட்டை சாறு 5% தெளிக்கவும்.",
+        hi: "स्यूडोमोनास फ्लोरेसेंस 10 ग्राम/लीटर या नीम बीज अर्क 5% का छिड़काव करें।"
+      },
+      chemical_treatment: {
+        en: "Spray Tricyclazole 75% WP @ 0.6g/litre or Isoprothiolane 40% EC @ 1.5ml/litre.",
+        ta: "டிரைசைக்ளசோல் 75% WP 0.6 கிராம்/லிட்டர் தண்ணீரில் கலந்து தெளிக்கவும்.",
+        hi: "ट्राइसाइक्लाजोल 75% WP 0.6 ग्राम/लीटर की दर से छिड़काव करें।"
+      },
+      prevention: {
+        en: "Avoid excessive nitrogen fertilizers; maintain field sanitation and balanced potassium.",
+        ta: "அதிகப்படியான தழைச்சத்து உரங்களை தவிர்க்கவும்; வயலில் நீர் தேங்காமல் சீராக பராமரிக்கவும்.",
+        hi: "अत्यधिक यूरिया के प्रयोग से बचें और खेत में उचित जल निकास बनाए रखें।"
       }
     };
   }
