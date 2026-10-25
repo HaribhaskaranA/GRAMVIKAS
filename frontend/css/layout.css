@@ -516,3 +516,121 @@ body {
 .print-only-header {
   display: none;
 }
+
+/* ==============================================================================
+   5. MOBILE & PC RESPONSIVE PERFECTION
+   ============================================================================== */
+
+/* Mobile Phones (<= 576px) */
+@media (max-width: 576px) {
+  :root {
+    --sidebar-width: 85vw;
+    --bottom-nav-height: 60px;
+  }
+
+  body {
+    font-size: 0.92rem;
+  }
+
+  .app-content {
+    padding: 0.75rem 0.5rem 5rem 0.5rem;
+  }
+
+  .picture-card-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.85rem !important;
+  }
+
+  .card-gv {
+    padding: 1rem !important;
+    border-radius: var(--radius-md) !important;
+  }
+
+  .chat-window {
+    height: calc(100vh - 220px) !important;
+    min-height: 400px;
+  }
+
+  .chat-input-bar {
+    padding: 0.5rem !important;
+    gap: 0.35rem !important;
+  }
+
+  .topbar-right {
+    gap: 0.35rem !important;
+  }
+
+  .topbar-right .btn {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.78rem !important;
+  }
+
+  .floating-assist-btn {
+    bottom: calc(var(--bottom-nav-height) + 12px) !important;
+    right: 12px !important;
+    width: 46px !important;
+    height: 46px !important;
+  }
+
+  .back-to-top-btn {
+    bottom: calc(var(--bottom-nav-height) + 12px) !important;
+    left: 12px !important;
+    width: 38px !important;
+    height: 38px !important;
+  }
+}
+
+/* Tablets (577px - 991px) */
+@media (min-width: 577px) and (max-width: 991.98px) {
+  .app-content {
+    padding: 1.25rem 1rem 5.5rem 1rem;
+  }
+
+  .picture-card-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+}
+
+/* PC & Large Desktops (>= 992px) */
+@media (min-width: 992px) {
+  .app-main {
+    margin-left: var(--sidebar-width);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 1.75rem 2rem;
+  }
+
+  .picture-card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .floating-assist-btn {
+    bottom: 2rem;
+    right: 2rem;
+    width: 56px;
+    height: 56px;
+  }
+
+  .back-to-top-btn {
+    bottom: 2rem;
+    left: calc(var(--sidebar-width) + 2rem);
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* Ultra-wide Monitors (>= 1600px) */
+@media (min-width: 1600px) {
+  .app-content {
+    max-width: 1560px;
+  }
+}

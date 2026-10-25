@@ -7,8 +7,29 @@ import os
 import tempfile
 from pathlib import Path
 from pydantic import BaseModel
-
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load local .env if available
+try:
+    from dotenv import load_dotenv
+    load_dotenv(BASE_DIR / ".env")
+except Exception:
+    pass
+
+env_file = BASE_DIR / ".env"
+if env_file.exists():
+    try:
+        with open(env_file, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    k, v = line.split("=", 1)
+                    k = k.strip()
+                    v = v.strip().strip('"').strip("'")
+                    if k not in os.environ:
+                        os.environ[k] = v
+    except Exception:
+        pass
 
 # Vercel / Serverless read-only detection
 IS_VERCEL = bool(os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME"))
@@ -48,7 +69,7 @@ class Settings(BaseModel):
     
     # AI Engine
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "").strip()
-    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-3.5-flash-lite")
     
     # Telephony Gateway
     TELEPHONY_API_KEY: str = os.getenv("TELEPHONY_API_KEY", "").strip()

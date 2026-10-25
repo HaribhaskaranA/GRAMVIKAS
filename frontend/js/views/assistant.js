@@ -208,11 +208,19 @@ export function renderAssistant(container) {
     appendLoadingBubble(botMsgId);
 
     try {
+      const activeUser = auth.getUser();
+      const userProfile = activeUser ? {
+        full_name: activeUser.full_name,
+        role: activeUser.role,
+        ...(activeUser.citizen_profile || activeUser.official_profile || {})
+      } : null;
+
       const res = await api.post("/api/assistant/chat", {
         query: query,
         message: query,
         language: getLanguage(),
-        session_id: "web-session-" + (user?.id || "guest")
+        session_id: "web-session-" + (activeUser?.id || "guest"),
+        user_profile: userProfile
       });
 
       const reply = res.answer || res.reply_text || "Thank you for asking. Our facts are grounded in verified government catalogs.";

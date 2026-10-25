@@ -3,15 +3,20 @@ GRAMVIKAS AI - Multilingual RAG Assistant Router.
 Provides AI grounded question-answering with strict citations and sample prompts.
 """
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from typing import Optional, Dict, Any
 from backend.models.schemas import AssistantChatRequest, AssistantChatResponse
 from backend.services.ai_rag import ai_assistant
+from backend.dependencies import get_optional_user
 
 router = APIRouter(prefix="/api/assistant", tags=["AI Assistant"])
 
 @router.post("/chat", response_model=AssistantChatResponse)
-async def chat_with_assistant(req: AssistantChatRequest):
-    return await ai_assistant.answer_query(req)
+async def chat_with_assistant(
+    req: AssistantChatRequest,
+    current_user: Optional[Dict[str, Any]] = Depends(get_optional_user)
+):
+    return await ai_assistant.answer_query(req, current_user=current_user)
 
 @router.get("/sample-questions")
 async def get_sample_questions():

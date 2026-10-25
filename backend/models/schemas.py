@@ -493,10 +493,13 @@ class CitationItem(BaseModel):
     excerpt: str
 
 class AssistantChatRequest(BaseModel):
-    query: str = Field(..., min_length=2)
+    query: str = Field(..., min_length=1)
+    message: Optional[str] = None
     conversation_history: List[Dict[str, str]] = []
     language: str = "en" # en, ta, hi
     village_filter: Optional[str] = None
+    user_profile: Optional[Dict[str, Any]] = None
+    session_id: Optional[str] = None
 
 class AssistantChatResponse(BaseModel):
     answer: str
