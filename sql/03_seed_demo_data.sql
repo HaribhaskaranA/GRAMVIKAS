@@ -1,6 +1,6 @@
 -- ==============================================================================
 -- GRAMVIKAS AI - REALISTIC TAMIL NADU RURAL DEVELOPMENT SEED DATA
--- Migration 03: Seed Users, Schemes, Village Projects, Reports & Announcements
+-- Migration 03: Seed Users, Schemes, Village Projects, Reports & Announcements.
 -- ==============================================================================
 
 -- 1. SEED USERS & PROFILES
