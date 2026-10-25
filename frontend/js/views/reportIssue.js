@@ -259,17 +259,25 @@ async function renderMyReports(container) {
  * Report Detail & 6-Stage Timeline View (/reports/:id)
  */
 async function renderReportDetail(container, reportId) {
+async function renderReportDetail(container, reportId) {
   const lang = getLanguage();
   container.innerHTML = `
     <div class="text-center py-5">
       <div class="spinner-border spinner-border-sm text-primary"></div>
-      <p class="mt-2 text-muted">${lang === 'ta' ? 'புகார் விவரங்கள் ஏற்றப்படுகின்றன...' : 'Loading grievance timeline...'}</p>
+      <p class="mt-2 text-muted">${lang === 'ta' ? 'புகார் விவரங்கள் மற்றும் கள புகைப்படங்கள் ஏற்றப்படுகின்றன...' : 'Loading grievance timeline and work completion photos...'}</p>
     </div>
   `;
 
   try {
-    const r = await api.get(`/api/reports/${reportId}`);
+    const [r, photos, questions] = await Promise.all([
+      api.get(`/api/reports/${reportId}`),
+      api.get(`/api/reports/${reportId}/photos`).catch(() => []),
+      api.get(`/api/reports/${reportId}/questions`).catch(() => [])
+    ]);
+
     const timeline = r.timeline || [];
+    const workPhotos = photos || r.completion_photos || [];
+    const user = auth.getUser();
 
     const stages = [
       { key: "submitted", label: `1. ${t('report_submitted')}` },
@@ -302,7 +310,7 @@ async function renderReportDetail(container, reportId) {
           <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
             <span class="badge bg-danger text-uppercase">${r.category}</span>
             <span class="badge bg-warning text-dark fw-bold">${t('report_' + r.current_status, r.current_status)}</span>
-            <span class="badge-demo"><i class="bi bi-shield-check"></i> ${t('demo_badge')}</span>
+            <span class="badge bg-success"><i class="bi bi-shield-check"></i> PUBLIC TRANSPARENCY</span>
           </div>
           <h2 class="fw-bold mb-2">${r.title}</h2>
           <p class="mb-3 text-light" style="opacity: 0.95;">
@@ -322,6 +330,185 @@ async function renderReportDetail(container, reportId) {
               <strong class="text-white">${new Date(r.created_at).toLocaleDateString()}</strong>
             </div>
           </div>
+        </div>
+
+        <!-- FEATURE 1: GOVERNMENT WORK COMPLETION & PROGRESS PHOTO TRANSPARENCY -->
+        <div class="card-gv p-4">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3 pb-2 border-bottom">
+            <div>
+              <h5 class="fw-bold mb-1" style="color: var(--color-navy);">
+                <i class="bi bi-camera-fill me-2 text-success"></i>
+                ${lang === 'ta' ? 'அரசு பணி நிறைவு & கள முன்னேற்ற புகைப்படங்கள் (Transparency)' : 'Government Work Completion & Progress Photos'}
+              </h5>
+              <p class="small text-muted mb-0">
+                ${lang === 'ta' ? 'அரசு அலுவலர்களால் கள ஆய்வு செய்து பதிவேற்றப்பட்ட நேரடி புகைப்படங்கள் மற்றும் பணி விவரம்.' : 'Official photographic evidence and technical sign-off notes uploaded directly by field engineers.'}
+              </p>
+            </div>
+            ${workPhotos.length > 0 ? `
+              <button class="btn btn-gv-saffron btn-sm" id="btn-trigger-ask-question">
+                <i class="bi bi-question-circle-fill me-1"></i> ${lang === 'ta' ? 'கேள்வி எழுப்புக / சரிபார்ப்பு கோரிக்கை' : 'Ask a Question / Request Verification'}
+              </button>
+            ` : ''}
+          </div>
+
+          ${workPhotos.length > 0 ? `
+            <div class="row g-3">
+              ${workPhotos.map((p, pIdx) => `
+                <div class="col-md-6 col-lg-4">
+                  <div class="card h-100 border shadow-sm rounded overflow-hidden">
+                    <div class="position-relative" style="height: 180px; background: #f1f5f9; cursor: pointer;" onclick="window.openWorkPhotoModal('${p.photo_url}', '${encodeURIComponent(p.description)}')">
+                      <img src="${p.photo_url}" alt="Work Evidence Photo" style="width: 100%; height: 100%; object-fit: cover;">
+                      <span class="badge ${p.is_completion ? 'bg-success' : 'bg-primary'} position-absolute top-0 start-0 m-2 shadow-sm">
+                        <i class="bi ${p.is_completion ? 'bi-check-circle-fill' : 'bi-hourglass-split'} me-1"></i>
+                        ${p.is_completion ? (lang === 'ta' ? 'பணி நிறைவு சான்று' : 'COMPLETION PHOTO') : (lang === 'ta' ? 'கள முன்னேற்றம்' : 'PROGRESS EVIDENCE')}
+                      </span>
+                      <div class="position-absolute bottom-0 end-0 m-2">
+                        <span class="badge bg-dark bg-opacity-75 text-white small"><i class="bi bi-arrows-fullscreen me-1"></i> ${lang === 'ta' ? 'பெரிதாக்கு' : 'Click to View'}</span>
+                      </div>
+                    </div>
+                    <div class="card-body p-3 d-flex flex-column justify-content-between">
+                      <div>
+                        <p class="fw-semibold text-dark small mb-2" style="line-height: 1.4;">${p.description}</p>
+                      </div>
+                      <div class="pt-2 border-top text-muted small">
+                        <div class="d-flex justify-content-between mb-1">
+                          <span><strong>${lang === 'ta' ? 'பதிவேற்றியவர்:' : 'Uploader:'}</strong></span>
+                          <span>${p.uploader_name}</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                          <span><strong>${lang === 'ta' ? 'தேதி:' : 'Date:'}</strong></span>
+                          <span>${new Date(p.created_at).toLocaleDateString()}</span>
+                        </div>
+                        <button class="btn btn-outline-primary btn-sm w-100 btn-ask-photo-q" data-photo="${p.photo_url}">
+                          <i class="bi bi-chat-square-dots me-1"></i> ${lang === 'ta' ? 'இப்புகைப்படம் குறித்து கேள்வி கேள்' : 'Ask Question on this Photo'}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+          ` : `
+            <div class="p-4 rounded bg-light border text-center text-muted">
+              <i class="bi bi-clock-history mb-2" style="font-size: 2rem;"></i>
+              <h6 class="fw-bold mb-1">${lang === 'ta' ? 'களப் பணி நிறைவு புகைப்படம் விரைவில் பதிவேற்றப்படும்' : 'Official Work Completion Evidence Pending'}</h6>
+              <p class="small mb-0">${lang === 'ta' ? 'ஒதுக்கப்பட்ட வட்டார அலுவலர் மற்றும் பொறியாளர் கள ஆய்வு முடித்து பணிகளை நிறைவு செய்யும் போது புகைப்பட சான்றுகள் இங்கு நேரடியாக காண்பிக்கப்படும்.' : 'Once the assigned BDO and field engineers complete physical repairs, verified completion photos will appear directly in this gallery.'}</p>
+            </div>
+          `}
+        </div>
+
+        <!-- FEATURE 1: CITIZEN QUESTIONS & VERIFICATION INQUIRIES -->
+        <div class="card-gv p-4">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3 pb-2 border-bottom">
+            <div>
+              <h5 class="fw-bold mb-1" style="color: var(--color-navy);">
+                <i class="bi bi-patch-question-fill me-2 text-warning"></i>
+                ${lang === 'ta' ? 'குடிமக்கள் சரிபார்ப்பு கேள்விகள் & நிர்வாக பதில்கள்' : 'Citizen Verification Questions & Official Responses'}
+              </h5>
+              <p class="small text-muted mb-0">
+                ${lang === 'ta' ? 'பணி நிறைவு குறித்து குடிமக்கள் எழுப்பும் கேள்விகள் மற்றும் மாநில நிர்வாகத்தின் அதிகாரப்பூர்வ விளக்கம்.' : 'Direct transparency inquiries raised by citizens regarding completion evidence and administrative answers.'}
+              </p>
+            </div>
+            <button class="btn btn-outline-warning btn-sm" id="btn-open-ask-modal-2">
+              <i class="bi bi-pencil-square me-1"></i> ${lang === 'ta' ? 'புதிய கேள்வி எழுப்புக' : 'Ask Verification Question'}
+            </button>
+          </div>
+
+          <!-- Question Form Box (Collapsible / Dynamic) -->
+          <div id="ask-question-form-box" class="p-3 mb-4 rounded border bg-light-subtle" style="display: none;">
+            <h6 class="fw-bold text-dark mb-2"><i class="bi bi-chat-dots-fill text-warning me-1"></i> ${lang === 'ta' ? 'பணி நிறைவு குறித்த உங்கள் கேள்வியை பதிவு செய்க' : 'Submit Question or Verification Request'}</h6>
+            <div class="mb-2">
+              <label class="form-label small fw-semibold">${lang === 'ta' ? 'பொதுவான உதாரண கேள்வி (Quick Templates):' : 'Suggested Inquiries:'}</label>
+              <div class="d-flex gap-2 flex-wrap mb-2">
+                <button type="button" class="btn btn-xs btn-outline-secondary btn-template-q" data-q="I need to verify whether this work has actually been completed.">
+                  "I need to verify whether this work has actually been completed."
+                </button>
+                <button type="button" class="btn btn-xs btn-outline-secondary btn-template-q" data-q="The uploaded photo does not show the drainage valve replacement. Please provide clarification.">
+                  "The photo does not show the drainage valve replacement. Please clarify."
+                </button>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-semibold">${lang === 'ta' ? 'விளக்கம் தேவைப்படும் விவரம் (Explanation):' : 'What needs clarification?'}</label>
+              <textarea class="form-control form-control-sm" id="input-verification-q-text" rows="3" placeholder="${lang === 'ta' ? 'எ.கா: இப்பணி உண்மையில் முடிந்துவிட்டதா என்பதை கள ஆய்வு செய்து உறுதிப்படுத்த வேண்டும்...' : 'Explain your inquiry regarding the photo evidence, materials used, or completion status...'}" required minlength="10"></textarea>
+            </div>
+            <div class="d-flex justify-content-end gap-2">
+              <button type="button" class="btn btn-outline-secondary btn-sm" id="btn-cancel-ask-q">${lang === 'ta' ? 'ரத்து செய்' : 'Cancel'}</button>
+              <button type="button" class="btn btn-gv-saffron btn-sm fw-bold" id="btn-submit-verification-q">
+                <i class="bi bi-send-fill me-1"></i> ${lang === 'ta' ? 'கேள்வியை சமர்ப்பி' : 'Submit Verification Question'}
+              </button>
+            </div>
+          </div>
+
+          <!-- Questions List -->
+          ${questions.length > 0 ? `
+            <div class="d-flex flex-column gap-3">
+              ${questions.map(q => {
+                const statusBadgeClass = q.status === 'answered' ? 'bg-success' : (q.status === 'closed' ? 'bg-secondary' : 'bg-warning text-dark');
+                const statusLabel = q.status === 'answered' ? (lang === 'ta' ? 'பதிலளிக்கப்பட்டது' : 'Answered') : (q.status === 'closed' ? (lang === 'ta' ? 'நிறைவுற்றது' : 'Closed') : (lang === 'ta' ? 'பரிசீலனையில்' : 'Open / Pending Answer'));
+                
+                return `
+                  <div class="p-3 rounded border bg-white shadow-sm">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2">
+                      <div class="d-flex align-items-center gap-2">
+                        <span class="badge ${statusBadgeClass}">${statusLabel}</span>
+                        <strong class="text-dark small"><i class="bi bi-person-fill text-muted me-1"></i> ${q.citizen_name}</strong>
+                      </div>
+                      <span class="small text-muted font-monospace">${new Date(q.created_at).toLocaleString()}</span>
+                    </div>
+
+                    <p class="mb-2 text-dark" style="font-size: 0.95rem;">${q.question_text}</p>
+
+                    ${q.photo_url ? `
+                      <div class="mb-2 p-2 bg-light rounded d-inline-flex align-items-center gap-2 border">
+                        <img src="${q.photo_url}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px;" alt="Referenced Photo">
+                        <span class="small text-muted">${lang === 'ta' ? 'குறிப்பிடப்பட்ட களப் புகைப்படம்' : 'Referenced Completion Photo'}</span>
+                      </div>
+                    ` : ''}
+
+                    <!-- Conversation Thread / Messages -->
+                    ${(q.messages && q.messages.length > 1) ? `
+                      <div class="p-3 my-2 rounded bg-light border-start border-3 border-primary d-flex flex-column gap-2">
+                        <span class="small fw-bold text-primary mb-1"><i class="bi bi-chat-left-text me-1"></i> ${lang === 'ta' ? 'உரையாடல் வரலாறு (Conversation History):' : 'Verification Discussion:'}</span>
+                        ${q.messages.slice(1).map(m => `
+                          <div class="p-2 rounded ${m.sender_role === 'admin' ? 'bg-primary-subtle border border-primary-subtle' : 'bg-white border'}">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                              <span class="small fw-bold ${m.sender_role === 'admin' ? 'text-primary' : 'text-dark'}">
+                                ${m.sender_role === 'admin' ? '<i class="bi bi-shield-check text-primary me-1"></i> System Administrator' : '<i class="bi bi-person me-1"></i> ' + m.sender_name}
+                              </span>
+                              <span class="small text-muted" style="font-size: 0.75rem;">${new Date(m.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                            </div>
+                            <p class="small mb-0 text-secondary">${m.message}</p>
+                          </div>
+                        `).join("")}
+                      </div>
+                    ` : (q.admin_response ? `
+                      <div class="p-3 my-2 rounded bg-success-subtle border border-success-subtle">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                          <span class="small fw-bold text-success"><i class="bi bi-shield-check me-1"></i> ${lang === 'ta' ? 'நிர்வாகியின் அதிகாரப்பூர்வ பதில்' : 'Administrative Verification Response'}</span>
+                          <span class="small text-muted">${q.admin_responder_name || 'State Governance Admin'}</span>
+                        </div>
+                        <p class="small mb-0 text-success-emphasis">${q.admin_response}</p>
+                      </div>
+                    ` : '')}
+
+                    <!-- Reply Box for Citizen -->
+                    <div class="mt-2 pt-2 border-top d-flex gap-2">
+                      <input type="text" class="form-control form-control-sm input-reply-q" data-qid="${q.id}" placeholder="${lang === 'ta' ? 'மேலும் விளக்கம் அல்லது பதில் எழுதுக...' : 'Write follow-up reply to continue conversation...'}">
+                      <button class="btn btn-sm btn-outline-primary btn-send-q-reply" data-qid="${q.id}">
+                        <i class="bi bi-reply-fill me-1"></i> ${lang === 'ta' ? 'பதில் அனுப்பு' : 'Reply'}
+                      </button>
+                    </div>
+                  </div>
+                `;
+              }).join("")}
+            </div>
+          ` : `
+            <div class="p-3 rounded bg-light text-center text-muted small">
+              <i class="bi bi-chat-square-text mb-1 d-block" style="font-size: 1.5rem;"></i>
+              ${lang === 'ta' ? 'இப்புகாரின் பணி நிறைவு அல்லது புகைப்படங்கள் குறித்து இதுவரை கேள்விகள் ஏதுமில்லை.' : 'No verification questions have been raised yet for this complaint.'}
+            </div>
+          `}
         </div>
 
         <!-- 6-Stage Resolution Timeline -->
@@ -354,7 +541,119 @@ async function renderReportDetail(container, reportId) {
           </div>
         </div>
       </div>
+
+      <!-- Photo Modal Lightbox -->
+      <div class="modal fade" id="modalWorkPhotoLightbox" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title fw-bold" id="lightbox-modal-title">
+                <i class="bi bi-camera me-1 text-success"></i> ${lang === 'ta' ? 'களப் பணி நிறைவு புகைப்படம் (முழு அளவு)' : 'Work Completion Evidence (Full Size)'}
+              </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center p-2 bg-black">
+              <img id="lightbox-modal-img" src="" class="img-fluid rounded" style="max-height: 75vh; object-fit: contain;">
+            </div>
+            <div class="modal-footer justify-content-between bg-light">
+              <p class="small mb-0 text-muted" id="lightbox-modal-desc"></p>
+              <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">${lang === 'ta' ? 'மூடுக' : 'Close'}</button>
+            </div>
+          </div>
+        </div>
+      </div>
     `;
+
+    // Global modal trigger for photo lightbox
+    window.openWorkPhotoModal = (imgUrl, descEncoded) => {
+      const img = document.getElementById("lightbox-modal-img");
+      const descEl = document.getElementById("lightbox-modal-desc");
+      if (img) img.src = imgUrl;
+      if (descEl) descEl.textContent = decodeURIComponent(descEncoded);
+      const modalEl = document.getElementById("modalWorkPhotoLightbox");
+      if (modalEl && window.bootstrap) {
+        const modal = new window.bootstrap.Modal(modalEl);
+        modal.show();
+      } else {
+        window.open(imgUrl, "_blank");
+      }
+    };
+
+    // Toggle Ask Question Form Box
+    const askBox = document.getElementById("ask-question-form-box");
+    const openAskForm = (photoUrl = null) => {
+      if (askBox) {
+        askBox.style.display = "block";
+        askBox.scrollIntoView({ behavior: "smooth" });
+        if (photoUrl) {
+          askBox.setAttribute("data-linked-photo", photoUrl);
+        }
+      }
+    };
+
+    document.getElementById("btn-trigger-ask-question")?.addEventListener("click", () => openAskForm());
+    document.getElementById("btn-open-ask-modal-2")?.addEventListener("click", () => openAskForm());
+    document.getElementById("btn-cancel-ask-q")?.addEventListener("click", () => {
+      if (askBox) askBox.style.display = "none";
+    });
+
+    // Quick templates
+    container.querySelectorAll(".btn-template-q").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const textInput = document.getElementById("input-verification-q-text");
+        if (textInput) textInput.value = btn.getAttribute("data-q");
+      });
+    });
+
+    // Ask Question on Specific Photo button
+    container.querySelectorAll(".btn-ask-photo-q").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const photoUrl = btn.getAttribute("data-photo");
+        openAskForm(photoUrl);
+      });
+    });
+
+    // Submit Verification Question
+    document.getElementById("btn-submit-verification-q")?.addEventListener("click", async () => {
+      const textInput = document.getElementById("input-verification-q-text");
+      const qText = textInput?.value?.trim();
+      const linkedPhoto = askBox?.getAttribute("data-linked-photo") || null;
+
+      if (!qText || qText.length < 10) {
+        alert(lang === 'ta' ? 'தயவுசெய்து உங்கள் கேள்வியை விளக்கமாக எழுதவும் (குறைந்தது 10 எழுத்துக்கள்).' : 'Please enter a clear inquiry of at least 10 characters.');
+        textInput?.focus();
+        return;
+      }
+
+      try {
+        await api.post(`/api/reports/${reportId}/questions`, {
+          question_text: qText,
+          photo_url: linkedPhoto
+        });
+        showToast(lang === 'ta' ? 'கேள்வி வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது!' : 'Verification question submitted successfully!', 'success');
+        renderReportDetail(container, reportId);
+      } catch (err) {
+        alert("Failed to submit question: " + err.message);
+      }
+    });
+
+    // Reply to Question thread
+    container.querySelectorAll(".btn-send-q-reply").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        const qid = btn.getAttribute("data-qid");
+        const input = container.querySelector(`.input-reply-q[data-qid="${qid}"]`);
+        const replyText = input?.value?.trim();
+        if (!replyText || replyText.length < 2) return;
+
+        try {
+          await api.post(`/api/reports/questions/${qid}/reply`, { message: replyText });
+          showToast(lang === 'ta' ? 'பதில் பதிவு செய்யப்பட்டது!' : 'Reply posted successfully!', 'success');
+          renderReportDetail(container, reportId);
+        } catch (err) {
+          alert("Reply failed: " + err.message);
+        }
+      });
+    });
 
     document.getElementById("btn-copy-detail-ref")?.addEventListener("click", () => {
       copyToClipboard(r.reference_id, lang === 'ta' ? 'புகார் குறிப்பு எண்' : 'Grievance Ref ID');

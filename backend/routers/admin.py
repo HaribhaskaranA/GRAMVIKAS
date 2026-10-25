@@ -1,14 +1,18 @@
 """
 GRAMVIKAS AI - System Administration & Verification Router.
-Endpoints for official verification, platform statistics, audit logs, and demo store resets.
+Endpoints for official verification, platform statistics, audit logs,
+completion photo oversight, citizen verification questions, and demo store resets.
 """
 
-from fastapi import APIRouter, HTTPException, status, Depends
-from typing import List, Dict, Any
+from fastapi import APIRouter, HTTPException, status, Depends, Query
+from typing import List, Dict, Any, Optional
 from backend.models.schemas import (
     AdminOverviewStats,
     OfficialVerificationAction,
-    AuditLogOut
+    AuditLogOut,
+    WorkPhotoOut,
+    VerificationQuestionOut,
+    VerificationQuestionStatusUpdate
 )
 from backend.database import db
 from backend.dependencies import require_admin
@@ -64,3 +68,51 @@ async def reset_demo_store(current_user: Dict[str, Any] = Depends(require_admin)
         user_name=current_user["full_name"]
     )
     return {"status": "success", "message": "Demo data store has been restored to factory seed state."}
+
+# ==============================================================================
+# FEATURE 1: WORK COMPLETION PHOTOS & VERIFICATION QUESTIONS OVERSIGHT
+# ==============================================================================
+@router.get("/complaint-photos", response_model=List[WorkPhotoOut])
+async def list_all_complaint_photos(
+    current_user: Dict[str, Any] = Depends(require_admin)
+):
+    """Administrators view all work completion & progress photos across all complaints."""
+    return db.get_work_photos()
+
+@router.get("/verification-questions", response_model=List[VerificationQuestionOut])
+async def list_all_verification_questions(
+    status: Optional[str] = Query(None, description="Filter by status: open, answered, closed"),
+    complaint_id: Optional[str] = Query(None, description="Filter by complaint ID"),
+    current_user: Dict[str, Any] = Depends(require_admin)
+):
+    """Administrators view and filter questions raised by citizens about completion photos."""
+    return db.get_verification_questions(report_id=complaint_id, status=status)
+
+@router.post("/verification-questions/{question_id}/respond", response_model=VerificationQuestionOut)
+async def admin_respond_to_verification_question(
+    question_id: str,
+    payload: VerificationQuestionStatusUpdate,
+    current_user: Dict[str, Any] = Depends(require_admin)
+):
+    """Administrators respond to citizen questions, clarify work status, and track Open/Answered/Closed."""
+    q = db.get_verification_question_by_id(question_id)
+    if not q:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Verification question not found.")
+
+    updated_q = db.update_verification_question_status(
+        question_id=question_id,
+        to_status=payload.status,
+        admin_id=current_user["id"],
+        admin_name=current_user["full_name"],
+        response=payload.admin_response
+    )
+
+    db.log_audit(
+        action="COMPLAINT_QUESTION_ADMIN_RESPONSE",
+        entity_type="verification_question",
+        entity_id=question_id,
+        user_id=current_user["id"],
+        user_name=current_user["full_name"],
+        details={"status": payload.status}
+    )
+    return updated_q

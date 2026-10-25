@@ -23,6 +23,12 @@ export const TRANSLATIONS = {
     nav_admin_portal: "System Admin",
     nav_verification_pending: "Verification Status",
     nav_help: "Help & Accessibility",
+    nav_support: "Support & Help Desk",
+    work_completion_transparency: "Work Completion Transparency",
+    ask_verification_question: "Ask a Question / Request Verification",
+    work_photo_mandatory: "Completion photo is mandatory when marking work as completed.",
+    support_ticket: "Support Ticket",
+    report_problem: "Report a Problem",
     
     // Auth & Status
     role_citizen: "Citizen",

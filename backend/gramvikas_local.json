@@ -3,42 +3,42 @@
     {
       "id": "11111111-1111-1111-1111-111111111111",
       "email": "citizen@gramvikas.in",
-      "hashed_password": "$2b$12$6jCUj.DAZIhOrrhbIdC/L.f0XFFZ48./ti9qkuExpkY4qp/HkBV5m",
+      "hashed_password": "$2b$12$hXGdYZMrWkNW8sX6sUYWDO/g7GpvjJkgGi8m/ybZXg6Xt8OZHBsea",
       "full_name": "Muthuvel K",
       "phone": "+91 98401 23456",
       "role": "citizen",
       "is_active": true,
-      "created_at": "2026-10-16T21:38:13.695233"
+      "created_at": "2026-10-24T16:48:56.201331"
     },
     {
       "id": "22222222-2222-2222-2222-222222222222",
       "email": "official@gramvikas.in",
-      "hashed_password": "$2b$12$US6Tw6eObevsTypWfzx9NuKBYbFVQ0u9tP5Y0XsD7RMimSOlZJ0sG",
+      "hashed_password": "$2b$12$WSd6qi943HZMYQlkEPVHZeorQKuOeoU7pjorcgBCzU7nTTBYdgvC6",
       "full_name": "Dr. Selvi Ramanathan",
       "phone": "+91 98409 87654",
       "role": "official",
       "is_active": true,
-      "created_at": "2026-10-16T21:38:13.695233"
+      "created_at": "2026-10-24T16:48:56.201331"
     },
     {
       "id": "33333333-3333-3333-3333-333333333333",
       "email": "pending@gramvikas.in",
-      "hashed_password": "$2b$12$waSuESJe1GYQebPAZ870WerxuwLeFGwSPTO84RsL4tAk/XReOFg0G",
+      "hashed_password": "$2b$12$Tv7s.IN04wRPmQbLSQ53GO3l3pp00Bh7ggNaIKnkjzxLdHUFoxYWm",
       "full_name": "R. Anbarasan",
       "phone": "+91 98405 55666",
       "role": "official",
       "is_active": true,
-      "created_at": "2026-10-17T21:38:13.695217"
+      "created_at": "2026-10-25T16:48:56.201312"
     },
     {
       "id": "44444444-4444-4444-4444-444444444444",
       "email": "admin@gramvikas.in",
-      "hashed_password": "$2b$12$saD99cp6jVceqyBcSsyxCuAOp1j3ndy5Yr2ElCrnmW28I4GfHoAq2",
+      "hashed_password": "$2b$12$2DrEFsc3tsHITD9TwxjNoOpgKrb29IK3Q/5Y4kkO8v9FadRkOx1Ou",
       "full_name": "State Governance Admin",
       "phone": "+91 98400 00001",
       "role": "admin",
       "is_active": true,
-      "created_at": "2026-10-16T21:38:13.695233"
+      "created_at": "2026-10-24T16:48:56.201331"
     }
   ],
   "citizen_profiles": {
@@ -70,7 +70,7 @@
       "district": "Chengalpattu",
       "employee_id_number": "TN-GOV-RD-2018-842",
       "verification_status": "approved",
-      "verified_at": "2026-10-16T21:38:13.695233",
+      "verified_at": "2026-10-24T16:48:56.201331",
       "rejection_reason": null
     },
     "33333333-3333-3333-3333-333333333333": {
@@ -107,7 +107,7 @@
       "helpline_number": "155261",
       "is_active": true,
       "is_demo": true,
-      "created_at": "2026-10-16T21:38:13.695233",
+      "created_at": "2026-10-24T16:48:56.201331",
       "criteria": {
         "min_age": 18,
         "max_age": 100,
@@ -170,7 +170,7 @@
       "helpline_number": "1800-425-4567",
       "is_active": true,
       "is_demo": true,
-      "created_at": "2026-10-16T21:38:13.695233",
+      "created_at": "2026-10-24T16:48:56.201331",
       "criteria": {
         "min_age": 21,
         "max_age": 90,
@@ -239,7 +239,7 @@
       "helpline_number": "1800-111-555",
       "is_active": true,
       "is_demo": true,
-      "created_at": "2026-10-16T21:38:13.695233",
+      "created_at": "2026-10-24T16:48:56.201331",
       "criteria": {
         "min_age": 18,
         "max_age": 80,
@@ -303,7 +303,7 @@
       "helpline_number": "044-25670845",
       "is_active": true,
       "is_demo": true,
-      "created_at": "2026-10-16T21:38:13.695233",
+      "created_at": "2026-10-24T16:48:56.201331",
       "criteria": {
         "min_age": 17,
         "max_age": 26,
@@ -366,7 +366,7 @@
       "helpline_number": "1800-180-1551",
       "is_active": true,
       "is_demo": true,
-      "created_at": "2026-10-16T21:38:13.695233",
+      "created_at": "2026-10-24T16:48:56.201331",
       "criteria": {
         "min_age": 18,
         "max_age": 100,
@@ -426,7 +426,7 @@
       "helpline_number": "1800-425-3993",
       "is_active": true,
       "is_demo": true,
-      "created_at": "2026-10-16T21:38:13.695233",
+      "created_at": "2026-10-24T16:48:56.201331",
       "criteria": {
         "min_age": 0,
         "max_age": 120,
@@ -470,18 +470,18 @@
   ],
   "saved_schemes": [
     {
-      "id": "ed0213ed-7535-4a91-b90f-46c7e9daf660",
+      "id": "de935b6b-2c1d-4ac0-b3a0-85ce30849aa4",
       "user_id": "11111111-1111-1111-1111-111111111111",
       "scheme_id": "a1111111-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
       "notes": "Patta applied at VAO office; awaiting verification.",
-      "created_at": "2026-10-16T21:38:13.695233"
+      "created_at": "2026-10-24T16:48:56.201331"
     },
     {
-      "id": "f10cf86f-9175-4a06-a8ec-a525d2fc9377",
+      "id": "c5318bf9-b494-4056-8859-fc31d50934a4",
       "user_id": "11111111-1111-1111-1111-111111111111",
       "scheme_id": "a2222222-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
       "notes": "Applied in Gram Sabha; Overseer inspection due.",
-      "created_at": "2026-10-16T21:38:13.695233"
+      "created_at": "2026-10-24T16:48:56.201331"
     }
   ],
   "projects": [
@@ -514,155 +514,155 @@
       "description_hi": "मेलमरुवथुर में 420 परिवारों के लिए 60,000 लीटर क्षमता की पानी की टंकी और 4.8 किमी पाइपलाइन निर्माण।",
       "cover_image_url": "https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=800&q=80",
       "is_demo": true,
-      "created_at": "2026-10-16T21:38:13.695233",
+      "created_at": "2026-10-24T16:48:56.201331",
       "milestones": [
         {
-          "id": "bc7e6e7b-8f8f-4ce9-aa03-23d5e59a172f",
+          "id": "74d8577d-ca8d-47d4-b284-fa699ef5c069",
           "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "planning",
           "stage_number": 1,
           "title": "Site Identification & Hydrogeological Survey",
           "description": "Standard rural milestone 1 for Site Identification & Hydrogeological Survey",
           "is_completed": true,
-          "target_date": "2026-07-04",
-          "completed_date": "2026-07-04"
+          "target_date": "2026-07-12",
+          "completed_date": "2026-07-12"
         },
         {
-          "id": "eb7f680b-8899-4d7b-9ec1-9855a6869911",
+          "id": "151dfa4d-d43e-4ba1-98b2-6b5d05c22dab",
           "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "budget_approved",
           "stage_number": 2,
           "title": "Administrative & Technical Sanction",
           "description": "Standard rural milestone 2 for Administrative & Technical Sanction",
           "is_completed": true,
-          "target_date": "2026-07-19",
-          "completed_date": "2026-07-19"
+          "target_date": "2026-07-27",
+          "completed_date": "2026-07-27"
         },
         {
-          "id": "aeb67459-de6c-40a6-9214-53741047d84a",
+          "id": "f5e0cceb-029d-4037-9cda-0b6dfca2ed8b",
           "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "tender_floated",
           "stage_number": 3,
           "title": "E-Tender Publication",
           "description": "Standard rural milestone 3 for E-Tender Publication",
           "is_completed": true,
-          "target_date": "2026-08-03",
-          "completed_date": "2026-08-03"
+          "target_date": "2026-08-11",
+          "completed_date": "2026-08-11"
         },
         {
-          "id": "5e896b25-a324-4049-a997-6125e4775be4",
+          "id": "6f3c1843-fb68-4308-9607-1d625f6afda5",
           "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "contractor_assigned",
           "stage_number": 4,
           "title": "Contractor Assigned & Work Order",
           "description": "Standard rural milestone 4 for Contractor Assigned & Work Order",
           "is_completed": true,
-          "target_date": "2026-08-18",
-          "completed_date": "2026-08-18"
+          "target_date": "2026-08-26",
+          "completed_date": "2026-08-26"
         },
         {
-          "id": "3749ed20-b5ca-420e-b73a-25b8119d3d69",
+          "id": "277f903b-c636-45e8-9fcf-75bcfc1d3e3b",
           "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "foundation_work",
           "stage_number": 5,
           "title": "Excavation & RCC Foundation",
           "description": "Standard rural milestone 5 for Excavation & RCC Foundation",
           "is_completed": true,
-          "target_date": "2026-09-02",
-          "completed_date": "2026-09-02"
+          "target_date": "2026-09-10",
+          "completed_date": "2026-09-10"
         },
         {
-          "id": "208bb89c-f708-43a4-a55d-443648c1b961",
+          "id": "988cec07-8321-471e-9d3a-3801b595758c",
           "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "structure_laying",
           "stage_number": 6,
           "title": "Main Structure & Pipeline Laying",
           "description": "Standard rural milestone 6 for Main Structure & Pipeline Laying",
           "is_completed": true,
-          "target_date": "2026-09-17",
-          "completed_date": "2026-09-17"
+          "target_date": "2026-09-25",
+          "completed_date": "2026-09-25"
         },
         {
-          "id": "8b82ba0b-6013-4e00-9192-03156f4d402c",
+          "id": "955b1ced-19ba-4331-8adc-43a303e7586b",
           "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "mid_term_inspection",
           "stage_number": 7,
           "title": "Assistant Executive Engineer Mid-Inspection",
           "description": "Standard rural milestone 7 for Assistant Executive Engineer Mid-Inspection",
           "is_completed": true,
-          "target_date": "2026-10-02",
-          "completed_date": "2026-10-02"
+          "target_date": "2026-10-10",
+          "completed_date": "2026-10-10"
         },
         {
-          "id": "554c36c3-d01e-4b21-acea-c54630353751",
+          "id": "3e265e8f-a2d7-4b58-910c-c958db9b23e7",
           "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "quality_testing",
           "stage_number": 8,
           "title": "Hydrostatic Pressure & Quality Testing",
           "description": "Standard rural milestone 8 for Hydrostatic Pressure & Quality Testing",
           "is_completed": false,
-          "target_date": "2026-10-17",
+          "target_date": "2026-10-25",
           "completed_date": null
         },
         {
-          "id": "0520952a-1f21-4016-a390-084589dcd5e6",
+          "id": "793775a8-cc06-44f0-a2ed-513013971e09",
           "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "final_finishing",
           "stage_number": 9,
           "title": "Painting, Disinfection & Safety Signage",
           "description": "Standard rural milestone 9 for Painting, Disinfection & Safety Signage",
           "is_completed": false,
-          "target_date": "2026-11-01",
+          "target_date": "2026-11-09",
           "completed_date": null
         },
         {
-          "id": "633ebb20-b278-4e14-81d8-2a4b88583013",
+          "id": "f6cd174c-4db7-477f-98e5-82224bad08bf",
           "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "completion_handover",
           "stage_number": 10,
           "title": "Trial Run & Panchayat Handover",
           "description": "Standard rural milestone 10 for Trial Run & Panchayat Handover",
           "is_completed": false,
-          "target_date": "2026-11-16",
+          "target_date": "2026-11-24",
           "completed_date": null
         },
         {
-          "id": "92d17534-7698-4cf7-a4d4-248aa27ec771",
+          "id": "39d223d0-88fe-452d-ae83-0fcc88940a8f",
           "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "official_signoff",
           "stage_number": 11,
           "title": "District Collector Sign-Off",
           "description": "Standard rural milestone 11 for District Collector Sign-Off",
           "is_completed": false,
-          "target_date": "2026-12-01",
+          "target_date": "2026-12-09",
           "completed_date": null
         },
         {
-          "id": "ba8ba708-a281-4424-9d2c-38de3cbce574",
+          "id": "f8563a6e-211a-4f67-8329-c0fbe233c984",
           "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "public_audit",
           "stage_number": 12,
           "title": "Gram Sabha Social Audit",
           "description": "Standard rural milestone 12 for Gram Sabha Social Audit",
           "is_completed": false,
-          "target_date": "2026-12-16",
+          "target_date": "2026-12-24",
           "completed_date": null
         },
         {
-          "id": "89209001-312e-4740-95dd-96f28930b40d",
+          "id": "37c69cf1-8371-416d-87e2-786383c85252",
           "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "maintenance_active",
           "stage_number": 13,
           "title": "Active Maintenance & Public Dashboard",
           "description": "Standard rural milestone 13 for Active Maintenance & Public Dashboard",
           "is_completed": false,
-          "target_date": "2026-12-31",
+          "target_date": "2027-01-08",
           "completed_date": null
         }
       ],
       "updates": [
         {
-          "id": "ac1a0745-64ba-45a9-aa5a-7fd455c40823",
+          "id": "48d8d94f-14a1-4d03-b180-8842c09b6245",
           "project_id": "b1111111-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "mid_term_inspection",
           "update_notes": "Structural concrete strength passed 28-day cube test (32.4 MPa). Pipeline pressure testing underway in Sector 2.",
@@ -671,7 +671,7 @@
           ],
           "expenditure_reported": 850000.0,
           "official_name": "Dr. Selvi Ramanathan",
-          "created_at": "2026-10-16T21:38:13.695233"
+          "created_at": "2026-10-24T16:48:56.201331"
         }
       ]
     },
@@ -704,155 +704,155 @@
       "description_hi": "1.2 किमी पक्की कंक्रीट सड़क और दोनों ओर नाली निर्माण कार्य।",
       "cover_image_url": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
       "is_demo": true,
-      "created_at": "2026-10-16T21:38:13.695233",
+      "created_at": "2026-10-24T16:48:56.201331",
       "milestones": [
         {
-          "id": "806f3845-79c1-4e73-a0ae-dea4495fcb52",
+          "id": "8c8db00d-fdf0-42bd-8b5e-9a25c7f63e65",
           "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "planning",
           "stage_number": 1,
           "title": "Site Identification & Hydrogeological Survey",
           "description": "Standard rural milestone 1 for Site Identification & Hydrogeological Survey",
           "is_completed": true,
-          "target_date": "2026-05-05",
-          "completed_date": "2026-05-05"
+          "target_date": "2026-05-13",
+          "completed_date": "2026-05-13"
         },
         {
-          "id": "95b4a4a3-60dd-4571-8677-c45112bb103b",
+          "id": "2322f035-9375-4d3c-af2a-f1855b48bfac",
           "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "budget_approved",
           "stage_number": 2,
           "title": "Administrative & Technical Sanction",
           "description": "Standard rural milestone 2 for Administrative & Technical Sanction",
           "is_completed": true,
-          "target_date": "2026-05-20",
-          "completed_date": "2026-05-20"
+          "target_date": "2026-05-28",
+          "completed_date": "2026-05-28"
         },
         {
-          "id": "077d990c-7548-4043-b0c1-9803d2d5b942",
+          "id": "17f5f29c-03be-4ac0-af69-1f5170c70557",
           "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "tender_floated",
           "stage_number": 3,
           "title": "E-Tender Publication",
           "description": "Standard rural milestone 3 for E-Tender Publication",
           "is_completed": true,
-          "target_date": "2026-06-04",
-          "completed_date": "2026-06-04"
+          "target_date": "2026-06-12",
+          "completed_date": "2026-06-12"
         },
         {
-          "id": "f279b474-3a35-47a9-a263-02e2106e71cc",
+          "id": "c3cfbf70-80aa-4ff3-a54d-99bf75a1c9d3",
           "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "contractor_assigned",
           "stage_number": 4,
           "title": "Contractor Assigned & Work Order",
           "description": "Standard rural milestone 4 for Contractor Assigned & Work Order",
           "is_completed": true,
-          "target_date": "2026-06-19",
-          "completed_date": "2026-06-19"
+          "target_date": "2026-06-27",
+          "completed_date": "2026-06-27"
         },
         {
-          "id": "8b1502d7-d471-4ddc-bd13-63706465fbd1",
+          "id": "349fdade-790d-4492-b934-294fec898f09",
           "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "foundation_work",
           "stage_number": 5,
           "title": "Excavation & RCC Foundation",
           "description": "Standard rural milestone 5 for Excavation & RCC Foundation",
           "is_completed": true,
-          "target_date": "2026-07-04",
-          "completed_date": "2026-07-04"
+          "target_date": "2026-07-12",
+          "completed_date": "2026-07-12"
         },
         {
-          "id": "0d2be13d-4067-4892-bd1f-c4f35f68165c",
+          "id": "319142a3-9a90-4e9f-a660-38faadb98f99",
           "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "structure_laying",
           "stage_number": 6,
           "title": "Main Structure & Pipeline Laying",
           "description": "Standard rural milestone 6 for Main Structure & Pipeline Laying",
           "is_completed": true,
-          "target_date": "2026-07-19",
-          "completed_date": "2026-07-19"
+          "target_date": "2026-07-27",
+          "completed_date": "2026-07-27"
         },
         {
-          "id": "be16efcf-1b26-4be0-abea-6a5373539b7a",
+          "id": "a1330d6f-501d-4a13-8873-da0297d587e7",
           "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "mid_term_inspection",
           "stage_number": 7,
           "title": "Assistant Executive Engineer Mid-Inspection",
           "description": "Standard rural milestone 7 for Assistant Executive Engineer Mid-Inspection",
           "is_completed": true,
-          "target_date": "2026-08-03",
-          "completed_date": "2026-08-03"
+          "target_date": "2026-08-11",
+          "completed_date": "2026-08-11"
         },
         {
-          "id": "cdd4ecaf-39ad-4e6f-8da6-36db59a77eec",
+          "id": "a0e5f0d7-5d06-4ecc-b953-357c24f2d8fc",
           "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "quality_testing",
           "stage_number": 8,
           "title": "Hydrostatic Pressure & Quality Testing",
           "description": "Standard rural milestone 8 for Hydrostatic Pressure & Quality Testing",
           "is_completed": true,
-          "target_date": "2026-08-18",
-          "completed_date": "2026-08-18"
+          "target_date": "2026-08-26",
+          "completed_date": "2026-08-26"
         },
         {
-          "id": "4d1d0095-1b00-4d00-a82e-214b2cd8836a",
+          "id": "c611dc2a-6e0e-4b76-993c-dcf00f2080be",
           "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "final_finishing",
           "stage_number": 9,
           "title": "Painting, Disinfection & Safety Signage",
           "description": "Standard rural milestone 9 for Painting, Disinfection & Safety Signage",
           "is_completed": true,
-          "target_date": "2026-09-02",
-          "completed_date": "2026-09-02"
+          "target_date": "2026-09-10",
+          "completed_date": "2026-09-10"
         },
         {
-          "id": "2912c2ce-0875-428b-b1bb-7cc4d3c71f89",
+          "id": "870bf3d7-67dc-4ecb-b4a9-d0791a8a5c7d",
           "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "completion_handover",
           "stage_number": 10,
           "title": "Trial Run & Panchayat Handover",
           "description": "Standard rural milestone 10 for Trial Run & Panchayat Handover",
           "is_completed": true,
-          "target_date": "2026-09-17",
-          "completed_date": "2026-09-17"
+          "target_date": "2026-09-25",
+          "completed_date": "2026-09-25"
         },
         {
-          "id": "8f75c842-d386-4636-bed3-8eeff3b4f51b",
+          "id": "1703a8f4-7560-4eb4-bc45-a565c0d7cf3a",
           "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "official_signoff",
           "stage_number": 11,
           "title": "District Collector Sign-Off",
           "description": "Standard rural milestone 11 for District Collector Sign-Off",
           "is_completed": true,
-          "target_date": "2026-10-02",
-          "completed_date": "2026-10-02"
+          "target_date": "2026-10-10",
+          "completed_date": "2026-10-10"
         },
         {
-          "id": "e77d414f-33cf-4d5e-9fa3-04c72f5a8642",
+          "id": "669cf6c7-b07c-47b3-899e-26c47381fe76",
           "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "public_audit",
           "stage_number": 12,
           "title": "Gram Sabha Social Audit",
           "description": "Standard rural milestone 12 for Gram Sabha Social Audit",
           "is_completed": false,
-          "target_date": "2026-10-17",
+          "target_date": "2026-10-25",
           "completed_date": null
         },
         {
-          "id": "bdd0af77-4146-4105-a36b-92adf0595727",
+          "id": "5c334f61-a59a-4957-90f7-4d0f5c0659c7",
           "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "maintenance_active",
           "stage_number": 13,
           "title": "Active Maintenance & Public Dashboard",
           "description": "Standard rural milestone 13 for Active Maintenance & Public Dashboard",
           "is_completed": false,
-          "target_date": "2026-11-01",
+          "target_date": "2026-11-09",
           "completed_date": null
         }
       ],
       "updates": [
         {
-          "id": "68a7d77e-7da8-4693-b772-7956cb131dac",
+          "id": "2b691d86-d61b-4a9a-a716-424893024b18",
           "project_id": "b2222222-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "official_signoff",
           "update_notes": "Road core cut samples verified. Edge curbs completed. Ready for Gram Sabha public audit presentation.",
@@ -861,7 +861,7 @@
           ],
           "expenditure_reported": 1850000.0,
           "official_name": "Dr. Selvi Ramanathan",
-          "created_at": "2026-10-16T21:38:13.695233"
+          "created_at": "2026-10-24T16:48:56.201331"
         }
       ]
     },
@@ -894,149 +894,149 @@
       "description_hi": "45 सौर एलईडी स्ट्रीट लाइट और 2 हाई-मास्ट लाइटों की स्थापना।",
       "cover_image_url": "https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=800&q=80",
       "is_demo": true,
-      "created_at": "2026-10-16T21:38:13.695233",
+      "created_at": "2026-10-24T16:48:56.201331",
       "milestones": [
         {
-          "id": "9b32e95e-eedf-4202-83cc-c1a5ebd95116",
+          "id": "0a5130e2-6e75-45f6-b8e1-a359adfac096",
           "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "planning",
           "stage_number": 1,
           "title": "Site Identification & Hydrogeological Survey",
           "description": "Standard rural milestone 1 for Site Identification & Hydrogeological Survey",
           "is_completed": true,
-          "target_date": "2026-08-03",
-          "completed_date": "2026-08-03"
+          "target_date": "2026-08-11",
+          "completed_date": "2026-08-11"
         },
         {
-          "id": "aec40f1d-df6d-4d7e-9ec0-20c085c70bbc",
+          "id": "29cbc5e8-51c3-419e-8c2b-d2cd4a12b5cc",
           "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "budget_approved",
           "stage_number": 2,
           "title": "Administrative & Technical Sanction",
           "description": "Standard rural milestone 2 for Administrative & Technical Sanction",
           "is_completed": true,
-          "target_date": "2026-08-18",
-          "completed_date": "2026-08-18"
+          "target_date": "2026-08-26",
+          "completed_date": "2026-08-26"
         },
         {
-          "id": "6b155052-44c7-47fb-8ef1-f40718125a72",
+          "id": "f83140ec-9bf6-4bc2-8eba-2ccafb2a88b8",
           "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "tender_floated",
           "stage_number": 3,
           "title": "E-Tender Publication",
           "description": "Standard rural milestone 3 for E-Tender Publication",
           "is_completed": true,
-          "target_date": "2026-09-02",
-          "completed_date": "2026-09-02"
+          "target_date": "2026-09-10",
+          "completed_date": "2026-09-10"
         },
         {
-          "id": "79729fe1-826b-4ccc-9eb8-f8e9cc176d9d",
+          "id": "998f68e8-9419-409e-9683-7433cd2860a7",
           "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "contractor_assigned",
           "stage_number": 4,
           "title": "Contractor Assigned & Work Order",
           "description": "Standard rural milestone 4 for Contractor Assigned & Work Order",
           "is_completed": true,
-          "target_date": "2026-09-17",
-          "completed_date": "2026-09-17"
+          "target_date": "2026-09-25",
+          "completed_date": "2026-09-25"
         },
         {
-          "id": "bd46368f-8add-4359-8a71-3f679faf9d83",
+          "id": "8146b2c2-765e-4cd5-b377-952216ff0472",
           "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "foundation_work",
           "stage_number": 5,
           "title": "Excavation & RCC Foundation",
           "description": "Standard rural milestone 5 for Excavation & RCC Foundation",
           "is_completed": true,
-          "target_date": "2026-10-02",
-          "completed_date": "2026-10-02"
+          "target_date": "2026-10-10",
+          "completed_date": "2026-10-10"
         },
         {
-          "id": "9a722c09-2420-4419-875b-70304f749214",
+          "id": "b3613d52-2cba-44b8-aff8-fa31ddec1ace",
           "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "structure_laying",
           "stage_number": 6,
           "title": "Main Structure & Pipeline Laying",
           "description": "Standard rural milestone 6 for Main Structure & Pipeline Laying",
           "is_completed": false,
-          "target_date": "2026-10-17",
+          "target_date": "2026-10-25",
           "completed_date": null
         },
         {
-          "id": "6d6c938b-1220-4d02-8002-b971e7671a04",
+          "id": "1478dfa8-d4a0-4efe-91fd-3a060453c99e",
           "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "mid_term_inspection",
           "stage_number": 7,
           "title": "Assistant Executive Engineer Mid-Inspection",
           "description": "Standard rural milestone 7 for Assistant Executive Engineer Mid-Inspection",
           "is_completed": false,
-          "target_date": "2026-11-01",
+          "target_date": "2026-11-09",
           "completed_date": null
         },
         {
-          "id": "86fd798e-6a47-4664-adf3-f8b3e981beca",
+          "id": "7a4f52d4-91c0-4113-8efc-6b2b18ec5fa8",
           "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "quality_testing",
           "stage_number": 8,
           "title": "Hydrostatic Pressure & Quality Testing",
           "description": "Standard rural milestone 8 for Hydrostatic Pressure & Quality Testing",
           "is_completed": false,
-          "target_date": "2026-11-16",
+          "target_date": "2026-11-24",
           "completed_date": null
         },
         {
-          "id": "934f0399-6c2f-4555-b62e-be73847a168e",
+          "id": "eb225bc9-91be-4c78-88ae-7eca0057e313",
           "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "final_finishing",
           "stage_number": 9,
           "title": "Painting, Disinfection & Safety Signage",
           "description": "Standard rural milestone 9 for Painting, Disinfection & Safety Signage",
           "is_completed": false,
-          "target_date": "2026-12-01",
+          "target_date": "2026-12-09",
           "completed_date": null
         },
         {
-          "id": "40f3f103-b5b6-42ae-851f-0b5625fdbe18",
+          "id": "88d23525-06b8-498f-ab35-3de4b1741821",
           "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "completion_handover",
           "stage_number": 10,
           "title": "Trial Run & Panchayat Handover",
           "description": "Standard rural milestone 10 for Trial Run & Panchayat Handover",
           "is_completed": false,
-          "target_date": "2026-12-16",
+          "target_date": "2026-12-24",
           "completed_date": null
         },
         {
-          "id": "1d009cc2-b486-4b9e-a85d-7398bf74558f",
+          "id": "287f79c3-7920-4351-8e82-836ad0c304ac",
           "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "official_signoff",
           "stage_number": 11,
           "title": "District Collector Sign-Off",
           "description": "Standard rural milestone 11 for District Collector Sign-Off",
           "is_completed": false,
-          "target_date": "2026-12-31",
+          "target_date": "2027-01-08",
           "completed_date": null
         },
         {
-          "id": "af592322-4ef8-4e2a-8a67-9c08b35a620b",
+          "id": "ae6e5486-f929-4a8b-a37d-7a7b863db073",
           "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "public_audit",
           "stage_number": 12,
           "title": "Gram Sabha Social Audit",
           "description": "Standard rural milestone 12 for Gram Sabha Social Audit",
           "is_completed": false,
-          "target_date": "2027-01-15",
+          "target_date": "2027-01-23",
           "completed_date": null
         },
         {
-          "id": "54d70186-3810-4e8c-9ab8-cc6deaf33847",
+          "id": "c5c2c0e9-992c-42e1-b375-dd162ea5b1bf",
           "project_id": "b3333333-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "maintenance_active",
           "stage_number": 13,
           "title": "Active Maintenance & Public Dashboard",
           "description": "Standard rural milestone 13 for Active Maintenance & Public Dashboard",
           "is_completed": false,
-          "target_date": "2027-01-30",
+          "target_date": "2027-02-07",
           "completed_date": null
         }
       ],
@@ -1071,149 +1071,149 @@
       "description_hi": "आंगनवाड़ी केंद्र में स्मार्ट क्लासरूम, आरओ जल संयंत्र और पोषण वाटिका का विकास।",
       "cover_image_url": "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&q=80",
       "is_demo": true,
-      "created_at": "2026-10-16T21:38:13.695233",
+      "created_at": "2026-10-24T16:48:56.201331",
       "milestones": [
         {
-          "id": "60f8f7c3-ef10-491b-8876-b34cfc415be5",
+          "id": "3ec0400c-b07c-4bbf-9024-0982a6481eef",
           "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "planning",
           "stage_number": 1,
           "title": "Site Identification & Hydrogeological Survey",
           "description": "Standard rural milestone 1 for Site Identification & Hydrogeological Survey",
           "is_completed": true,
-          "target_date": "2026-09-17",
-          "completed_date": "2026-09-17"
+          "target_date": "2026-09-25",
+          "completed_date": "2026-09-25"
         },
         {
-          "id": "32fa135a-1207-4717-8a7f-88f31d2c50b9",
+          "id": "c9e24075-e108-4a37-bed3-211c6e10d92b",
           "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "budget_approved",
           "stage_number": 2,
           "title": "Administrative & Technical Sanction",
           "description": "Standard rural milestone 2 for Administrative & Technical Sanction",
           "is_completed": true,
-          "target_date": "2026-10-02",
-          "completed_date": "2026-10-02"
+          "target_date": "2026-10-10",
+          "completed_date": "2026-10-10"
         },
         {
-          "id": "5d0b208d-81dd-4cad-9172-6dd1eda4c0a3",
+          "id": "9354aaf2-f6c7-4bc6-8a4a-369bcf2810f3",
           "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "tender_floated",
           "stage_number": 3,
           "title": "E-Tender Publication",
           "description": "Standard rural milestone 3 for E-Tender Publication",
           "is_completed": false,
-          "target_date": "2026-10-17",
+          "target_date": "2026-10-25",
           "completed_date": null
         },
         {
-          "id": "9fef8f89-9312-4deb-92c8-d8ae543c63e7",
+          "id": "684e5769-35b0-411f-a4d6-876556ebd7ac",
           "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "contractor_assigned",
           "stage_number": 4,
           "title": "Contractor Assigned & Work Order",
           "description": "Standard rural milestone 4 for Contractor Assigned & Work Order",
           "is_completed": false,
-          "target_date": "2026-11-01",
+          "target_date": "2026-11-09",
           "completed_date": null
         },
         {
-          "id": "e720026d-2018-417e-9f9d-0650e5b7a85e",
+          "id": "d45c1309-e860-466b-887e-bd0a7767ecde",
           "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "foundation_work",
           "stage_number": 5,
           "title": "Excavation & RCC Foundation",
           "description": "Standard rural milestone 5 for Excavation & RCC Foundation",
           "is_completed": false,
-          "target_date": "2026-11-16",
+          "target_date": "2026-11-24",
           "completed_date": null
         },
         {
-          "id": "7da7f4e2-f5a7-4784-983a-ad4f6b8d18f1",
+          "id": "62dad1bd-b40f-4471-b30c-87f28b652549",
           "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "structure_laying",
           "stage_number": 6,
           "title": "Main Structure & Pipeline Laying",
           "description": "Standard rural milestone 6 for Main Structure & Pipeline Laying",
           "is_completed": false,
-          "target_date": "2026-12-01",
+          "target_date": "2026-12-09",
           "completed_date": null
         },
         {
-          "id": "9eddb526-3f7b-4bd1-b814-5eebf9c817d2",
+          "id": "129316c4-b927-46f2-994e-7c1eb0a28c3d",
           "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "mid_term_inspection",
           "stage_number": 7,
           "title": "Assistant Executive Engineer Mid-Inspection",
           "description": "Standard rural milestone 7 for Assistant Executive Engineer Mid-Inspection",
           "is_completed": false,
-          "target_date": "2026-12-16",
+          "target_date": "2026-12-24",
           "completed_date": null
         },
         {
-          "id": "0f63887f-580d-4244-a524-9025a93579f7",
+          "id": "24d09b06-92be-4d02-b9d5-cd1338252201",
           "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "quality_testing",
           "stage_number": 8,
           "title": "Hydrostatic Pressure & Quality Testing",
           "description": "Standard rural milestone 8 for Hydrostatic Pressure & Quality Testing",
           "is_completed": false,
-          "target_date": "2026-12-31",
+          "target_date": "2027-01-08",
           "completed_date": null
         },
         {
-          "id": "e8c8fa9a-549f-4894-ba14-9ae18fb47b97",
+          "id": "72b77a38-aa85-49e1-8981-7051f3ab274e",
           "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "final_finishing",
           "stage_number": 9,
           "title": "Painting, Disinfection & Safety Signage",
           "description": "Standard rural milestone 9 for Painting, Disinfection & Safety Signage",
           "is_completed": false,
-          "target_date": "2027-01-15",
+          "target_date": "2027-01-23",
           "completed_date": null
         },
         {
-          "id": "e69fff90-c83b-450e-8c6c-99b4ea31e422",
+          "id": "35b32073-843a-4edb-bdb5-cb7af4d3a338",
           "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "completion_handover",
           "stage_number": 10,
           "title": "Trial Run & Panchayat Handover",
           "description": "Standard rural milestone 10 for Trial Run & Panchayat Handover",
           "is_completed": false,
-          "target_date": "2027-01-30",
+          "target_date": "2027-02-07",
           "completed_date": null
         },
         {
-          "id": "eebb83a3-8569-40e9-ac91-1459ea3124e4",
+          "id": "a2b5ee69-2aaa-4ddd-b056-ac63c11c9abd",
           "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "official_signoff",
           "stage_number": 11,
           "title": "District Collector Sign-Off",
           "description": "Standard rural milestone 11 for District Collector Sign-Off",
           "is_completed": false,
-          "target_date": "2027-02-14",
+          "target_date": "2027-02-22",
           "completed_date": null
         },
         {
-          "id": "cc3b1d83-602b-4b2a-b4cd-b14000874295",
+          "id": "9dd08189-99a8-46d9-9b98-cfbe2fb993a9",
           "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "public_audit",
           "stage_number": 12,
           "title": "Gram Sabha Social Audit",
           "description": "Standard rural milestone 12 for Gram Sabha Social Audit",
           "is_completed": false,
-          "target_date": "2027-03-01",
+          "target_date": "2027-03-09",
           "completed_date": null
         },
         {
-          "id": "025db615-0d86-4cea-aad1-3371e9c9211c",
+          "id": "59134ef8-e86f-49b1-ba68-66aabca2b574",
           "project_id": "b4444444-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
           "stage": "maintenance_active",
           "stage_number": 13,
           "title": "Active Maintenance & Public Dashboard",
           "description": "Standard rural milestone 13 for Active Maintenance & Public Dashboard",
           "is_completed": false,
-          "target_date": "2027-03-16",
+          "target_date": "2027-03-24",
           "completed_date": null
         }
       ],
@@ -1221,40 +1221,6 @@
     }
   ],
   "reports": [
-    {
-      "category": "drinking_water",
-      "title": "Broken pipe valve leaking clean drinking water",
-      "description": "Continuous water loss near the temple junction for over 3 days, needs immediate valve replacement.",
-      "village": "Melmaruvathur",
-      "block": "Cheyyur",
-      "district": "Chengalpattu",
-      "landmark": "Near Pillaiyar Temple",
-      "latitude": 12.43502,
-      "longitude": 79.83039,
-      "photo_urls": [],
-      "priority": "high",
-      "is_public": true,
-      "citizen_id": "11111111-1111-1111-1111-111111111111",
-      "citizen_name": "Muthuvel K",
-      "id": "5fffc27c-ca7a-46c9-a1b7-1ae6c234ed58",
-      "reference_id": "GV-REP-20261020-3435",
-      "current_status": "submitted",
-      "is_demo": true,
-      "created_at": "2026-10-20T16:02:00.625585",
-      "updated_at": "2026-10-20T16:02:00.625585",
-      "timeline": [
-        {
-          "id": "d2fc8910-a17a-47aa-9c61-e9b0595b5124",
-          "report_id": "5fffc27c-ca7a-46c9-a1b7-1ae6c234ed58",
-          "actor_name": "Muthuvel K",
-          "from_status": null,
-          "to_status": "submitted",
-          "action_note": "Issue grievance submitted with GPS location and details.",
-          "evidence_urls": [],
-          "created_at": "2026-10-20T16:02:00.625585"
-        }
-      ]
-    },
     {
       "id": "c1111111-cccc-cccc-cccc-cccccccccccc",
       "reference_id": "GV-REP-20261015-1042",
@@ -1281,48 +1247,48 @@
       "resolution_photo_urls": [],
       "closed_at": null,
       "is_demo": true,
-      "created_at": "2026-10-16T21:38:13.695233",
-      "updated_at": "2026-10-17T21:38:13.695217",
+      "created_at": "2026-10-24T16:48:56.201331",
+      "updated_at": "2026-10-25T16:48:56.201312",
       "timeline": [
         {
-          "id": "02f74f21-4a40-4d10-a408-34f444d3d69d",
+          "id": "bfcf4c0b-5f35-4c30-b62c-044c3b14de65",
           "report_id": "c1111111-cccc-cccc-cccc-cccccccccccc",
           "actor_name": "Muthuvel K (Citizen)",
           "from_status": null,
           "to_status": "submitted",
           "action_note": "Issue reported with GPS coordinates and clear landmark.",
           "evidence_urls": [],
-          "created_at": "2026-10-16T21:38:13.695233"
+          "created_at": "2026-10-24T16:48:56.201331"
         },
         {
-          "id": "1007aa46-3e9e-4774-b335-1190af4d2c5b",
+          "id": "fb165acc-c658-4979-a92b-bf822036d577",
           "report_id": "c1111111-cccc-cccc-cccc-cccccccccccc",
           "actor_name": "Dr. Selvi Ramanathan (BDO)",
           "from_status": "submitted",
           "to_status": "triaged",
           "action_note": "Assigned to Cheyyur Rural Water Supply engineering field team.",
           "evidence_urls": [],
-          "created_at": "2026-10-16T21:38:13.695233"
+          "created_at": "2026-10-24T16:48:56.201331"
         },
         {
-          "id": "cf0c36b9-4b23-4b8d-b588-405f227d92fb",
+          "id": "7a0658ba-d6d7-47ec-bdc1-1332c9de2c14",
           "report_id": "c1111111-cccc-cccc-cccc-cccccccccccc",
           "actor_name": "Cheyyur RWS Overseer",
           "from_status": "triaged",
           "to_status": "inspection_scheduled",
           "action_note": "Field technician inspected site. Cylinder wear and seal leakage identified.",
           "evidence_urls": [],
-          "created_at": "2026-10-17T21:38:13.695217"
+          "created_at": "2026-10-25T16:48:56.201312"
         },
         {
-          "id": "251db085-4809-47b6-b1e3-815c21f107aa",
+          "id": "a440f080-3978-4e7e-91fa-b755215b4b0b",
           "report_id": "c1111111-cccc-cccc-cccc-cccccccccccc",
           "actor_name": "Field Engineering Team",
           "from_status": "inspection_scheduled",
           "to_status": "in_progress",
           "action_note": "Procured heavy-duty replacement kit. Assembly and flushing underway.",
           "evidence_urls": [],
-          "created_at": "2026-10-17T21:38:13.695217"
+          "created_at": "2026-10-25T16:48:56.201312"
         }
       ]
     },
@@ -1352,28 +1318,28 @@
       "resolution_photo_urls": [],
       "closed_at": null,
       "is_demo": true,
-      "created_at": "2026-10-16T21:38:13.695233",
-      "updated_at": "2026-10-17T21:38:13.695217",
+      "created_at": "2026-10-24T16:48:56.201331",
+      "updated_at": "2026-10-25T16:48:56.201312",
       "timeline": [
         {
-          "id": "bb9ded8d-040c-433c-9c2c-a5bb4032e89d",
+          "id": "693f3b5f-2d0a-461c-945e-e06e799b5234",
           "report_id": "c2222222-cccc-cccc-cccc-cccccccccccc",
           "actor_name": "Muthuvel K (Citizen)",
           "from_status": null,
           "to_status": "submitted",
           "action_note": "Logged citizen grievance with photos of culvert subsidence.",
           "evidence_urls": [],
-          "created_at": "2026-10-16T21:38:13.695233"
+          "created_at": "2026-10-24T16:48:56.201331"
         },
         {
-          "id": "2356e11f-bf71-434c-9c02-af36d78727f9",
+          "id": "4728c559-6ca0-4c52-9fdf-446090295203",
           "report_id": "c2222222-cccc-cccc-cccc-cccccccccccc",
           "actor_name": "Dr. Selvi Ramanathan (BDO)",
           "from_status": "submitted",
           "to_status": "triaged",
           "action_note": "Marked HIGH priority due to upcoming harvest transport.",
           "evidence_urls": [],
-          "created_at": "2026-10-17T21:38:13.695217"
+          "created_at": "2026-10-25T16:48:56.201312"
         }
       ]
     },
@@ -1401,18 +1367,18 @@
       "resolution_photo_urls": [],
       "closed_at": null,
       "is_demo": true,
-      "created_at": "2026-10-17T21:38:13.695217",
-      "updated_at": "2026-10-17T21:38:13.695217",
+      "created_at": "2026-10-25T16:48:56.201312",
+      "updated_at": "2026-10-25T16:48:56.201312",
       "timeline": [
         {
-          "id": "470027c6-e22e-4e0d-884e-6f4abd5a8f55",
+          "id": "af1ccb56-adac-41ed-bca9-5f7e20af2b83",
           "report_id": "c3333333-cccc-cccc-cccc-cccccccccccc",
           "actor_name": "Muthuvel K (Citizen)",
           "from_status": null,
           "to_status": "submitted",
           "action_note": "Submitted issue via web portal.",
           "evidence_urls": [],
-          "created_at": "2026-10-17T21:38:13.695217"
+          "created_at": "2026-10-25T16:48:56.201312"
         }
       ]
     }
@@ -1430,11 +1396,11 @@
       "priority": "high",
       "target_level": "panchayat",
       "target_area": "Melmaruvathur",
-      "event_date": "2026-10-20T10:00:16.168630",
-      "expires_at": "2026-10-24T21:38:16.168640",
+      "event_date": "2026-10-28T10:00:57.059492",
+      "expires_at": "2026-11-01T16:48:57.059508",
       "is_verified": true,
       "is_demo": true,
-      "created_at": "2026-10-16T21:38:13.695233"
+      "created_at": "2026-10-24T16:48:56.201331"
     },
     {
       "id": "d2222222-dddd-dddd-dddd-dddddddddddd",
@@ -1448,16 +1414,16 @@
       "priority": "emergency",
       "target_level": "district",
       "target_area": "Chengalpattu",
-      "event_date": "2026-10-17T21:38:13.695217",
-      "expires_at": "2026-10-22T21:38:16.168651",
+      "event_date": "2026-10-25T16:48:56.201312",
+      "expires_at": "2026-10-30T16:48:57.059510",
       "is_verified": true,
       "is_demo": true,
-      "created_at": "2026-10-16T21:38:13.695233"
+      "created_at": "2026-10-24T16:48:56.201331"
     }
   ],
   "voice_subscriptions": [
     {
-      "id": "140607b3-77cb-477f-a56a-abd8dfb41667",
+      "id": "9b452451-881d-4d05-a7e2-995c7945a68d",
       "user_id": "11111111-1111-1111-1111-111111111111",
       "phone_number": "+919840123456",
       "subscriber_name": "Muthuvel K",
@@ -1465,11 +1431,11 @@
       "village": "Melmaruvathur",
       "district": "Chengalpattu",
       "consent_given": true,
-      "consent_recorded_at": "2026-10-16T21:38:13.695233",
+      "consent_recorded_at": "2026-10-24T16:48:56.201331",
       "is_active": true
     },
     {
-      "id": "cb7f042b-63df-4306-8286-46d496d5e836",
+      "id": "c9814bf0-b223-4e4b-abc8-2e3d0d23e1a2",
       "user_id": null,
       "phone_number": "+919840998877",
       "subscriber_name": "K. Murugesan",
@@ -1477,7 +1443,7 @@
       "village": "Sothupakkam",
       "district": "Chengalpattu",
       "consent_given": true,
-      "consent_recorded_at": "2026-10-16T21:38:13.695233",
+      "consent_recorded_at": "2026-10-24T16:48:56.201331",
       "is_active": true
     }
   ],
@@ -1490,434 +1456,27 @@
       "target_district": "Chengalpattu",
       "target_block": "Cheyyur",
       "approved_by_admin": true,
-      "scheduled_dispatch_time": "2026-10-17T21:38:13.695217",
+      "scheduled_dispatch_time": "2026-10-25T16:48:56.201312",
       "status": "completed",
-      "created_at": "2026-10-16T21:38:13.695233"
+      "created_at": "2026-10-24T16:48:56.201331"
     }
   ],
   "call_logs": [
     {
-      "subscription_id": "cb7f042b-63df-4306-8286-46d496d5e836",
-      "campaign_id": "e1111111-eeee-eeee-eeee-eeeeeeeeeeee",
-      "campaign_name": "Gram Sabha October Reminder",
-      "phone_number": "+919840998877",
-      "call_status": "delivered",
-      "duration_seconds": 35,
-      "failure_reason": null,
-      "id": "d8c64074-0acd-48de-828f-2bda98ea40cc",
-      "attempt_timestamp": "2026-10-20T16:10:07.597108"
-    },
-    {
-      "subscription_id": "140607b3-77cb-477f-a56a-abd8dfb41667",
-      "campaign_id": "e1111111-eeee-eeee-eeee-eeeeeeeeeeee",
-      "campaign_name": "Gram Sabha October Reminder",
-      "phone_number": "+919840123456",
-      "call_status": "delivered",
-      "duration_seconds": 35,
-      "failure_reason": null,
-      "id": "010fde8a-0f1e-4218-9b25-152c68b4557f",
-      "attempt_timestamp": "2026-10-20T16:10:07.588634"
-    },
-    {
-      "subscription_id": "cb7f042b-63df-4306-8286-46d496d5e836",
-      "campaign_id": "e1111111-eeee-eeee-eeee-eeeeeeeeeeee",
-      "campaign_name": "Gram Sabha October Reminder",
-      "phone_number": "+919840998877",
-      "call_status": "delivered",
-      "duration_seconds": 35,
-      "failure_reason": null,
-      "id": "f9992787-071f-4e71-957e-e86b7b8515de",
-      "attempt_timestamp": "2026-10-20T16:08:48.471420"
-    },
-    {
-      "subscription_id": "140607b3-77cb-477f-a56a-abd8dfb41667",
-      "campaign_id": "e1111111-eeee-eeee-eeee-eeeeeeeeeeee",
-      "campaign_name": "Gram Sabha October Reminder",
-      "phone_number": "+919840123456",
-      "call_status": "delivered",
-      "duration_seconds": 35,
-      "failure_reason": null,
-      "id": "e09cd61a-0b81-445f-b817-a020a3f86006",
-      "attempt_timestamp": "2026-10-20T16:08:48.461765"
-    },
-    {
-      "id": "c18f9ef3-9fa2-478d-ba5e-11e4a68bbe93",
-      "subscription_id": "140607b3-77cb-477f-a56a-abd8dfb41667",
+      "id": "39b39ecd-e373-4086-92f5-ef3c7a1a4986",
+      "subscription_id": "9b452451-881d-4d05-a7e2-995c7945a68d",
       "campaign_id": "e1111111-eeee-eeee-eeee-eeeeeeeeeeee",
       "campaign_name": "Gram Sabha October Reminder",
       "phone_number": "+919840123456",
       "call_status": "delivered",
       "duration_seconds": 42,
-      "attempt_timestamp": "2026-10-16T21:38:13.695233",
+      "attempt_timestamp": "2026-10-24T16:48:56.201331",
       "failure_reason": null
     }
   ],
   "audit_logs": [
     {
-      "id": "99dbc7b9-9e04-401f-a73d-a72bccae09d4",
-      "user_id": "44444444-4444-4444-4444-444444444444",
-      "user_name": "State Governance Admin",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "44444444-4444-4444-4444-444444444444",
-      "details": {
-        "role": "admin"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-20T16:08:38.527793"
-    },
-    {
-      "id": "d8c0e124-3e63-4f07-a559-58651cc3b922",
-      "user_id": "22222222-2222-2222-2222-222222222222",
-      "user_name": "Dr. Selvi Ramanathan",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "22222222-2222-2222-2222-222222222222",
-      "details": {
-        "role": "official"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-20T16:05:52.558037"
-    },
-    {
-      "id": "985ee080-e410-4705-ae2e-0f0a5b26504c",
-      "user_id": "11111111-1111-1111-1111-111111111111",
-      "user_name": "Muthuvel K",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "11111111-1111-1111-1111-111111111111",
-      "details": {
-        "role": "citizen"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-20T16:05:01.789634"
-    },
-    {
-      "id": "2abbe961-9c4a-4b09-aa15-a2c566c96d3e",
-      "user_id": "44444444-4444-4444-4444-444444444444",
-      "user_name": "State Governance Admin",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "44444444-4444-4444-4444-444444444444",
-      "details": {
-        "role": "admin"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-20T16:02:22.314477"
-    },
-    {
-      "id": "2c125caf-a7e3-4688-9e72-6621949bcce6",
-      "user_id": "22222222-2222-2222-2222-222222222222",
-      "user_name": "Dr. Selvi Ramanathan",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "22222222-2222-2222-2222-222222222222",
-      "details": {
-        "role": "official"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-20T16:02:22.011099"
-    },
-    {
-      "id": "ce684989-ef04-40bb-ae37-a6029571695c",
-      "user_id": "11111111-1111-1111-1111-111111111111",
-      "user_name": "Muthuvel K",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "11111111-1111-1111-1111-111111111111",
-      "details": {
-        "role": "citizen"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-20T16:02:20.085519"
-    },
-    {
-      "id": "946594e5-75b6-4608-b951-833092c71272",
-      "user_id": "11111111-1111-1111-1111-111111111111",
-      "user_name": "Muthuvel K",
-      "action": "REPORT_SUBMITTED",
-      "entity_type": "citizen_report",
-      "entity_id": "5fffc27c-ca7a-46c9-a1b7-1ae6c234ed58",
-      "details": {
-        "reference_id": "GV-REP-20261020-3435",
-        "category": "drinking_water"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-20T16:02:00.632525"
-    },
-    {
-      "id": "9d061327-0fa4-4484-9837-8228a1977d56",
-      "user_id": "11111111-1111-1111-1111-111111111111",
-      "user_name": "Muthuvel K",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "11111111-1111-1111-1111-111111111111",
-      "details": {
-        "role": "citizen"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-20T16:02:00.568970"
-    },
-    {
-      "id": "e914ec40-3877-4900-8280-31fb035d1147",
-      "user_id": "11111111-1111-1111-1111-111111111111",
-      "user_name": "Muthuvel K",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "11111111-1111-1111-1111-111111111111",
-      "details": {
-        "role": "citizen"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-20T15:45:47.947596"
-    },
-    {
-      "id": "27afbc76-6519-414a-bc38-9f3611baab0b",
-      "user_id": "44444444-4444-4444-4444-444444444444",
-      "user_name": "State Governance Admin",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "44444444-4444-4444-4444-444444444444",
-      "details": {
-        "role": "admin"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-20T15:39:21.742700"
-    },
-    {
-      "id": "31962c61-e27b-4614-bac1-46eba734304c",
-      "user_id": "22222222-2222-2222-2222-222222222222",
-      "user_name": "Dr. Selvi Ramanathan",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "22222222-2222-2222-2222-222222222222",
-      "details": {
-        "role": "official"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-20T15:39:21.422876"
-    },
-    {
-      "id": "52363ee4-fb63-40af-9be7-49fd7f35b14b",
-      "user_id": "11111111-1111-1111-1111-111111111111",
-      "user_name": "Muthuvel K",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "11111111-1111-1111-1111-111111111111",
-      "details": {
-        "role": "citizen"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-20T15:39:19.100746"
-    },
-    {
-      "id": "0c359145-c324-4bd5-8e46-f784860eabdc",
-      "user_id": "44444444-4444-4444-4444-444444444444",
-      "user_name": "State Governance Admin",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "44444444-4444-4444-4444-444444444444",
-      "details": {
-        "role": "admin"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-20T12:50:16.101192"
-    },
-    {
-      "id": "3c0d9e8a-aa7c-4f80-8477-496aba8b10ed",
-      "user_id": "22222222-2222-2222-2222-222222222222",
-      "user_name": "Dr. Selvi Ramanathan",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "22222222-2222-2222-2222-222222222222",
-      "details": {
-        "role": "official"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-20T12:50:15.181008"
-    },
-    {
-      "id": "7c66ed7d-786c-494c-8caa-5e895a5add02",
-      "user_id": "11111111-1111-1111-1111-111111111111",
-      "user_name": "Muthuvel K",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "11111111-1111-1111-1111-111111111111",
-      "details": {
-        "role": "citizen"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-20T12:50:04.925279"
-    },
-    {
-      "id": "baf78e6d-89b4-4009-a9b8-9c75a04c0089",
-      "user_id": "22222222-2222-2222-2222-222222222222",
-      "user_name": "Dr. Selvi Ramanathan",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "22222222-2222-2222-2222-222222222222",
-      "details": {
-        "role": "official"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-18T20:22:23.794255"
-    },
-    {
-      "id": "8601af1a-6828-458c-bc53-38b84e09dc12",
-      "user_id": "44444444-4444-4444-4444-444444444444",
-      "user_name": "State Governance Admin",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "44444444-4444-4444-4444-444444444444",
-      "details": {
-        "role": "admin"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-18T20:05:34.859084"
-    },
-    {
-      "id": "545973c2-3c73-4322-8542-f991fe672849",
-      "user_id": "22222222-2222-2222-2222-222222222222",
-      "user_name": "Dr. Selvi Ramanathan",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "22222222-2222-2222-2222-222222222222",
-      "details": {
-        "role": "official"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-18T20:05:34.552015"
-    },
-    {
-      "id": "44445683-7ee5-4c58-a309-dc3f1203d54a",
-      "user_id": "11111111-1111-1111-1111-111111111111",
-      "user_name": "Muthuvel K",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "11111111-1111-1111-1111-111111111111",
-      "details": {
-        "role": "citizen"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-18T20:05:33.450373"
-    },
-    {
-      "id": "8975cd24-bf05-4d6e-ab4d-d66eab44b117",
-      "user_id": "11111111-1111-1111-1111-111111111111",
-      "user_name": "Muthuvel K",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "11111111-1111-1111-1111-111111111111",
-      "details": {
-        "role": "citizen"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-18T19:52:20.288410"
-    },
-    {
-      "id": "916d6478-28e9-401f-9ef1-91a99e000b23",
-      "user_id": "44444444-4444-4444-4444-444444444444",
-      "user_name": "State Governance Admin",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "44444444-4444-4444-4444-444444444444",
-      "details": {
-        "role": "admin"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-18T19:33:22.227792"
-    },
-    {
-      "id": "90ae6299-7ac7-4a13-8f67-224f149b5abf",
-      "user_id": "22222222-2222-2222-2222-222222222222",
-      "user_name": "Dr. Selvi Ramanathan",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "22222222-2222-2222-2222-222222222222",
-      "details": {
-        "role": "official"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-18T19:33:21.912944"
-    },
-    {
-      "id": "ba369f6a-7ff3-42fe-ac24-097eac98cb0b",
-      "user_id": "11111111-1111-1111-1111-111111111111",
-      "user_name": "Muthuvel K",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "11111111-1111-1111-1111-111111111111",
-      "details": {
-        "role": "citizen"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-18T19:33:20.341505"
-    },
-    {
-      "id": "c146f785-5401-4ff6-8b64-9775aff06d19",
-      "user_id": "44444444-4444-4444-4444-444444444444",
-      "user_name": "State Governance Admin",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "44444444-4444-4444-4444-444444444444",
-      "details": {
-        "role": "admin"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-18T17:25:01.081814"
-    },
-    {
-      "id": "7ea8dc25-ee99-40b4-a0ad-3495d4880883",
-      "user_id": "22222222-2222-2222-2222-222222222222",
-      "user_name": "Dr. Selvi Ramanathan",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "22222222-2222-2222-2222-222222222222",
-      "details": {
-        "role": "official"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-18T17:25:00.611325"
-    },
-    {
-      "id": "72ece28d-c49d-4021-aa95-8eb3ba4ca646",
-      "user_id": "11111111-1111-1111-1111-111111111111",
-      "user_name": "Muthuvel K",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "11111111-1111-1111-1111-111111111111",
-      "details": {
-        "role": "citizen"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-18T17:24:55.329587"
-    },
-    {
-      "id": "93cf44e8-4de9-4928-933a-a5a6518d73b3",
-      "user_id": "11111111-1111-1111-1111-111111111111",
-      "user_name": "Muthuvel K",
-      "action": "USER_LOGIN",
-      "entity_type": "user",
-      "entity_id": "11111111-1111-1111-1111-111111111111",
-      "details": {
-        "role": "citizen"
-      },
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-17T22:03:36.772903"
-    },
-    {
-      "id": "ca81c9dd-33ad-4f7c-af54-95f9ebc65e24",
-      "user_id": "44444444-4444-4444-4444-444444444444",
-      "user_name": "State Governance Admin",
-      "action": "DEMO_STORE_RESET",
-      "entity_type": "system",
-      "entity_id": "global",
-      "details": {},
-      "ip_address": "127.0.0.1",
-      "created_at": "2026-10-17T21:38:16.175571"
-    },
-    {
-      "id": "9c1aaab7-cb36-449c-9339-93a7662df9ac",
+      "id": "90138809-6116-47be-9e6f-0928dd4399e5",
       "user_id": "44444444-4444-4444-4444-444444444444",
       "user_name": "State Governance Admin",
       "action": "OFFICIAL_VERIFIED",
@@ -1928,7 +1487,140 @@
         "status": "approved"
       },
       "ip_address": "127.0.0.1",
-      "created_at": "2026-10-16T21:38:13.695233"
+      "created_at": "2026-10-24T16:48:56.201331"
+    }
+  ],
+  "work_photos": [
+    {
+      "id": "wp-1111-1111-1111-111111111111",
+      "complaint_id": "c3333333-cccc-cccc-cccc-cccccccccccc",
+      "complaint_ref": "GV-REP-20261017-3104",
+      "complaint_title": "3 LED Streetlights fused on Bus Stop Road",
+      "photo_url": "https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=800&q=80",
+      "description": "Completed installation of 3 high-intensity surge-protected 45W LED streetlight luminaires with automatic LDR dusk-to-dawn timers on Bus Stop Road.",
+      "stage": "verified_closed",
+      "is_completion": true,
+      "uploader_id": "22222222-2222-2222-2222-222222222222",
+      "uploader_name": "Dr. Selvi Ramanathan (BDO)",
+      "uploader_role": "official",
+      "created_at": "2026-10-24T16:48:56.201331"
+    },
+    {
+      "id": "wp-2222-2222-2222-222222222222",
+      "complaint_id": "c1111111-cccc-cccc-cccc-cccccccccccc",
+      "complaint_ref": "GV-REP-20261015-1042",
+      "complaint_title": "Handpump non-functional for past 2 weeks",
+      "photo_url": "https://images.unsplash.com/photo-1584467735871-8e85353a8413?auto=format&fit=crop&w=800&q=80",
+      "description": "Deepened suction cylinder assembly and replaced worn washer seals. Tested water output at 18 liters per minute.",
+      "stage": "in_progress",
+      "is_completion": false,
+      "uploader_id": "22222222-2222-2222-2222-222222222222",
+      "uploader_name": "Dr. Selvi Ramanathan (BDO)",
+      "uploader_role": "official",
+      "created_at": "2026-10-25T16:48:56.201312"
+    }
+  ],
+  "verification_questions": [
+    {
+      "id": "vq-1111-1111-1111-111111111111",
+      "complaint_id": "c3333333-cccc-cccc-cccc-cccccccccccc",
+      "complaint_ref": "GV-REP-20261017-3104",
+      "complaint_title": "3 LED Streetlights fused on Bus Stop Road",
+      "photo_url": "https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=800&q=80",
+      "citizen_id": "11111111-1111-1111-1111-111111111111",
+      "citizen_name": "Muthuvel K",
+      "question_text": "I need to verify whether the replacement streetlights include automatic dusk-to-dawn sensors as requested in the Gram Sabha.",
+      "status": "answered",
+      "admin_response": "Verified by BDO Dr. Selvi Ramanathan: The installed 45W fixtures are equipped with automatic LDR dusk-to-dawn sensors and backed by a 3-year municipal warranty.",
+      "admin_responder_id": "44444444-4444-4444-4444-444444444444",
+      "admin_responder_name": "State Governance Admin",
+      "created_at": "2026-10-24T16:48:56.201331",
+      "updated_at": "2026-10-25T16:48:56.201312",
+      "messages": [
+        {
+          "id": "885f321b-bf49-45ee-b65b-991227343395",
+          "sender_id": "11111111-1111-1111-1111-111111111111",
+          "sender_name": "Muthuvel K",
+          "sender_role": "citizen",
+          "message": "I need to verify whether the replacement streetlights include automatic dusk-to-dawn sensors as requested in the Gram Sabha.",
+          "created_at": "2026-10-24T16:48:56.201331"
+        },
+        {
+          "id": "2ac77626-de8d-4021-9d8d-8d75649e6e3a",
+          "sender_id": "44444444-4444-4444-4444-444444444444",
+          "sender_name": "State Governance Admin",
+          "sender_role": "admin",
+          "message": "Verified by BDO Dr. Selvi Ramanathan: The installed 45W fixtures are equipped with automatic LDR dusk-to-dawn sensors and backed by a 3-year municipal warranty.",
+          "created_at": "2026-10-25T16:48:56.201312"
+        }
+      ]
+    }
+  ],
+  "support_tickets": [
+    {
+      "id": "st-1111-1111-1111-111111111111",
+      "ticket_number": "GV-SUP-20261022-7812",
+      "user_id": "11111111-1111-1111-1111-111111111111",
+      "user_name": "Muthuvel K",
+      "user_email": "citizen@gramvikas.in",
+      "user_role": "citizen",
+      "category": "technical_issue",
+      "title": "Tamil voice audio playback buffering on rural 2G network",
+      "description": "When clicking the 'Listen Audio' button in Scheme details, the voice stream was taking 15 seconds to begin in Melmaruvathur village on weak signal.",
+      "attachment_url": null,
+      "status": "resolved",
+      "priority": "high",
+      "admin_notes": "Optimized server audio streaming chunk size and added client-side caching.",
+      "created_at": "2026-10-24T16:48:56.201331",
+      "updated_at": "2026-10-25T16:48:56.201312",
+      "messages": [
+        {
+          "id": "a0ad1f2d-a3d9-4955-be68-a6719dcf6eb6",
+          "sender_id": "11111111-1111-1111-1111-111111111111",
+          "sender_name": "Muthuvel K",
+          "sender_role": "citizen",
+          "message": "When clicking the 'Listen Audio' button in Scheme details, the voice stream was taking 15 seconds to begin in Melmaruvathur village on weak signal.",
+          "attachment_url": null,
+          "created_at": "2026-10-24T16:48:56.201331"
+        },
+        {
+          "id": "3160ca9d-5830-41b9-b536-a943290057dd",
+          "sender_id": "44444444-4444-4444-4444-444444444444",
+          "sender_name": "State Governance Admin",
+          "sender_role": "admin",
+          "message": "We optimized the gTTS audio streaming chunks and enabled client audio caching. Verified streaming latency is now under 1.8 seconds on 2G/3G networks.",
+          "attachment_url": null,
+          "created_at": "2026-10-25T16:48:56.201312"
+        }
+      ]
+    },
+    {
+      "id": "st-2222-2222-2222-222222222222",
+      "ticket_number": "GV-SUP-20261025-4401",
+      "user_id": "22222222-2222-2222-2222-222222222222",
+      "user_name": "Dr. Selvi Ramanathan",
+      "user_email": "official@gramvikas.in",
+      "user_role": "official",
+      "category": "broken_feature",
+      "title": "Request to add export to Excel option for Village Infrastructure Projects",
+      "description": "Need a 1-click CSV/Excel export for the 13-stage project milestones to share with District Collectorate during weekly review.",
+      "attachment_url": null,
+      "status": "in_progress",
+      "priority": "normal",
+      "admin_notes": "Under review by engineering team for sprint release.",
+      "created_at": "2026-10-25T16:48:56.201312",
+      "updated_at": "2026-10-25T16:48:56.201312",
+      "messages": [
+        {
+          "id": "45c5fdd8-c05a-4f18-a1f6-4856b45fa79c",
+          "sender_id": "22222222-2222-2222-2222-222222222222",
+          "sender_name": "Dr. Selvi Ramanathan",
+          "sender_role": "official",
+          "message": "Need a 1-click CSV/Excel export for the 13-stage project milestones to share with District Collectorate during weekly review.",
+          "attachment_url": null,
+          "created_at": "2026-10-25T16:48:56.201312"
+        }
+      ]
     }
   ]
 }

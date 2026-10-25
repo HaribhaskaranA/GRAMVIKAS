@@ -163,6 +163,7 @@ export async function renderProfile(container) {
  */
 function renderHelpDirectory(container) {
   const lang = getLanguage();
+  const user = auth.getUser();
 
   const faqs = [
     {
@@ -207,8 +208,118 @@ function renderHelpDirectory(container) {
     <div class="row justify-content-center">
       <div class="col-lg-9 d-flex flex-column gap-4">
         <div>
-          <h3 class="fw-bold mb-1" style="color: var(--color-navy);"><i class="bi bi-question-circle-fill me-2 text-warning"></i> ${lang === 'ta' ? 'உதவி மற்றும் அணுகல்தன்மை வழிகாட்டி' : (lang === 'hi' ? 'सहायता एवं अक्सर पूछे जाने वाले प्रश्न' : 'Help & Accessibility Guide')}</h3>
-          <p class="text-muted small mb-0">${lang === 'ta' ? 'கிராம விகாஸ் தளத்தை தடையின்றி பயன்படுத்த உதவும் வழிகாட்டுதல்கள் மற்றும் பொதுவான கேள்விகள்.' : 'Comprehensive user guide, accessibility tools, and frequently asked village citizen questions.'}</p>
+          <h3 class="fw-bold mb-1" style="color: var(--color-navy);"><i class="bi bi-question-circle-fill me-2 text-warning"></i> ${lang === 'ta' ? 'உதவி, அடிக்கடி கேட்கப்படும் கேள்விகள் & ஆதரவு மையம்' : (lang === 'hi' ? 'सहायता, अक्सर पूछे जाने वाले प्रश्न एवं सपोर्ट' : 'Help, FAQ & Support System')}</h3>
+          <p class="text-muted small mb-0">${lang === 'ta' ? 'கிராம விகாஸ் தளத்தை தடையின்றி பயன்படுத்த உதவும் வழிகாட்டுதல்கள் மற்றும் அதிகாரப்பூர்வ ஆதரவு மையம்.' : 'Comprehensive user guide, frequently asked questions, and official ticket-based technical support.'}</p>
+        </div>
+
+        <!-- FEATURE 2: INTEGRATED SUPPORT SYSTEM & REPORT A PROBLEM SECTION -->
+        <div class="card-gv p-4 border-2 border-primary-subtle shadow-sm">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-3 pb-2 border-bottom">
+            <div>
+              <h5 class="fw-bold mb-1 text-dark">
+                <i class="bi bi-headset text-primary me-2"></i>
+                ${lang === 'ta' ? 'ஆதரவு மையம் / சிக்கலை புகாரளிக்கவும் (Support Desk)' : (lang === 'hi' ? 'सपोर्ट डेस्क / समस्या दर्ज करें' : 'Support Desk & Problem Reporting')}
+              </h5>
+              <p class="small text-muted mb-0">
+                ${lang === 'ta' ? 'தொழில்நுட்ப சிக்கல்கள், கணக்கு அல்லது பக்க பிழைகள் குறித்து அதிகாரப்பூர்வ ஆதரவு டிக்கெட் சமர்ப்பிக்கலாம்.' : 'Submit a direct ticket to administrators for bugs, account issues, or feature help.'}
+              </p>
+            </div>
+            <ul class="nav nav-pills gap-1" id="support-subtabs">
+              <li class="nav-item">
+                <button class="nav-link active btn-sm" id="tab-new-ticket">
+                  <i class="bi bi-plus-circle me-1"></i> ${lang === 'ta' ? 'புதிய ஆதரவு டிக்கெட்' : 'New Ticket'}
+                </button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link btn-sm position-relative" id="tab-my-tickets">
+                  <i class="bi bi-inbox-fill me-1"></i> ${lang === 'ta' ? 'எனது ஆதரவு டிக்கெட்டுகள்' : 'My Tickets'}
+                  <span class="badge bg-danger ms-1" id="badge-my-tickets-count" style="display: none;">0</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Alert for generated ticket confirmation -->
+          <div id="support-success-alert" class="alert alert-success d-flex align-items-center gap-2 mb-3" style="display: none;">
+            <i class="bi bi-check-circle-fill flex-shrink-0" style="font-size: 1.25rem;"></i>
+            <div>
+              <strong id="support-alert-ticket-id"></strong>
+              <div id="support-alert-msg" class="small"></div>
+            </div>
+          </div>
+
+          <!-- 1. Submit Ticket View -->
+          <div id="view-submit-ticket">
+            <form id="form-create-support-ticket" class="d-flex flex-column gap-3">
+              <!-- Auto User Association -->
+              <div class="p-2 bg-light rounded small border d-flex justify-content-between align-items-center">
+                <span>
+                  <i class="bi bi-person-check-fill text-success me-1"></i>
+                  ${lang === 'ta' ? 'பயனர்:' : 'Reporter:'} <strong>${user?.full_name || 'Citizen User'} (${user?.email || 'user@gramvikas.in'})</strong>
+                </span>
+                <span class="badge bg-secondary">${(user?.role || 'citizen').toUpperCase()}</span>
+              </div>
+
+              <!-- Category -->
+              <div>
+                <label class="form-label small fw-semibold">
+                  ${lang === 'ta' ? 'சிக்கலின் வகை (Issue Category):' : (lang === 'hi' ? 'समस्या की श्रेणी:' : 'Issue Category:')}
+                </label>
+                <select class="form-select form-select-sm" id="support-category" required>
+                  <option value="bug">🐛 ${lang === 'ta' ? 'Report a Bug (பிழை புகார்)' : (lang === 'hi' ? 'बग रिपोर्ट (Report a Bug)' : 'Report a Bug')}</option>
+                  <option value="technical_issue">⚙️ ${lang === 'ta' ? 'Report a Technical Issue (தொழில்நுட்ப சிக்கல்)' : (lang === 'hi' ? 'तकनीकी समस्या (Technical Issue)' : 'Report a Technical Issue')}</option>
+                  <option value="account_login">🔑 ${lang === 'ta' ? 'Report a Login or Account Problem (உள்நுழைவு சிக்கல்)' : (lang === 'hi' ? 'लॉगिन समस्या (Login / Account Issue)' : 'Report a Login or Account Problem')}</option>
+                  <option value="broken_feature">⚠️ ${lang === 'ta' ? 'Report an Incorrect Page or Broken Feature (செயலிழப்பு)' : (lang === 'hi' ? 'टूटा हुआ फीचर (Broken Feature)' : 'Report an Incorrect Page or Broken Feature')}</option>
+                  <option value="general_help">❓ ${lang === 'ta' ? 'Ask for Help (பொதுவான உதவி கோரல்)' : (lang === 'hi' ? 'सहायता मांगें (Ask for Help)' : 'Ask for Help')}</option>
+                </select>
+              </div>
+
+              <!-- Title -->
+              <div>
+                <label class="form-label small fw-semibold">
+                  ${lang === 'ta' ? 'சிக்கலின் சுருக்கமான தலைப்பு (Short Title):' : 'Short Issue Title:'}
+                </label>
+                <input type="text" class="form-control form-control-sm" id="support-title" placeholder="${lang === 'ta' ? 'எ.கா: வரைபடத்தில் பின் சரியாக காட்டப்படவில்லை...' : 'e.g. Page navigation stuck on login...'}" required minlength="5" maxlength="150">
+              </div>
+
+              <!-- Description -->
+              <div>
+                <label class="form-label small fw-semibold">
+                  ${lang === 'ta' ? 'விரிவான விவரம் (Detailed Description):' : 'Detailed Description:'}
+                </label>
+                <textarea class="form-control form-control-sm" id="support-desc" rows="3" placeholder="${lang === 'ta' ? 'நீங்கள் எதிர்கொண்ட சிக்கல், எந்த பக்கத்தில் ஏற்பட்டது மற்றும் பிழை விவரங்களை எழுதுக...' : 'Provide specific details of what happened, page URL, and steps to reproduce...'}" required minlength="10"></textarea>
+              </div>
+
+              <!-- Screenshot / Attachment Upload -->
+              <div>
+                <label class="form-label small fw-semibold d-flex justify-content-between">
+                  <span><i class="bi bi-paperclip me-1"></i> ${lang === 'ta' ? 'திரைக்காட்சி / புகைப்பட இணைப்பு (விருப்பத்தேர்வு)' : 'Optional Screenshot / Attachment:'}</span>
+                  <span class="text-muted small">Max 10MB (JPG, PNG, WebP)</span>
+                </label>
+                <input type="file" class="form-control form-control-sm" id="support-file" accept="image/jpeg,image/png,image/webp">
+                <div class="mt-2 text-center" id="support-file-preview-wrap" style="display: none;">
+                  <img id="support-file-preview" src="" alt="Screenshot Preview" class="img-fluid rounded border shadow-sm" style="max-height: 120px; object-fit: contain;">
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center pt-2">
+                <span class="small text-muted font-monospace"><i class="bi bi-clock me-1"></i> ${new Date().toLocaleDateString()}</span>
+                <button type="submit" class="btn btn-gv-primary btn-sm fw-bold px-4" id="btn-submit-support">
+                  <i class="bi bi-send-fill me-1"></i> ${lang === 'ta' ? 'ஆதரவு கோரிக்கையை சமர்ப்பி' : 'Submit Support Ticket'}
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- 2. My Tickets View -->
+          <div id="view-my-tickets" style="display: none;">
+            <div id="my-tickets-list-container" class="d-flex flex-column gap-3">
+              <div class="text-center py-4 text-muted">
+                <div class="spinner-border spinner-border-sm text-primary mb-2"></div>
+                <div>${lang === 'ta' ? 'டிக்கெட்டுகள் ஏற்றப்படுகின்றன...' : 'Loading your support tickets...'}</div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Localized Expandable FAQ Accordion -->
@@ -251,25 +362,6 @@ function renderHelpDirectory(container) {
           </div>
         </div>
 
-        <!-- Accessibility Features Card -->
-        <div class="card-gv p-4">
-          <h5 class="fw-bold mb-3 text-dark">${lang === 'ta' ? 'அணுகல்தன்மை வசதிகள்' : 'Platform Accessibility Features'}</h5>
-          <div class="row g-3">
-            <div class="col-md-6">
-              <div class="p-3 rounded border bg-light h-100">
-                <h6 class="fw-bold text-dark mb-1"><i class="bi bi-fonts text-primary me-1"></i> ${lang === 'ta' ? 'எழுத்து அளவு மாற்றி (Font Scaler)' : 'Font Scaler'}</h6>
-                <p class="small text-muted mb-0">${lang === 'ta' ? 'மேல் பட்டையில் உள்ள A-, A, A+ பொத்தான்களை அழுத்தி வாசிப்பதற்கு வசதியாக எழுத்துக்களை பெரிதாக்கலாம்.' : 'Use the top-bar font size switcher to comfortably scale text across the entire interface.'}</p>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="p-3 rounded border bg-light h-100">
-                <h6 class="fw-bold text-dark mb-1"><i class="bi bi-reception-2 text-success me-1"></i> ${lang === 'ta' ? 'குறைந்த இணைய வேகம் (2G Low-Data)' : 'Low-Bandwidth 2G Mode'}</h6>
-                <p class="small text-muted mb-0">${lang === 'ta' ? 'கிராமப்புறங்களில் இணைய வேகம் குறைவாக இருக்கும் போது மேப் மற்றும் படங்களை மறைத்து அதிவேகமாக இயங்க வைக்கும்.' : 'Turns off heavy map tiles and background images to operate flawlessly on 2G rural networks.'}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <!-- Emergency Helplines -->
         <div class="card-gv p-4">
           <h5 class="fw-bold mb-3 text-dark">${lang === 'ta' ? 'அவசர உதவி எண்கள் (Emergency Helplines)' : 'Important Rural Helpline Numbers'}</h5>
@@ -293,6 +385,210 @@ function renderHelpDirectory(container) {
       </div>
     </div>
   `;
+
+  // Subtab switching
+  const tabNew = document.getElementById("tab-new-ticket");
+  const tabMy = document.getElementById("tab-my-tickets");
+  const viewSubmit = document.getElementById("view-submit-ticket");
+  const viewMy = document.getElementById("view-my-tickets");
+
+  tabNew?.addEventListener("click", () => {
+    tabNew.classList.add("active");
+    tabMy?.classList.remove("active");
+    if (viewSubmit) viewSubmit.style.display = "block";
+    if (viewMy) viewMy.style.display = "none";
+  });
+
+  tabMy?.addEventListener("click", () => {
+    tabMy.classList.add("active");
+    tabNew?.classList.remove("active");
+    if (viewSubmit) viewSubmit.style.display = "none";
+    if (viewMy) viewMy.style.display = "block";
+    loadMyTickets();
+  });
+
+  // Screenshot preview
+  document.getElementById("support-file")?.addEventListener("change", (e) => {
+    const file = e.target.files?.[0];
+    const previewWrap = document.getElementById("support-file-preview-wrap");
+    const previewImg = document.getElementById("support-file-preview");
+    if (file && previewWrap && previewImg) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        previewImg.src = event.target.result;
+        previewWrap.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  // Submit Support Ticket Form
+  document.getElementById("form-create-support-ticket")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const cat = document.getElementById("support-category").value;
+    const title = document.getElementById("support-title").value.trim();
+    const desc = document.getElementById("support-desc").value.trim();
+    const fileInput = document.getElementById("support-file");
+    const file = fileInput?.files?.[0];
+
+    const submitBtn = document.getElementById("btn-submit-support");
+    const origBtnText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-1"></span> ${lang === 'ta' ? 'பதிவாகிறது...' : 'Submitting...'}`;
+
+    try {
+      let attachmentUrl = null;
+      if (file) {
+        const formData = new FormData();
+        formData.append("file", file);
+        const upRes = await api.postFormData("/api/support/upload-attachment", formData);
+        attachmentUrl = upRes.url;
+      }
+
+      const ticket = await api.post("/api/support/tickets", {
+        category: cat,
+        title: title,
+        description: desc,
+        attachment_url: attachmentUrl
+      });
+
+      // Show confirmation alert
+      const alertBox = document.getElementById("support-success-alert");
+      const alertId = document.getElementById("support-alert-ticket-id");
+      const alertMsg = document.getElementById("support-alert-msg");
+      if (alertBox && alertId && alertMsg) {
+        alertId.textContent = `${lang === 'ta' ? 'ஆதரவு டிக்கெட் பதிவு செய்யப்பட்டது! எண்:' : 'Support Ticket Created! ID:'} ${ticket.ticket_number}`;
+        alertMsg.textContent = lang === 'ta' ?
+          "உங்கள் கோரிக்கை மாநில நிர்வாக உதவி மையத்திற்கு அனுப்பப்பட்டுள்ளது. 'எனது ஆதரவு டிக்கெட்டுகள்' பகுதியில் தீர்வு நிலையை கண்காணிக்கலாம்." :
+          "Your support ticket has been received by administrative engineers. You can track progress and reply under 'My Tickets'.";
+        alertBox.style.display = "flex";
+        alertBox.scrollIntoView({ behavior: "smooth" });
+      }
+
+      showToast(lang === 'ta' ? `டிக்கெட் ${ticket.ticket_number} பதிவானது!` : `Ticket ${ticket.ticket_number} created!`, "success");
+
+      // Reset form
+      document.getElementById("support-title").value = "";
+      document.getElementById("support-desc").value = "";
+      if (fileInput) fileInput.value = "";
+      document.getElementById("support-file-preview-wrap").style.display = "none";
+
+      // Update badge count
+      loadMyTicketsCount();
+    } catch (err) {
+      alert("Ticket submission failed: " + err.message);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = origBtnText;
+    }
+  });
+
+  async function loadMyTicketsCount() {
+    try {
+      const tickets = await api.get("/api/support/tickets/my");
+      const badge = document.getElementById("badge-my-tickets-count");
+      if (badge && tickets.length > 0) {
+        badge.textContent = tickets.length;
+        badge.style.display = "inline";
+      }
+    } catch (e) {}
+  }
+
+  loadMyTicketsCount();
+
+  async function loadMyTickets() {
+    const listContainer = document.getElementById("my-tickets-list-container");
+    if (!listContainer) return;
+
+    try {
+      const tickets = await api.get("/api/support/tickets/my");
+      if (tickets.length === 0) {
+        listContainer.innerHTML = `
+          <div class="text-center py-4 text-muted bg-light rounded border">
+            <i class="bi bi-inbox mb-2" style="font-size: 2rem;"></i>
+            <h6>${lang === 'ta' ? 'ஆதரவு டிக்கெட்டுகள் ஏதுமில்லை' : 'No Support Tickets Found'}</h6>
+            <p class="small mb-0">${lang === 'ta' ? 'சிக்கல்கள் அல்லது பிழைகள் இருந்தால் புதிய டிக்கெட்டை சமர்ப்பிக்கவும்.' : 'Click "New Ticket" to submit a problem or bug report.'}</p>
+          </div>
+        `;
+        return;
+      }
+
+      listContainer.innerHTML = tickets.map(t => {
+        const statusClass = t.status === 'resolved' ? 'bg-success' : (t.status === 'in_progress' ? 'bg-info text-dark' : (t.status === 'closed' ? 'bg-secondary' : 'bg-warning text-dark'));
+        const statusText = t.status.toUpperCase().replace('_', ' ');
+
+        return `
+          <div class="p-3 rounded border bg-white shadow-sm">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2 pb-2 border-bottom">
+              <div class="d-flex align-items-center gap-2">
+                <span class="badge ${statusClass}">${statusText}</span>
+                <span class="badge bg-light text-dark border font-monospace fw-bold">${t.ticket_number}</span>
+                <span class="badge bg-secondary-subtle text-secondary small">${t.category.toUpperCase().replace('_', ' ')}</span>
+              </div>
+              <span class="small text-muted font-monospace">${new Date(t.created_at).toLocaleString()}</span>
+            </div>
+
+            <h6 class="fw-bold text-dark mb-1">${t.title}</h6>
+            <p class="small text-secondary mb-2">${t.description}</p>
+
+            ${t.attachment_url ? `
+              <div class="mb-2">
+                <a href="${t.attachment_url}" target="_blank" class="btn btn-xs btn-outline-secondary">
+                  <i class="bi bi-image me-1"></i> ${lang === 'ta' ? 'இணைக்கப்பட்ட படம் காண்க' : 'View Attachment Screenshot'}
+                </a>
+              </div>
+            ` : ''}
+
+            <!-- Conversation messages -->
+            ${(t.messages && t.messages.length > 1) ? `
+              <div class="p-3 my-2 rounded bg-light border-start border-3 border-primary d-flex flex-column gap-2">
+                <span class="small fw-bold text-primary mb-1"><i class="bi bi-chat-left-text me-1"></i> ${lang === 'ta' ? 'உரையாடல் வரலாறு:' : 'Conversation History:'}</span>
+                ${t.messages.slice(1).map(m => `
+                  <div class="p-2 rounded ${m.sender_role === 'admin' ? 'bg-primary-subtle border border-primary-subtle' : 'bg-white border'}">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                      <span class="small fw-bold ${m.sender_role === 'admin' ? 'text-primary' : 'text-dark'}">
+                        ${m.sender_role === 'admin' ? '<i class="bi bi-shield-check me-1"></i> System Administrator' : '<i class="bi bi-person me-1"></i> ' + m.sender_name}
+                      </span>
+                      <span class="small text-muted" style="font-size: 0.75rem;">${new Date(m.created_at).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}</span>
+                    </div>
+                    <p class="small mb-0 text-secondary">${m.message}</p>
+                  </div>
+                `).join("")}
+              </div>
+            ` : ''}
+
+            <!-- Reply Box for Reporter -->
+            <div class="mt-2 pt-2 border-top d-flex gap-2">
+              <input type="text" class="form-control form-control-sm input-reply-support" data-tid="${t.id}" placeholder="${lang === 'ta' ? 'நிர்வாகிக்கு கூடுதல் தகவல் அல்லது பதில் எழுதுக...' : 'Reply to administrator...'}">
+              <button class="btn btn-sm btn-outline-primary btn-send-support-reply" data-tid="${t.id}">
+                <i class="bi bi-reply-fill me-1"></i> ${lang === 'ta' ? 'பதில் அனுப்பு' : 'Reply'}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      // Attach reply handlers
+      listContainer.querySelectorAll(".btn-send-support-reply").forEach(btn => {
+        btn.addEventListener("click", async () => {
+          const tid = btn.getAttribute("data-tid");
+          const input = listContainer.querySelector(`.input-reply-support[data-tid="${tid}"]`);
+          const msg = input?.value?.trim();
+          if (!msg || msg.length < 2) return;
+
+          try {
+            await api.post(`/api/support/tickets/${tid}/reply`, { message: msg });
+            showToast(lang === 'ta' ? 'பதில் பதிவு செய்யப்பட்டது!' : 'Reply submitted!', 'success');
+            loadMyTickets();
+          } catch (err) {
+            alert("Reply failed: " + err.message);
+          }
+        });
+      });
+    } catch (e) {
+      listContainer.innerHTML = `<div class="alert alert-danger">${e.message}</div>`;
+    }
+  }
 
   // FAQ audio readout listener
   container.querySelectorAll(".btn-read-faq").forEach(btn => {

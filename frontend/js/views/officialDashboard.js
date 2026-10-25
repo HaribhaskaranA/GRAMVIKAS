@@ -1,7 +1,7 @@
 /**
  * GRAMVIKAS AI - Verified Official Dashboard (/official/dashboard).
  * Official management portal for milestone progress updates, grievance triage,
- * and direct voice broadcast dispatches. 100% Multilingual.
+ * government work completion photo transparency, and direct voice broadcast dispatches.
  */
 
 import { api } from "../api.js";
@@ -103,11 +103,12 @@ export async function renderOfficialDashboard(container) {
           </div>
         </div>
 
-        <!-- 2. Grievance Triage & Resolution Workflow -->
+        <!-- 2. Grievance Triage & Resolution Workflow with Photo Transparency -->
         <div class="col-lg-6">
           <div class="card-gv h-100">
-            <div class="card-header-gv">
-              <span class="fw-bold" style="color: var(--color-navy);"><i class="bi bi-clipboard-check me-1 text-warning"></i> ${lang === 'ta' ? 'குடிமக்கள் புகார் பரிசீலனை மற்றும் தீர்வு' : 'Citizen Grievance Resolution Desk'}</span>
+            <div class="card-header-gv d-flex align-items-center justify-content-between">
+              <span class="fw-bold" style="color: var(--color-navy);"><i class="bi bi-clipboard-check me-1 text-warning"></i> ${lang === 'ta' ? 'குடிமக்கள் புகார் பரிசீலனை & பணி நிறைவு வெளிப்படைத்தன்மை' : 'Citizen Grievance & Work Completion Desk'}</span>
+              <span class="badge bg-success-subtle text-success border border-success-subtle small"><i class="bi bi-camera-fill me-1"></i> Photo Verified</span>
             </div>
             <div class="card-body-gv">
               <form id="form-triage-report" class="d-flex flex-column gap-3">
@@ -116,6 +117,12 @@ export async function renderOfficialDashboard(container) {
                   <select class="form-select form-select-sm" id="triage-report-id" required>
                     <option value="">${lang === 'ta' ? 'புகார்கள் ஏற்றப்படுகின்றன...' : 'Loading grievances...'}</option>
                   </select>
+                </div>
+
+                <!-- Existing Photos Display Container -->
+                <div id="triage-existing-photos-container" style="display: none;">
+                  <label class="form-label small fw-semibold text-muted mb-1">${lang === 'ta' ? 'ஏற்கனவே பதிவேற்றப்பட்ட கள புகைப்படங்கள்:' : 'Previously Uploaded Evidence Photos:'}</label>
+                  <div class="d-flex gap-2 flex-wrap" id="triage-existing-photos-list"></div>
                 </div>
 
                 <div>
@@ -129,13 +136,40 @@ export async function renderOfficialDashboard(container) {
                   </select>
                 </div>
 
-                <div>
-                  <label class="form-label small fw-semibold">${lang === 'ta' ? 'நடவடிக்கை மற்றும் தீர்வு குறிப்பு' : 'Official Action / Resolution Note'}</label>
-                  <textarea class="form-control form-control-sm" id="triage-note" rows="3" placeholder="${lang === 'ta' ? 'எடுக்கப்பட்ட கள நடவடிக்கை அல்லது பழுது நீக்கப்பட்ட விவரம்...' : 'Inspection findings, contractor work order...'}" required minlength="5"></textarea>
+                <!-- Mandatory Completion Photo Alert -->
+                <div class="alert alert-warning py-2 px-3 small d-flex align-items-center gap-2 mb-0" id="completion-photo-req-alert" style="display: none;">
+                  <i class="bi bi-exclamation-triangle-fill text-warning flex-shrink-0" style="font-size: 1.1rem;"></i>
+                  <div>
+                    <strong>${lang === 'ta' ? 'கட்டாய விதிமுறை:' : 'Mandatory Completion Photo:'}</strong>
+                    <span>${lang === 'ta' ? 'பணியை நிறைவு செய்ய குறைந்தது ஒரு களப் பணி நிறைவு புகைப்படம் (Completion Photo) பதிவேற்றுவது அவசியம்.' : 'At least one actual on-site completion photo is strictly required when marking work as completed.'}</span>
+                  </div>
                 </div>
 
-                <button type="submit" class="btn btn-warning btn-sm w-100 fw-bold">
-                  <i class="bi bi-check2-all me-1"></i> ${lang === 'ta' ? 'தீர்வு நிலையை புதுப்பி' : 'Submit Official Action Sign-Off'}
+                <!-- Work Progress / Completion Photo Upload -->
+                <div>
+                  <label class="form-label small fw-semibold d-flex justify-content-between">
+                    <span><i class="bi bi-camera me-1 text-primary"></i> ${lang === 'ta' ? 'களப் பணி முன்னேற்றம் / நிறைவு புகைப்படம்' : 'Work Progress / Completion Photo'}</span>
+                    <span class="text-danger small fw-bold" id="label-photo-mandatory" style="display: none;">* ${lang === 'ta' ? 'கட்டாயம்' : 'Required'}</span>
+                  </label>
+                  <input type="file" class="form-control form-control-sm" id="triage-photo-file" accept="image/jpeg,image/png,image/webp">
+                  <div class="mt-2 text-center" id="triage-photo-preview-wrap" style="display: none;">
+                    <img id="triage-photo-preview" src="" alt="Work Photo Preview" class="img-fluid rounded border shadow-sm" style="max-height: 140px; object-fit: cover;">
+                  </div>
+                </div>
+
+                <!-- Work Description Completed -->
+                <div>
+                  <label class="form-label small fw-semibold">${lang === 'ta' ? 'நிறைவு செய்யப்பட்ட பணி விளக்கம்' : 'Description of Work Completed'}</label>
+                  <textarea class="form-control form-control-sm" id="triage-work-desc" rows="2" placeholder="${lang === 'ta' ? 'பழுது நீக்கப்பட்ட முறை, பயன்படுத்தப்பட்ட உதிரி பாகங்கள் மற்றும் கள ஆய்வு அறிக்கை...' : 'Detailed description of materials used, repairs carried out, and technical tests completed...'}" required minlength="5"></textarea>
+                </div>
+
+                <div>
+                  <label class="form-label small fw-semibold">${lang === 'ta' ? 'அலுவலர் நடவடிக்கை குறிப்பு' : 'Official Action Log Note'}</label>
+                  <input type="text" class="form-control form-control-sm" id="triage-note" placeholder="${lang === 'ta' ? 'சுருக்கமான நடவடிக்கை குறிப்பு (எ.கா. தரம் சரிபார்க்கப்பட்டது)...' : 'Brief action note (e.g. Inspected and verified by BDO)...'}" value="Official field verification inspection complete.">
+                </div>
+
+                <button type="submit" class="btn btn-warning btn-sm w-100 fw-bold" id="btn-submit-triage">
+                  <i class="bi bi-check2-all me-1"></i> ${lang === 'ta' ? 'புகார் நிலையை புதுப்பித்து புகைப்படத்தை சேமி' : 'Submit Official Action & Work Evidence'}
                 </button>
               </form>
             </div>
@@ -145,6 +179,8 @@ export async function renderOfficialDashboard(container) {
     </div>
   `;
 
+  let cachedReports = [];
+
   // Load select options
   async function loadFormSelects() {
     try {
@@ -152,6 +188,7 @@ export async function renderOfficialDashboard(container) {
         api.get("/api/projects"),
         api.get("/api/reports")
       ]);
+      cachedReports = reports;
 
       const projSelect = document.getElementById("adv-project-id");
       if (projSelect) {
@@ -165,13 +202,72 @@ export async function renderOfficialDashboard(container) {
         repSelect.innerHTML = reports.map(r => `
           <option value="${r.id}">${r.reference_id}: ${r.title} [${r.current_status}]</option>
         `).join("");
+        updateTriageFormDisplay();
       }
     } catch (e) {
       console.warn("Select load note:", e);
     }
   }
 
+  function updateTriageFormDisplay() {
+    const repSelect = document.getElementById("triage-report-id");
+    const statusSelect = document.getElementById("triage-to-status");
+    const alertReq = document.getElementById("completion-photo-req-alert");
+    const labelMandatory = document.getElementById("label-photo-mandatory");
+    const existingPhotosContainer = document.getElementById("triage-existing-photos-container");
+    const existingPhotosList = document.getElementById("triage-existing-photos-list");
+
+    const selectedReportId = repSelect?.value;
+    const selectedStatus = statusSelect?.value;
+    const isCompletionStatus = selectedStatus === "resolution_proposed" || selectedStatus === "verified_closed";
+
+    if (alertReq && labelMandatory) {
+      if (isCompletionStatus) {
+        alertReq.style.display = "flex";
+        labelMandatory.style.display = "inline";
+      } else {
+        alertReq.style.display = "none";
+        labelMandatory.style.display = "none";
+      }
+    }
+
+    if (selectedReportId && existingPhotosContainer && existingPhotosList) {
+      const rep = cachedReports.find(r => r.id === selectedReportId);
+      const photos = rep?.completion_photos || [];
+      if (photos.length > 0) {
+        existingPhotosContainer.style.display = "block";
+        existingPhotosList.innerHTML = photos.map(p => `
+          <div class="position-relative border rounded p-1 bg-light">
+            <img src="${p.photo_url}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;" alt="Work Photo">
+            <span class="badge ${p.is_completion ? 'bg-success' : 'bg-primary'} position-absolute top-0 end-0" style="font-size: 0.6rem;">${p.is_completion ? 'Done' : 'Prog'}</span>
+          </div>
+        `).join("");
+      } else {
+        existingPhotosContainer.style.display = "none";
+      }
+    }
+  }
+
   loadFormSelects();
+
+  // Status select change triggers mandatory alert
+  document.getElementById("triage-to-status")?.addEventListener("change", updateTriageFormDisplay);
+  document.getElementById("triage-report-id")?.addEventListener("change", updateTriageFormDisplay);
+
+  // Photo preview
+  document.getElementById("triage-photo-file")?.addEventListener("change", (e) => {
+    const file = e.target.files?.[0];
+    const previewWrap = document.getElementById("triage-photo-preview-wrap");
+    const previewImg = document.getElementById("triage-photo-preview");
+    if (file && previewWrap && previewImg) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        previewImg.src = event.target.result;
+        previewWrap.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+    }
+  });
 
   // Advance project milestone
   document.getElementById("form-advance-project")?.addEventListener("submit", async (e) => {
@@ -203,25 +299,71 @@ export async function renderOfficialDashboard(container) {
     }
   });
 
-  // Triage grievance
+  // Triage grievance with photo upload and completion verification
   document.getElementById("form-triage-report")?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const reportId = document.getElementById("triage-report-id").value;
     const toStatus = document.getElementById("triage-to-status").value;
     const note = document.getElementById("triage-note").value;
+    const workDesc = document.getElementById("triage-work-desc").value;
+    const photoFileInput = document.getElementById("triage-photo-file");
+    const photoFile = photoFileInput?.files?.[0];
+
+    const isCompletionStatus = toStatus === "resolution_proposed" || toStatus === "verified_closed";
+    const rep = cachedReports.find(r => r.id === reportId);
+    const hasExistingCompletionPhoto = rep?.completion_photos?.some(p => p.is_completion);
+
+    // Enforce completion photo requirement
+    if (isCompletionStatus && !photoFile && !hasExistingCompletionPhoto) {
+      alert(lang === 'ta' ?
+        "கட்டாய விதிமுறை: பணியை நிறைவு செய்ய குறைந்தது ஒரு களப் பணி நிறைவு புகைப்படம் (Completion Photo) பதிவேற்றுவது அவசியம்!" :
+        "Mandatory requirement: You must upload at least one work completion photo before marking this complaint as resolved/closed!"
+      );
+      photoFileInput.focus();
+      return;
+    }
+
+    const submitBtn = document.getElementById("btn-submit-triage");
+    const origText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-1"></span> ${lang === 'ta' ? 'பதிவேற்றப்படுகிறது...' : 'Uploading & Updating...'}`;
 
     try {
-      await api.post(`/api/reports/${reportId}/status`, {
-        to_status: toStatus,
-        action_note: note,
-        assigned_official_id: user?.id,
-        evidence_urls: []
-      });
+      let uploadedPhotoUrl = null;
 
-      showToast(lang === 'ta' ? "புகார் தீர்வு நிலை புதுப்பிக்கப்பட்டது!" : "Grievance status updated successfully!", "success");
-      loadFormSelects();
+      // 1. Upload photo if selected
+      if (photoFile) {
+        const formData = new FormData();
+        formData.append("file", photoFile);
+        const uploadRes = await api.postFormData("/api/reports/upload-work-photo", formData);
+        uploadedPhotoUrl = uploadRes.url;
+      }
+
+      // 2. Submit status update with photo & description
+      const payload = {
+        to_status: toStatus,
+        action_note: note || workDesc,
+        assigned_official_id: user?.id,
+        work_description: workDesc,
+        completion_photos: uploadedPhotoUrl ? [uploadedPhotoUrl] : [],
+        evidence_urls: uploadedPhotoUrl ? [uploadedPhotoUrl] : []
+      };
+
+      await api.post(`/api/reports/${reportId}/status`, payload);
+
+      showToast(lang === 'ta' ? "புகார் தீர்வு நிலை மற்றும் பணி நிறைவு புகைப்படம் வெற்றிகரமாக புதுப்பிக்கப்பட்டது!" : "Grievance status and work completion evidence recorded successfully!", "success");
+
+      // Reset form
+      document.getElementById("triage-work-desc").value = "";
+      if (photoFileInput) photoFileInput.value = "";
+      document.getElementById("triage-photo-preview-wrap").style.display = "none";
+
+      await loadFormSelects();
     } catch (err) {
       alert("Triage update failed: " + err.message);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = origText;
     }
   });
 }

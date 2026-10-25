@@ -994,6 +994,145 @@ class DatabaseAdapter:
             }
         ]
 
+        # 9. Work Photos & Completion Evidence Seeds
+        work_photos = [
+            {
+                "id": "wp-1111-1111-1111-111111111111",
+                "complaint_id": "c3333333-cccc-cccc-cccc-cccccccccccc",
+                "complaint_ref": "GV-REP-20261017-3104",
+                "complaint_title": "3 LED Streetlights fused on Bus Stop Road",
+                "photo_url": "https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=800&q=80",
+                "description": "Completed installation of 3 high-intensity surge-protected 45W LED streetlight luminaires with automatic LDR dusk-to-dawn timers on Bus Stop Road.",
+                "stage": "verified_closed",
+                "is_completion": True,
+                "uploader_id": "22222222-2222-2222-2222-222222222222",
+                "uploader_name": "Dr. Selvi Ramanathan (BDO)",
+                "uploader_role": "official",
+                "created_at": yesterday_iso
+            },
+            {
+                "id": "wp-2222-2222-2222-222222222222",
+                "complaint_id": "c1111111-cccc-cccc-cccc-cccccccccccc",
+                "complaint_ref": "GV-REP-20261015-1042",
+                "complaint_title": "Handpump non-functional for past 2 weeks",
+                "photo_url": "https://images.unsplash.com/photo-1584467735871-8e85353a8413?auto=format&fit=crop&w=800&q=80",
+                "description": "Deepened suction cylinder assembly and replaced worn washer seals. Tested water output at 18 liters per minute.",
+                "stage": "in_progress",
+                "is_completion": False,
+                "uploader_id": "22222222-2222-2222-2222-222222222222",
+                "uploader_name": "Dr. Selvi Ramanathan (BDO)",
+                "uploader_role": "official",
+                "created_at": now_iso
+            }
+        ]
+
+        # 10. Citizen Verification Questions
+        verification_questions = [
+            {
+                "id": "vq-1111-1111-1111-111111111111",
+                "complaint_id": "c3333333-cccc-cccc-cccc-cccccccccccc",
+                "complaint_ref": "GV-REP-20261017-3104",
+                "complaint_title": "3 LED Streetlights fused on Bus Stop Road",
+                "photo_url": "https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=800&q=80",
+                "citizen_id": "11111111-1111-1111-1111-111111111111",
+                "citizen_name": "Muthuvel K",
+                "question_text": "I need to verify whether the replacement streetlights include automatic dusk-to-dawn sensors as requested in the Gram Sabha.",
+                "status": "answered",
+                "admin_response": "Verified by BDO Dr. Selvi Ramanathan: The installed 45W fixtures are equipped with automatic LDR dusk-to-dawn sensors and backed by a 3-year municipal warranty.",
+                "admin_responder_id": "44444444-4444-4444-4444-444444444444",
+                "admin_responder_name": "State Governance Admin",
+                "created_at": yesterday_iso,
+                "updated_at": now_iso,
+                "messages": [
+                    {
+                        "id": str(uuid.uuid4()),
+                        "sender_id": "11111111-1111-1111-1111-111111111111",
+                        "sender_name": "Muthuvel K",
+                        "sender_role": "citizen",
+                        "message": "I need to verify whether the replacement streetlights include automatic dusk-to-dawn sensors as requested in the Gram Sabha.",
+                        "created_at": yesterday_iso
+                    },
+                    {
+                        "id": str(uuid.uuid4()),
+                        "sender_id": "44444444-4444-4444-4444-444444444444",
+                        "sender_name": "State Governance Admin",
+                        "sender_role": "admin",
+                        "message": "Verified by BDO Dr. Selvi Ramanathan: The installed 45W fixtures are equipped with automatic LDR dusk-to-dawn sensors and backed by a 3-year municipal warranty.",
+                        "created_at": now_iso
+                    }
+                ]
+            }
+        ]
+
+        # 11. Support Tickets Seeds (Integrated Into FAQ)
+        support_tickets = [
+            {
+                "id": "st-1111-1111-1111-111111111111",
+                "ticket_number": "GV-SUP-20261022-7812",
+                "user_id": "11111111-1111-1111-1111-111111111111",
+                "user_name": "Muthuvel K",
+                "user_email": "citizen@gramvikas.in",
+                "user_role": "citizen",
+                "category": "technical_issue",
+                "title": "Tamil voice audio playback buffering on rural 2G network",
+                "description": "When clicking the 'Listen Audio' button in Scheme details, the voice stream was taking 15 seconds to begin in Melmaruvathur village on weak signal.",
+                "attachment_url": None,
+                "status": "resolved",
+                "priority": "high",
+                "admin_notes": "Optimized server audio streaming chunk size and added client-side caching.",
+                "created_at": yesterday_iso,
+                "updated_at": now_iso,
+                "messages": [
+                    {
+                        "id": str(uuid.uuid4()),
+                        "sender_id": "11111111-1111-1111-1111-111111111111",
+                        "sender_name": "Muthuvel K",
+                        "sender_role": "citizen",
+                        "message": "When clicking the 'Listen Audio' button in Scheme details, the voice stream was taking 15 seconds to begin in Melmaruvathur village on weak signal.",
+                        "attachment_url": None,
+                        "created_at": yesterday_iso
+                    },
+                    {
+                        "id": str(uuid.uuid4()),
+                        "sender_id": "44444444-4444-4444-4444-444444444444",
+                        "sender_name": "State Governance Admin",
+                        "sender_role": "admin",
+                        "message": "We optimized the gTTS audio streaming chunks and enabled client audio caching. Verified streaming latency is now under 1.8 seconds on 2G/3G networks.",
+                        "attachment_url": None,
+                        "created_at": now_iso
+                    }
+                ]
+            },
+            {
+                "id": "st-2222-2222-2222-222222222222",
+                "ticket_number": "GV-SUP-20261025-4401",
+                "user_id": "22222222-2222-2222-2222-222222222222",
+                "user_name": "Dr. Selvi Ramanathan",
+                "user_email": "official@gramvikas.in",
+                "user_role": "official",
+                "category": "broken_feature",
+                "title": "Request to add export to Excel option for Village Infrastructure Projects",
+                "description": "Need a 1-click CSV/Excel export for the 13-stage project milestones to share with District Collectorate during weekly review.",
+                "attachment_url": None,
+                "status": "in_progress",
+                "priority": "normal",
+                "admin_notes": "Under review by engineering team for sprint release.",
+                "created_at": now_iso,
+                "updated_at": now_iso,
+                "messages": [
+                    {
+                        "id": str(uuid.uuid4()),
+                        "sender_id": "22222222-2222-2222-2222-222222222222",
+                        "sender_name": "Dr. Selvi Ramanathan",
+                        "sender_role": "official",
+                        "message": "Need a 1-click CSV/Excel export for the 13-stage project milestones to share with District Collectorate during weekly review.",
+                        "attachment_url": None,
+                        "created_at": now_iso
+                    }
+                ]
+            }
+        ]
+
         self.data = {
             "users": users,
             "citizen_profiles": citizen_profiles,
@@ -1006,7 +1145,10 @@ class DatabaseAdapter:
             "voice_subscriptions": voice_subscriptions,
             "voice_campaigns": voice_campaigns,
             "call_logs": call_logs,
-            "audit_logs": audit_logs
+            "audit_logs": audit_logs,
+            "work_photos": work_photos,
+            "verification_questions": verification_questions,
+            "support_tickets": support_tickets
         }
         self.save_state()
 
@@ -1213,11 +1355,18 @@ class DatabaseAdapter:
             results = [r for r in results if r.get("category", "").lower() == category.lower()]
         if village and village.lower() != "all":
             results = [r for r in results if r.get("village", "").lower() == village.lower()]
+        for r in results:
+            photos = [p for p in self.data.get("work_photos", []) if p.get("complaint_id") == r["id"]]
+            r["completion_photos"] = photos
+            r["has_completion_photos"] = len(photos) > 0
         return results
 
     def get_report_by_id(self, report_id: str) -> Optional[Dict[str, Any]]:
         for r in self.data.get("reports", []):
             if str(r["id"]) == str(report_id) or r.get("reference_id") == str(report_id):
+                photos = [p for p in self.data.get("work_photos", []) if p.get("complaint_id") == r["id"]]
+                r["completion_photos"] = photos
+                r["has_completion_photos"] = len(photos) > 0
                 return r
         return None
 
@@ -1269,24 +1418,62 @@ class DatabaseAdapter:
         self.save_state()
         return report_dict
 
-    def update_report_status(self, report_id: str, actor_name: str, to_status: str, action_note: str, assigned_official_id: Optional[str] = None, evidence_urls: Optional[List[str]] = None) -> Dict[str, Any]:
+    def update_report_status(
+        self,
+        report_id: str,
+        actor_name: str,
+        to_status: str,
+        action_note: str,
+        assigned_official_id: Optional[str] = None,
+        evidence_urls: Optional[List[str]] = None,
+        completion_photos: Optional[List[str]] = None,
+        work_description: Optional[str] = None,
+        uploader_id: Optional[str] = None,
+        uploader_role: Optional[str] = "official"
+    ) -> Dict[str, Any]:
         rep = self.get_report_by_id(report_id)
         if not rep:
             raise ValueError("Report not found")
+
+        # FEATURE 1: Require at least one completion photo when marking work as completed
+        is_marking_completed = to_status in ("resolution_proposed", "verified_closed")
+        existing_photos = rep.get("completion_photos", [])
+        provided_photos = completion_photos or evidence_urls or []
+
+        if is_marking_completed and not provided_photos and not any(p.get("is_completion") for p in existing_photos):
+            raise ValueError("At least one completion photo is mandatory when marking work as completed.")
+
         from_status = rep.get("current_status")
         rep["current_status"] = to_status
         rep["updated_at"] = datetime.now().isoformat()
+        if work_description:
+            rep["work_description"] = work_description
         if assigned_official_id:
             rep["assigned_official_id"] = assigned_official_id
             off = self.get_user_by_id(assigned_official_id)
             if off:
                 rep["assigned_official_name"] = off.get("full_name")
-        if to_status == "verified_closed":
+
+        if is_marking_completed:
             rep["closed_at"] = datetime.now().isoformat()
-            rep["resolution_notes"] = action_note
-            if evidence_urls:
-                rep["resolution_photo_urls"] = evidence_urls
-        
+            rep["resolution_notes"] = work_description or action_note
+            if provided_photos:
+                rep["resolution_photo_urls"] = provided_photos
+
+        # Store completion & progress photos with full metadata
+        if provided_photos:
+            for p_url in provided_photos:
+                self.add_work_photo(
+                    report_id=rep["id"],
+                    photo_url=p_url,
+                    description=work_description or action_note,
+                    stage=to_status,
+                    is_completion=is_marking_completed,
+                    uploader_id=uploader_id or assigned_official_id or "system",
+                    uploader_name=actor_name,
+                    uploader_role=uploader_role or "official"
+                )
+
         timeline_entry = {
             "id": str(uuid.uuid4()),
             "report_id": rep["id"],
@@ -1294,7 +1481,7 @@ class DatabaseAdapter:
             "from_status": from_status,
             "to_status": to_status,
             "action_note": action_note,
-            "evidence_urls": evidence_urls or [],
+            "evidence_urls": provided_photos,
             "created_at": datetime.now().isoformat()
         }
         rep.setdefault("timeline", []).append(timeline_entry)
@@ -1477,6 +1664,313 @@ class DatabaseAdapter:
             "voice_subscribers": len(voice_subs),
             "is_demo_mode": settings.is_demo_mode
         }
+
+
+# ==========================================================================
+    # WORK COMPLETION PHOTOS & CITIZEN VERIFICATION QUESTIONS
+    # ==========================================================================
+    def add_work_photo(
+        self,
+        report_id: str,
+        photo_url: str,
+        description: str,
+        stage: str = "in_progress",
+        is_completion: bool = False,
+        uploader_id: str = "system",
+        uploader_name: str = "Official",
+        uploader_role: str = "official"
+    ) -> Dict[str, Any]:
+        rep = self.get_report_by_id(report_id)
+        if not rep:
+            raise ValueError(f"Report '{report_id}' not found.")
+
+        photo_entry = {
+            "id": str(uuid.uuid4()),
+            "complaint_id": rep["id"],
+            "complaint_ref": rep.get("reference_id"),
+            "complaint_title": rep.get("title"),
+            "photo_url": photo_url,
+            "description": description,
+            "stage": stage,
+            "is_completion": is_completion,
+            "uploader_id": uploader_id,
+            "uploader_name": uploader_name,
+            "uploader_role": uploader_role,
+            "created_at": datetime.now().isoformat()
+        }
+        
+        self.data.setdefault("work_photos", []).insert(0, photo_entry)
+        rep.setdefault("completion_photos", []).append(photo_entry)
+        rep["has_completion_photos"] = True
+        if is_completion:
+            rep["work_description"] = description
+            if photo_url not in rep.get("resolution_photo_urls", []):
+                rep.setdefault("resolution_photo_urls", []).append(photo_url)
+
+        self.save_state()
+        return photo_entry
+
+    def get_work_photos(self, report_id: Optional[str] = None) -> List[Dict[str, Any]]:
+        photos = self.data.get("work_photos", [])
+        if report_id:
+            rep = self.get_report_by_id(report_id)
+            target_id = rep["id"] if rep else report_id
+            return [p for p in photos if p.get("complaint_id") == target_id]
+        return photos
+
+    def create_verification_question(
+        self,
+        report_id: str,
+        citizen_id: str,
+        citizen_name: str,
+        question_text: str,
+        photo_url: Optional[str] = None
+    ) -> Dict[str, Any]:
+        rep = self.get_report_by_id(report_id)
+        if not rep:
+            raise ValueError(f"Report '{report_id}' not found.")
+
+        q_id = str(uuid.uuid4())
+        now_str = datetime.now().isoformat()
+
+        question_obj = {
+            "id": q_id,
+            "complaint_id": rep["id"],
+            "complaint_ref": rep.get("reference_id"),
+            "complaint_title": rep.get("title"),
+            "photo_url": photo_url,
+            "citizen_id": citizen_id,
+            "citizen_name": citizen_name,
+            "question_text": question_text,
+            "status": "open",
+            "admin_response": None,
+            "admin_responder_id": None,
+            "admin_responder_name": None,
+            "created_at": now_str,
+            "updated_at": now_str,
+            "messages": [
+                {
+                    "id": str(uuid.uuid4()),
+                    "sender_id": citizen_id,
+                    "sender_name": citizen_name,
+                    "sender_role": "citizen",
+                    "message": question_text,
+                    "created_at": now_str
+                }
+            ]
+        }
+        self.data.setdefault("verification_questions", []).insert(0, question_obj)
+        self.save_state()
+        return question_obj
+
+    def get_verification_questions(
+        self,
+        report_id: Optional[str] = None,
+        citizen_id: Optional[str] = None,
+        status: Optional[str] = None
+    ) -> List[Dict[str, Any]]:
+        questions = self.data.get("verification_questions", [])
+        if report_id:
+            rep = self.get_report_by_id(report_id)
+            target_id = rep["id"] if rep else report_id
+            questions = [q for q in questions if q.get("complaint_id") == target_id]
+        if citizen_id:
+            questions = [q for q in questions if str(q.get("citizen_id")) == str(citizen_id)]
+        if status and status.lower() != "all":
+            questions = [q for q in questions if q.get("status", "").lower() == status.lower()]
+        return questions
+
+    def get_verification_question_by_id(self, question_id: str) -> Optional[Dict[str, Any]]:
+        for q in self.data.get("verification_questions", []):
+            if str(q.get("id")) == str(question_id):
+                return q
+        return None
+
+    def add_verification_question_reply(
+        self,
+        question_id: str,
+        sender_id: str,
+        sender_name: str,
+        sender_role: str,
+        message: str
+    ) -> Dict[str, Any]:
+        q = self.get_verification_question_by_id(question_id)
+        if not q:
+            raise ValueError(f"Question '{question_id}' not found.")
+
+        now_str = datetime.now().isoformat()
+        msg_obj = {
+            "id": str(uuid.uuid4()),
+            "sender_id": sender_id,
+            "sender_name": sender_name,
+            "sender_role": sender_role,
+            "message": message,
+            "created_at": now_str
+        }
+        q.setdefault("messages", []).append(msg_obj)
+        q["updated_at"] = now_str
+
+        # If admin replied, mark as answered
+        if sender_role == "admin":
+            q["status"] = "answered"
+            q["admin_response"] = message
+            q["admin_responder_id"] = sender_id
+            q["admin_responder_name"] = sender_name
+
+        self.save_state()
+        return q
+
+    def update_verification_question_status(
+        self,
+        question_id: str,
+        to_status: str,
+        admin_id: Optional[str] = None,
+        admin_name: Optional[str] = None,
+        response: Optional[str] = None
+    ) -> Dict[str, Any]:
+        q = self.get_verification_question_by_id(question_id)
+        if not q:
+            raise ValueError(f"Question '{question_id}' not found.")
+
+        q["status"] = to_status
+        q["updated_at"] = datetime.now().isoformat()
+        if response:
+            q["admin_response"] = response
+            if admin_id:
+                q["admin_responder_id"] = admin_id
+            if admin_name:
+                q["admin_responder_name"] = admin_name
+            q.setdefault("messages", []).append({
+                "id": str(uuid.uuid4()),
+                "sender_id": admin_id or "admin",
+                "sender_name": admin_name or "System Administrator",
+                "sender_role": "admin",
+                "message": response,
+                "created_at": datetime.now().isoformat()
+            })
+
+        self.save_state()
+        return q
+
+    # ==========================================================================
+    # SUPPORT TICKETS (FAQ INTEGRATION)
+    # ==========================================================================
+    def create_support_ticket(
+        self,
+        user_id: str,
+        user_name: str,
+        user_email: str,
+        user_role: str,
+        category: str,
+        title: str,
+        description: str,
+        attachment_url: Optional[str] = None
+    ) -> Dict[str, Any]:
+        ticket_id = str(uuid.uuid4())
+        ticket_num = f"GV-SUP-{datetime.now().strftime('%Y%m%d')}-{uuid.uuid4().hex[:4].upper()}"
+        now_str = datetime.now().isoformat()
+
+        ticket_obj = {
+            "id": ticket_id,
+            "ticket_number": ticket_num,
+            "user_id": user_id,
+            "user_name": user_name,
+            "user_email": user_email,
+            "user_role": user_role,
+            "category": category,
+            "title": title,
+            "description": description,
+            "attachment_url": attachment_url,
+            "status": "open",
+            "priority": "normal",
+            "admin_notes": None,
+            "created_at": now_str,
+            "updated_at": now_str,
+            "messages": [
+                {
+                    "id": str(uuid.uuid4()),
+                    "sender_id": user_id,
+                    "sender_name": user_name,
+                    "sender_role": user_role,
+                    "message": description,
+                    "attachment_url": attachment_url,
+                    "created_at": now_str
+                }
+            ]
+        }
+        self.data.setdefault("support_tickets", []).insert(0, ticket_obj)
+        self.save_state()
+        return ticket_obj
+
+    def get_support_tickets(
+        self,
+        user_id: Optional[str] = None,
+        category: Optional[str] = None,
+        status: Optional[str] = None
+    ) -> List[Dict[str, Any]]:
+        tickets = self.data.get("support_tickets", [])
+        if user_id:
+            tickets = [t for t in tickets if str(t.get("user_id")) == str(user_id)]
+        if category and category.lower() != "all":
+            tickets = [t for t in tickets if t.get("category", "").lower() == category.lower()]
+        if status and status.lower() != "all":
+            tickets = [t for t in tickets if t.get("status", "").lower() == status.lower()]
+        return tickets
+
+    def get_support_ticket_by_id(self, ticket_id: str) -> Optional[Dict[str, Any]]:
+        for t in self.data.get("support_tickets", []):
+            if str(t.get("id")) == str(ticket_id) or t.get("ticket_number") == str(ticket_id):
+                return t
+        return None
+
+    def add_support_ticket_reply(
+        self,
+        ticket_id: str,
+        sender_id: str,
+        sender_name: str,
+        sender_role: str,
+        message: str,
+        attachment_url: Optional[str] = None
+    ) -> Dict[str, Any]:
+        t = self.get_support_ticket_by_id(ticket_id)
+        if not t:
+            raise ValueError(f"Support ticket '{ticket_id}' not found.")
+
+        now_str = datetime.now().isoformat()
+        msg_obj = {
+            "id": str(uuid.uuid4()),
+            "sender_id": sender_id,
+            "sender_name": sender_name,
+            "sender_role": sender_role,
+            "message": message,
+            "attachment_url": attachment_url,
+            "created_at": now_str
+        }
+        t.setdefault("messages", []).append(msg_obj)
+        t["updated_at"] = now_str
+        if sender_role == "admin" and t.get("status") == "open":
+            t["status"] = "in_progress"
+
+        self.save_state()
+        return t
+
+    def update_support_ticket_status(
+        self,
+        ticket_id: str,
+        to_status: str,
+        admin_notes: Optional[str] = None
+    ) -> Dict[str, Any]:
+        t = self.get_support_ticket_by_id(ticket_id)
+        if not t:
+            raise ValueError(f"Support ticket '{ticket_id}' not found.")
+
+        t["status"] = to_status
+        t["updated_at"] = datetime.now().isoformat()
+        if admin_notes:
+            t["admin_notes"] = admin_notes
+
+        self.save_state()
+        return t
 
 # Global singleton database adapter
 db = DatabaseAdapter()

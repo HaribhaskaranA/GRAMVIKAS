@@ -375,12 +375,17 @@ class CitizenReportOut(BaseModel):
     created_at: datetime
     updated_at: datetime
     timeline: List[ReportTimelineOut] = []
+    completion_photos: List[Dict[str, Any]] = []
+    work_description: Optional[str] = None
+    has_completion_photos: bool = False
 
 class ReportStatusUpdate(BaseModel):
     to_status: ReportStatus
     action_note: str = Field(..., min_length=5)
     assigned_official_id: Optional[str] = None
     evidence_urls: List[str] = []
+    completion_photos: List[str] = []
+    work_description: Optional[str] = None
 
 # ==============================================================================
 # 6. ANNOUNCEMENTS SCHEMAS
@@ -538,3 +543,110 @@ class AuditLogOut(BaseModel):
     details: Optional[Dict[str, Any]] = None
     ip_address: Optional[str] = None
     created_at: datetime
+
+
+# ==============================================================================
+# 10. WORK COMPLETION PHOTOS & CITIZEN QUESTIONS SCHEMAS
+# ==============================================================================
+class WorkPhotoCreate(BaseModel):
+    photo_url: str
+    description: str = Field(..., min_length=5)
+    stage: str = "in_progress"
+    is_completion: bool = False
+
+class WorkPhotoOut(BaseModel):
+    id: str
+    complaint_id: str
+    complaint_ref: Optional[str] = None
+    complaint_title: Optional[str] = None
+    photo_url: str
+    description: str
+    stage: str
+    is_completion: bool = False
+    uploader_id: str
+    uploader_name: str
+    uploader_role: str = "official"
+    created_at: datetime
+
+class VerificationQuestionCreate(BaseModel):
+    photo_url: Optional[str] = None
+    question_text: str = Field(..., min_length=10)
+
+class VerificationQuestionReplyCreate(BaseModel):
+    message: str = Field(..., min_length=2)
+
+class VerificationQuestionStatusUpdate(BaseModel):
+    status: Literal["open", "answered", "closed"]
+    admin_response: Optional[str] = None
+
+class VerificationQuestionMessageOut(BaseModel):
+    id: str
+    sender_id: str
+    sender_name: str
+    sender_role: str
+    message: str
+    created_at: datetime
+
+class VerificationQuestionOut(BaseModel):
+    id: str
+    complaint_id: str
+    complaint_ref: Optional[str] = None
+    complaint_title: Optional[str] = None
+    photo_url: Optional[str] = None
+    citizen_id: str
+    citizen_name: str
+    question_text: str
+    status: Literal["open", "answered", "closed"] = "open"
+    admin_response: Optional[str] = None
+    admin_responder_id: Optional[str] = None
+    admin_responder_name: Optional[str] = None
+    created_at: datetime
+    updated_at: datetime
+    messages: List[VerificationQuestionMessageOut] = []
+
+# ==============================================================================
+# 11. SUPPORT TICKETS SCHEMAS
+# ==============================================================================
+SupportCategory = Literal["bug", "technical_issue", "account_login", "broken_feature", "general_help"]
+SupportStatus = Literal["open", "in_progress", "resolved", "closed"]
+
+class SupportTicketCreate(BaseModel):
+    category: SupportCategory
+    title: str = Field(..., min_length=5, max_length=200)
+    description: str = Field(..., min_length=10)
+    attachment_url: Optional[str] = None
+
+class SupportTicketReplyCreate(BaseModel):
+    message: str = Field(..., min_length=2)
+    attachment_url: Optional[str] = None
+
+class SupportTicketStatusUpdate(BaseModel):
+    status: SupportStatus
+    admin_notes: Optional[str] = None
+
+class SupportTicketMessageOut(BaseModel):
+    id: str
+    sender_id: str
+    sender_name: str
+    sender_role: str
+    message: str
+    attachment_url: Optional[str] = None
+    created_at: datetime
+
+class SupportTicketOut(BaseModel):
+    id: str
+    ticket_number: str
+    user_id: str
+    user_name: str
+    user_email: str
+    user_role: str
+    category: SupportCategory
+    title: str
+    description: str
+    attachment_url: Optional[str] = None
+    status: SupportStatus = "open"
+    priority: str = "normal"
+    admin_notes: Optional[str] = None
+    created_at: datetime
+    updated_at: datetime
+    messages: List[SupportTicketMessageOut] = []

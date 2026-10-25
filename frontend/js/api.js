@@ -245,6 +245,114 @@ function resolveFallback(endpoint, options = {}) {
     ];
   }
 
+  // Work Photos & Verification Questions Fallbacks
+  if (path.includes("/photos") && method === "GET") {
+    return [
+      {
+        id: "wp-fallback-1",
+        complaint_id: "c3333333-cccc-cccc-cccc-cccccccccccc",
+        complaint_ref: "GV-REP-20261017-3104",
+        complaint_title: "3 LED Streetlights fused on Bus Stop Road",
+        photo_url: "https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=800&q=80",
+        description: "Completed installation of 3 high-intensity surge-protected 45W LED streetlight luminaires with automatic LDR dusk-to-dawn timers on Bus Stop Road.",
+        stage: "verified_closed",
+        is_completion: true,
+        uploader_id: "22222222-2222-2222-2222-222222222222",
+        uploader_name: "Dr. Selvi Ramanathan (BDO)",
+        uploader_role: "official",
+        created_at: new Date(Date.now() - 86400000).toISOString()
+      }
+    ];
+  }
+
+  if (path.includes("/questions") && method === "GET") {
+    return [
+      {
+        id: "vq-fallback-1",
+        complaint_id: "c3333333-cccc-cccc-cccc-cccccccccccc",
+        complaint_ref: "GV-REP-20261017-3104",
+        complaint_title: "3 LED Streetlights fused on Bus Stop Road",
+        photo_url: "https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=800&q=80",
+        citizen_id: "11111111-1111-1111-1111-111111111111",
+        citizen_name: "Muthuvel K",
+        question_text: "I need to verify whether the replacement streetlights include automatic dusk-to-dawn sensors as requested in the Gram Sabha.",
+        status: "answered",
+        admin_response: "Verified by BDO Dr. Selvi Ramanathan: The installed 45W fixtures are equipped with automatic LDR dusk-to-dawn sensors and backed by a 3-year municipal warranty.",
+        created_at: new Date(Date.now() - 86400000).toISOString(),
+        updated_at: new Date().toISOString(),
+        messages: [
+          {
+            id: "msg-1",
+            sender_id: "11111111-1111-1111-1111-111111111111",
+            sender_name: "Muthuvel K",
+            sender_role: "citizen",
+            message: "I need to verify whether the replacement streetlights include automatic dusk-to-dawn sensors as requested in the Gram Sabha.",
+            created_at: new Date(Date.now() - 86400000).toISOString()
+          },
+          {
+            id: "msg-2",
+            sender_id: "44444444-4444-4444-4444-444444444444",
+            sender_name: "State Governance Admin",
+            sender_role: "admin",
+            message: "Verified by BDO Dr. Selvi Ramanathan: The installed 45W fixtures are equipped with automatic LDR dusk-to-dawn sensors and backed by a 3-year municipal warranty.",
+            created_at: new Date().toISOString()
+          }
+        ]
+      }
+    ];
+  }
+
+  // Support Tickets Fallbacks
+  if (path.startsWith("/api/support/tickets") || path.startsWith("/api/support/admin/tickets")) {
+    return [
+      {
+        id: "st-fallback-1",
+        ticket_number: "GV-SUP-20261022-7812",
+        user_id: "11111111-1111-1111-1111-111111111111",
+        user_name: "Muthuvel K",
+        user_email: "citizen@gramvikas.in",
+        user_role: "citizen",
+        category: "technical_issue",
+        title: "Tamil voice audio playback buffering on rural 2G network",
+        description: "When clicking the 'Listen Audio' button in Scheme details, the voice stream was taking 15 seconds to begin in Melmaruvathur village on weak signal.",
+        attachment_url: null,
+        status: "resolved",
+        priority: "high",
+        admin_notes: "Optimized server audio streaming chunk size and added client-side caching.",
+        created_at: new Date(Date.now() - 86400000).toISOString(),
+        updated_at: new Date().toISOString(),
+        messages: [
+          {
+            id: "msg-s1",
+            sender_id: "11111111-1111-1111-1111-111111111111",
+            sender_name: "Muthuvel K",
+            sender_role: "citizen",
+            message: "When clicking the 'Listen Audio' button in Scheme details, the voice stream was taking 15 seconds to begin in Melmaruvathur village on weak signal.",
+            attachment_url: null,
+            created_at: new Date(Date.now() - 86400000).toISOString()
+          },
+          {
+            id: "msg-s2",
+            sender_id: "44444444-4444-4444-4444-444444444444",
+            sender_name: "State Governance Admin",
+            sender_role: "admin",
+            message: "We optimized the gTTS audio streaming chunks and enabled client audio caching. Verified streaming latency is now under 1.8 seconds on 2G/3G networks.",
+            attachment_url: null,
+            created_at: new Date().toISOString()
+          }
+        ]
+      }
+    ];
+  }
+
+  if (path.includes("/questions/") && (method === "POST" || method === "PUT")) {
+    return { status: "success", message: "Question response recorded successfully." };
+  }
+
+  if (path.startsWith("/api/support/") && (method === "POST" || method === "PUT")) {
+    return { status: "success", message: "Support ticket action updated successfully." };
+  }
+
   if (path === "/api/admin/audit-logs") {
     return FALLBACK_DATA.audit_logs;
   }

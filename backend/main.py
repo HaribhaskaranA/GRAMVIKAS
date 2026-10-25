@@ -21,7 +21,8 @@ from backend.routers import (
     assistant,
     voice,
     admin,
-    crop_doctor
+    crop_doctor,
+    support
 )
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -73,6 +74,7 @@ app.include_router(assistant.router)
 app.include_router(voice.router)
 app.include_router(admin.router)
 app.include_router(crop_doctor.router)
+app.include_router(support.router)
 
 # Mount Uploads directory safely
 try:
