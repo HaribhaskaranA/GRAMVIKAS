@@ -250,11 +250,31 @@ function resolveFallback(endpoint, options = {}) {
 
   // 9. AI Assistant (Personalized Fallback)
   if (path === "/api/assistant/chat" && method === "POST") {
+    let reqBody = {};
+    try {
+      if (typeof options.body === "string") reqBody = JSON.parse(options.body);
+      else if (options.body) reqBody = options.body;
+    } catch (e) {}
+
+    const query = (reqBody.query || reqBody.message || "").trim();
+    const storedLang = localStorage.getItem("gv_lang") || "en";
+    let lang = reqBody.language || storedLang || "en";
+
+    // Auto-detect language script from query if present
+    if (/[\u0B80-\u0BFF]/.test(query)) {
+      lang = "ta";
+    } else if (/[\u0900-\u097F]/.test(query)) {
+      lang = "hi";
+    } else if (/^[A-Za-z0-9\s.,?!'"₹@#$%&*()_\-]+$/.test(query)) {
+      if (reqBody.language === "en" || storedLang === "en" || !reqBody.language) {
+        lang = "en";
+      }
+    }
+
     let userName = "Muthuvel K";
     let village = "Melmaruvathur";
-    let occupation = "விவசாயி";
-    let land = "1.8 ஏக்கர்";
-    let lang = "ta";
+    let occupation = "farmer";
+    let land = "1.8 acres";
     try {
       const u = JSON.parse(localStorage.getItem("gv_user") || "{}");
       if (u.full_name) userName = u.full_name;
@@ -262,27 +282,40 @@ function resolveFallback(endpoint, options = {}) {
       if (prof) {
         village = prof.village || prof.assigned_area || village;
         occupation = prof.occupation || prof.designation || occupation;
-        if (prof.landholding_acres) land = `${prof.landholding_acres} ஏக்கர்`;
+        if (prof.landholding_acres) land = `${prof.landholding_acres} acres`;
       }
-      lang = localStorage.getItem("gv_lang") || "ta";
     } catch (e) {}
+
+    // Clean occupation and land text per language
+    let occLabel = occupation;
+    let landLabel = land;
+    if (lang === "ta") {
+      occLabel = (occupation === "farmer" || occupation === "விவசாயி") ? "விவசாயி" : occupation;
+      landLabel = land.includes("acres") ? land.replace("acres", "ஏக்கர்") : land;
+    } else if (lang === "hi") {
+      occLabel = (occupation === "farmer" || occupation === "விவசாயி") ? "किसान" : occupation;
+      landLabel = land.includes("acres") ? land.replace("acres", "एकड़") : land;
+    } else {
+      occLabel = (occupation === "farmer" || occupation === "விவசாயி") ? "farmer" : occupation;
+      landLabel = land.includes("ஏக்கர்") ? land.replace("ஏக்கர்", "acres") : land;
+    }
 
     let personalizedAnswer = "";
     if (lang === "ta") {
-      personalizedAnswer = `வணக்கம் **${userName}** அவர்களே! **${village}** கிராமத்தைச் சேர்ந்த **${occupation}** தொழிலாளியான உங்களின் சுயவிவரப்படி (நிலம்: **${land}**, ஆண்டு வருமானம்: **₹75,000**), உங்கள் கேள்விக்கான அதிகாரப்பூர்வ தகவல் இதோ:\n\n` +
+      personalizedAnswer = `வணக்கம் **${userName}** அவர்களே! **${village}** கிராமத்தைச் சேர்ந்த **${occLabel}** தொழிலாளியான உங்களின் சுயவிவரப்படி (நிலம்: **${landLabel}**, ஆண்டு வருமானம்: **₹75,000**), உங்கள் கேள்விக்கான அதிகாரப்பூர்வ தகவல் இதோ:\n\n` +
         `• **PM-KISAN சம்மான் நிதி:** சொந்த நிலம் வைத்துள்ள தங்களுக்கு ஆண்டுக்கு ₹6,000 மூன்று தவணைகளில் நேரடியாக வங்கிக் கணக்கில் வரவு வைக்கப்படுகிறது [Scheme: PM-KISAN].\n` +
         `• **தேவையான ஆவணங்கள்:** ஆதார் அட்டை, நிலப்பட்டா/சிட்டா நகல், வங்கிக் கணக்கு புத்தகம்.\n` +
         `• உதவி எண்: **1800-425-1333** | இ-சேவை மையத்தில் உடனடியாக விண்ணப்பிக்கலாம்.`;
     } else if (lang === "hi") {
-      personalizedAnswer = `नमस्ते **${userName}** जी! आपके प्रोफाइल के अनुसार, **${village}** के **${occupation}** (भूमि: **1.8 एकड़**, वार्षिक आय: **₹75,000**) के रूप में, आपके सवाल का विवरण:\n\n` +
+      personalizedAnswer = `नमस्ते **${userName}** जी! आपके प्रोफाइल के अनुसार, **${village}** के **${occLabel}** (भूमि: **${landLabel}**, वार्षिक आय: **₹75,000**) के रूप में, आपके सवाल का विवरण:\n\n` +
         `• **पीएम-किसान सम्मान निधि:** आप ₹6,000 वार्षिक प्रत्यक्ष सहायता के लिए पूरी तरह पात्र हैं [Scheme: PM-KISAN]।\n` +
         `• **आवश्यक दस्तावेज:** आधार कार्ड, खतौनी/भूमि पट्टा, बैंक पासबुक।\n` +
-        `• हेल्पलाइन: **1800-425-1333**`;
+        `• हेल्पलाइन: **1800-425-1333** | आप निकटतम सीएससी केंद्र पर आवेदन कर सकते हैं।`;
     } else {
-      personalizedAnswer = `Hello **${userName}**! According to your profile as a **${occupation}** in **${village}** (Landholding: **1.8 acres**, Annual Income: **₹75,000**), here is the verified guidance for your query:\n\n` +
+      personalizedAnswer = `Hello **${userName}**! According to your profile as a **${occLabel}** in **${village}** (Landholding: **${landLabel}**, Annual Income: **₹75,000**), here is the verified guidance for your query:\n\n` +
         `• **PM-KISAN Entitlement:** You are eligible for direct annual income support of ₹6,000 paid in 3 installments [Scheme: PM-KISAN].\n` +
-        `• **Required Documents:** Aadhaar card, Landholding Patta / Chitta document, Bank passbook.\n` +
-        `• Official Helpline: **1800-425-1333**`;
+        `• **Required Documents:** Aadhaar card, Landholding Patta / Chitta copy, Bank passbook.\n` +
+        `• Official Helpline: **1800-425-1333** | You can apply immediately through your village e-Seva centre.`;
     }
 
     return {
@@ -381,28 +414,30 @@ class ApiClient {
     }
   }
 
-  get(endpoint, params = {}) {
+  get(endpoint, params = {}, options = {}) {
     const query = new URLSearchParams(params).toString();
     const url = query ? `${endpoint}?${query}` : endpoint;
-    return this.request(url, { method: "GET" });
+    return this.request(url, { ...options, method: "GET" });
   }
 
-  post(endpoint, body = {}) {
+  post(endpoint, body = {}, options = {}) {
     return this.request(endpoint, {
+      ...options,
       method: "POST",
       body: JSON.stringify(body)
     });
   }
 
-  put(endpoint, body = {}) {
+  put(endpoint, body = {}, options = {}) {
     return this.request(endpoint, {
+      ...options,
       method: "PUT",
       body: JSON.stringify(body)
     });
   }
 
-  delete(endpoint) {
-    return this.request(endpoint, { method: "DELETE" });
+  delete(endpoint, options = {}) {
+    return this.request(endpoint, { ...options, method: "DELETE" });
   }
 
   upload(endpoint, file) {

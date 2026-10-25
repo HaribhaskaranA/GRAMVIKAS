@@ -5,6 +5,7 @@ Guarantees zero crashes, strict source citations, and multilingual responses (EN
 """
 
 import os
+import re
 import httpx
 from typing import Dict, Any, List, Optional
 from backend.config import settings
@@ -130,28 +131,58 @@ class AssistantService:
         """Answers citizen query using Gemini with direct user personalization, or deterministic fallback."""
         query = (req.query or req.message or "").strip()
         lang = req.language or "en"
+        
+        # Robust language resolution
+        if re.search(r'[\u0B80-\u0BFF]', query):
+            lang = "ta"
+        elif re.search(r'[\u0900-\u097F]', query):
+            lang = "hi"
+        elif lang == "en" or (re.search(r'^[A-Za-z0-9\s.,?!\'"₹@#$%&*()_\-]+$', query) and req.language not in ["ta", "hi"]):
+            lang = "en"
+
         user_profile = self._resolve_user_profile(req, current_user)
         
         user_name = user_profile.get("full_name", "Citizen")
         village = user_profile.get("village", "Melmaruvathur")
-        occupation = user_profile.get("occupation", "farmer")
+        raw_occupation = user_profile.get("occupation", "farmer")
         landholding = user_profile.get("landholding_acres", 1.8)
         annual_income = user_profile.get("annual_income", 75000.0)
         ration_card = user_profile.get("ration_card_type", "PHH")
         social_cat = user_profile.get("social_category", "OBC")
+
+        # Localize occupation display
+        if lang == "ta":
+            occupation = "விவசாயி" if raw_occupation in ["farmer", "விவசாயி", "किसान"] else raw_occupation
+        elif lang == "hi":
+            occupation = "किसान" if raw_occupation in ["farmer", "விவசாயி", "किसान"] else raw_occupation
+        else:
+            occupation = "farmer" if raw_occupation in ["farmer", "விவசாயி", "किसान"] else raw_occupation
         
         # 1. Attempt Live Gemini Generation
         if settings.GEMINI_API_KEY:
             try:
                 context_corpus = self.build_context_corpus(req.village_filter)
+                
+                lang_directive = (
+                    "CRITICAL: The user has selected ENGLISH. You MUST formulate your entire response in ENGLISH only. Do NOT use Tamil or Hindi words."
+                    if lang == "en" else
+                    ("முக்கியம்: பயனர் தமிழைத் தேர்ந்தெடுத்துள்ளார். உங்கள் முழு பதிலும் தமிழிலேயே இருக்க வேண்டும்." if lang == "ta" else
+                     "महत्वपूर्ण: उपयोगकर्ता ने हिंदी चुनी है। आपका पूरा उत्तर केवल हिंदी में होना चाहिए।")
+                )
+
                 system_instruction = (
                     "You are GRAMVIKAS AI, a personalized, empathetic, and expert rural governance and agriculture assistant.\n\n"
+                    f"*** MANDATORY LANGUAGE INSTRUCTION ***\n{lang_directive}\n\n"
                     "*** MANDATORY PERSONALIZATION DIRECTIVE ***\n"
                     "You MUST address the user personally by name and explicitly acknowledge their profile in the very first sentence:\n"
-                    f"- In English (en): Start with: 'Hello {user_name}! According to your profile as a {occupation} in {village} (Landholding: {landholding} acres, Annual income: ₹{annual_income:,.0f}, Ration Card: {ration_card})...'\n"
-                    f"- In Tamil (ta): Start with: 'வணக்கம் {user_name} அவர்களே! {village} கிராமத்தைச் சேர்ந்த {occupation} தொழிலாளியான உங்களின் சுயவிவரப்படி (நிலம்: {landholding} ஏக்கர், ஆண்டு வருமானம்: ₹{annual_income:,.0f}, குடும்ப அட்டை: {ration_card})...'\n"
-                    f"- In Hindi (hi): Start with: 'नमस्ते {user_name} जी! आपके प्रोफाइल के अनुसार, {village} के {occupation} ({landholding} एकड़ भूमि, वार्षिक आय ₹{annual_income:,.0f}, राशन कार्ड: {ration_card}) के रूप में...'\n\n"
-                    "STRICT RULES:\n"
+                    + (
+                        f"- In English (en): Start with: 'Hello {user_name}! According to your profile as a {occupation} in {village} (Landholding: {landholding} acres, Annual income: ₹{annual_income:,.0f}, Ration Card: {ration_card})...'\n"
+                        if lang == "en" else
+                        (f"- In Tamil (ta): Start with: 'வணக்கம் {user_name} அவர்களே! {village} கிராமத்தைச் சேர்ந்த {occupation} தொழிலாளியான உங்களின் சுயவிவரப்படி (நிலம்: {landholding} ஏக்கர், ஆண்டு வருமானம்: ₹{annual_income:,.0f}, குடும்ப அட்டை: {ration_card})...'\n"
+                         if lang == "ta" else
+                         f"- In Hindi (hi): Start with: 'नमस्ते {user_name} जी! आपके प्रोफाइल के अनुसार, {village} के {occupation} ({landholding} एकड़ भूमि, वार्षिक आय ₹{annual_income:,.0f}, राशन कार्ड: {ration_card}) के रूप में...'\n")
+                    )
+                    + "\nSTRICT RULES:\n"
                     f"1. Evaluate their eligibility specifically against their profile parameters (e.g. check if their {landholding} acres or ₹{annual_income:,.0f} income qualifies for the scheme).\n"
                     "2. Rely ONLY on the verified context provided below. Never hallucinate schemes or false subsidy amounts.\n"
                     "3. Cite verified sources in square brackets, e.g. [Scheme: PM-KISAN] or [Project: TN-CGL-2026-WTR-01].\n"
@@ -163,7 +194,7 @@ class AssistantService:
                     f"--- CITIZEN PROFILE DATA ---\n"
                     f"Name: {user_name} | Village: {village} | Occupation: {occupation} | Land: {landholding} acres | Income: ₹{annual_income:,.0f} | Ration: {ration_card} | Social: {social_cat}\n\n"
                     f"--- VERIFIED CONTEXT DOCUMENTS ---\n{context_corpus}\n\n"
-                    f"--- CONVERSATION LANGUAGE ---\nLanguage code: {lang}\n\n"
+                    f"--- TARGET CONVERSATION LANGUAGE ---\nRequired output language: {lang.upper()}\n\n"
                     f"--- CITIZEN QUERY ---\n{query}"
                 )
 
@@ -207,33 +238,49 @@ class AssistantService:
 
     def _deterministic_rag_answer(self, req: AssistantChatRequest, user_profile: Optional[Dict[str, Any]] = None) -> AssistantChatResponse:
         """Grounded rule-based answer generation with strict citations and personalized multilingual templates."""
-        q = (req.query or req.message or "").lower()
+        raw_q = (req.query or req.message or "").strip()
+        q = raw_q.lower()
         lang = req.language or "en"
+        
+        # Robust script detection
+        if re.search(r'[\u0B80-\u0BFF]', raw_q):
+            lang = "ta"
+        elif re.search(r'[\u0900-\u097F]', raw_q):
+            lang = "hi"
+        elif lang == "en" or (re.search(r'^[A-Za-z0-9\s.,?!\'"₹@#$%&*()_\-]+$', raw_q) and req.language not in ["ta", "hi"]):
+            lang = "en"
+
         prof = user_profile or self._resolve_user_profile(req)
         
         user_name = prof.get("full_name", "Muthuvel K")
         village = prof.get("village", "Melmaruvathur")
-        occupation = prof.get("occupation", "farmer")
+        raw_occupation = prof.get("occupation", "farmer")
         landholding = prof.get("landholding_acres", 1.8)
         annual_income = prof.get("annual_income", 75000.0)
 
-        # Personalized greeting header
+        # Localize occupation and land labels
         if lang == "ta":
+            occupation = "விவசாயி" if raw_occupation in ["farmer", "விவசாயி", "किसान"] else raw_occupation
+            land_label = f"{landholding} ஏக்கர்"
             personalized_greeting = (
                 f"வணக்கம் **{user_name}** அவர்களே! **{village}** கிராமத்தைச் சேர்ந்த **{occupation}** தொழிலாளியான "
-                f"உங்களின் சுயவிவரப்படி (நிலம்: **{landholding} ஏக்கர்**, ஆண்டு வருமானம்: **₹{annual_income:,.0f}**), "
+                f"உங்களின் சுயவிவரப்படி (நிலம்: **{land_label}**, ஆண்டு வருமானம்: **₹{annual_income:,.0f}**), "
                 f"உங்கள் கேள்விக்கான அதிகாரப்பூர்வ தகவல் இதோ:\n\n"
             )
         elif lang == "hi":
+            occupation = "किसान" if raw_occupation in ["farmer", "விவசாயி", "किसान"] else raw_occupation
+            land_label = f"{landholding} एकड़"
             personalized_greeting = (
                 f"नमस्ते **{user_name}** जी! आपके प्रोफाइल के अनुसार, **{village}** के **{occupation}** "
-                f"(भूमि: **{landholding} एकड़**, वार्षिक आय: **₹{annual_income:,.0f}**) के रूप में, "
+                f"(भूमि: **{land_label}**, वार्षिक आय: **₹{annual_income:,.0f}**) के रूप में, "
                 f"आपके सवाल का सत्यापित विवरण इस प्रकार है:\n\n"
             )
         else:
+            occupation = "farmer" if raw_occupation in ["farmer", "விவசாயி", "किसान"] else raw_occupation
+            land_label = f"{landholding} acres"
             personalized_greeting = (
                 f"Hello **{user_name}**! According to your profile as a **{occupation}** in **{village}** "
-                f"(Landholding: **{landholding} acres**, Annual Income: **₹{annual_income:,.0f}**), "
+                f"(Landholding: **{land_label}**, Annual Income: **₹{annual_income:,.0f}**), "
                 f"here is the verified guidance for your query:\n\n"
             )
 

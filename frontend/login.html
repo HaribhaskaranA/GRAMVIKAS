@@ -69,7 +69,7 @@
                   </div>
                   <div>
                     <h3 class="fw-bold mb-0 text-white" style="letter-spacing: 0.5px; color: var(--color-champagne) !important;">GRAMVIKAS AI</h3>
-                    <span class="small text-uppercase" style="color: var(--color-champagne-border); font-weight: 600; letter-spacing: 1px;">கிராம விகாஸ் &bull; Rural Portal</span>
+                    <span class="small text-uppercase" style="color: var(--color-champagne-border); font-weight: 600; letter-spacing: 1px;">GRAMVIKAS &bull; Rural Governance Portal</span>
                   </div>
                 </div>
 
@@ -189,6 +189,11 @@
     import { showToast } from "/js/components/toast.js";
     import { openModal } from "/js/components/modal.js";
     import { api } from "/js/api.js";
+
+    // Ensure clean English session by default
+    if (!localStorage.getItem("gv_lang")) {
+      localStorage.setItem("gv_lang", "en");
+    }
 
     // Auto fill buttons
     document.querySelectorAll(".btn-fill-demo").forEach(btn => {

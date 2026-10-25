@@ -215,19 +215,20 @@ export function renderAssistant(container) {
         ...(activeUser.citizen_profile || activeUser.official_profile || {})
       } : null;
 
+      const activeLang = getLanguage();
       const res = await api.post("/api/assistant/chat", {
         query: query,
         message: query,
-        language: getLanguage(),
+        language: activeLang,
         session_id: "web-session-" + (activeUser?.id || "guest"),
         user_profile: userProfile
-      });
+      }, { timeout: 25000 });
 
       const reply = res.answer || res.reply_text || "Thank you for asking. Our facts are grounded in verified government catalogs.";
       updateBotBubble(botMsgId, reply, res.citations, res.suggested_schemes);
       
       // Auto Read Aloud the response
-      speakText(res.audio_tts_text || reply, getLanguage());
+      speakText(res.audio_tts_text || reply, activeLang);
     } catch (err) {
       updateBotBubble(botMsgId, `I encountered an issue processing your query: ${err.message}. Please check your connection or try again.`);
     }
@@ -303,13 +304,13 @@ export function renderAssistant(container) {
     row.innerHTML = `
       <div class="message-avatar" style="overflow: hidden; padding: 0;"><img src="/assets/assistant_logo.jpeg" alt="Bot" style="width: 100%; height: 100%; object-fit: cover;"></div>
       <div class="message-bubble">
-        <div class="d-flex align-items-center justify-content-between mb-1">
-          <span class="fw-semibold small" style="color: var(--color-navy);">GRAMVIKAS Grounded AI</span>
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <span class="fw-bold small" style="color: var(--color-primary);"><i class="bi bi-robot me-1"></i> GRAMVIKAS Grounded AI</span>
           <button class="btn btn-xs btn-outline-secondary py-0 btn-speak-msg" title="Read Aloud" style="font-size: 0.72rem;">
             <i class="bi bi-volume-up"></i> Listen
           </button>
         </div>
-        <div class="bot-text mb-1" style="white-space: pre-wrap; line-height: 1.5;">${escapeHtml(text)}</div>
+        <div class="bot-text mb-2">${renderMarkdownToHtml(text)}</div>
         ${schemesHtml}
         ${citationsHtml}
       </div>
@@ -322,12 +323,73 @@ export function renderAssistant(container) {
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
   }
 
+  function renderMarkdownToHtml(md) {
+    if (!md) return "";
+    
+    // 1. Basic HTML sanitization
+    let safe = md
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+
+    // 2. Bold tags: **text** or __text__
+    safe = safe.replace(/\*\*(.+?)\*\*/g, '<strong style="color: var(--color-primary); font-weight: 700;">$1</strong>');
+    safe = safe.replace(/__(.+?)__/g, '<strong style="color: var(--color-primary); font-weight: 700;">$1</strong>');
+
+    // 3. Citations in square brackets e.g. [Scheme: PM-KISAN]
+    safe = safe.replace(/\[((?:Scheme|Project|Source|Handbook):[^\]]+)\]/gi, '<span class="badge border ms-1 py-1 px-2" style="background: rgba(6, 78, 59, 0.08); color: var(--color-primary); font-weight: 600;"><i class="bi bi-shield-check text-success me-1"></i>$1</span>');
+
+    // 4. Markdown links: [text](url)
+    safe = safe.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-decoration-underline fw-semibold" style="color: var(--color-primary);">$1</a>');
+
+    // 5. Section headings (### Header, ## Header)
+    safe = safe.replace(/^### (.*?)$/gm, '<h6 class="fw-bold mt-2 mb-1" style="color: var(--color-primary);">$1</h6>');
+    safe = safe.replace(/^## (.*?)$/gm, '<h5 class="fw-bold mt-2 mb-1" style="color: var(--color-primary);">$1</h5>');
+
+    // 6. Split into lines and structure into clean lists or paragraphs
+    const lines = safe.split("\n");
+    const formatted = [];
+    let inList = false;
+
+    for (let rawLine of lines) {
+      const trimmed = rawLine.trim();
+      if (!trimmed) {
+        if (inList) {
+          formatted.push("</ul>");
+          inList = false;
+        }
+        continue;
+      }
+
+      if (trimmed.startsWith("• ") || trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
+        const itemContent = trimmed.replace(/^[•\-\*]\s*/, "");
+        if (!inList) {
+          formatted.push('<ul class="mb-2 ps-3" style="list-style-type: disc;">');
+          inList = true;
+        }
+        formatted.push(`<li class="mb-1" style="line-height: 1.5;">${itemContent}</li>`);
+      } else {
+        if (inList) {
+          formatted.push("</ul>");
+          inList = false;
+        }
+        formatted.push(`<p class="mb-2" style="line-height: 1.55;">${trimmed}</p>`);
+      }
+    }
+
+    if (inList) {
+      formatted.push("</ul>");
+    }
+
+    return formatted.join("");
+  }
+
   function speakText(text, lang) {
     if (!window.speechSynthesis) return;
     window.speechSynthesis.cancel();
 
     // Clean markdown/special characters for speech
-    const cleanText = text.replace(/[*_#`]/g, "");
+    const cleanText = text.replace(/[*_#`\[\]]/g, "").replace(/\(.*?\)/g, "");
     const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.lang = lang === "ta" ? "ta-IN" : (lang === "hi" ? "hi-IN" : "en-IN");
     utterance.rate = 0.95;
