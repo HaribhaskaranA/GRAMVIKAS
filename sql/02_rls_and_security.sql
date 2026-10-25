@@ -1,6 +1,6 @@
 -- ==============================================================================
 -- GRAMVIKAS AI - ROW LEVEL SECURITY (RLS) & ACCESS CONTROL POLICIES
--- Migration 02: Supabase RLS Enablement and Role Policies
+-- Migration 02: Supabase RLS Enablement and Role Policies.
 -- ==============================================================================
 
 -- 1. Enable RLS on core tables
