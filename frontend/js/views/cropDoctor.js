@@ -354,11 +354,12 @@ export async function renderCropDoctor(container) {
             body: formData
           });
         } else {
-          // Native fetch fallback
+          // Native fetch fallback with dynamic API Base URL
           const token = localStorage.getItem("gv_token");
           const headers = {};
           if (token) headers["Authorization"] = `Bearer ${token}`;
-          const res = await fetch(`/api/crop-doctor/analyze?language=${currentLang}`, {
+          const targetUrl = `${(api.baseUrl || '').replace(/\/+$/, '')}/api/crop-doctor/analyze?language=${currentLang}`;
+          const res = await fetch(targetUrl, {
             method: "POST",
             headers,
             body: formData

@@ -2,18 +2,22 @@
  * GRAMVIKAS AI - Frontend Configuration & Constants
  */
 
+// Deployed Render FastAPI Backend URL
+export const RENDER_BACKEND_URL = "https://gramvikas-ai-backend.onrender.com";
+
 const isLocalhost = typeof window !== 'undefined' && (
   window.location.hostname === 'localhost' ||
   window.location.hostname === '127.0.0.1'
 );
 
-// Always relative in production / Vercel to guarantee zero CORS issues
-export const API_BASE = isLocalhost ? 'http://127.0.0.1:8000' : '';
+// In production (Vercel), route all API requests to the active Render cloud backend
+export const API_BASE = isLocalhost ? 'http://127.0.0.1:8000' : RENDER_BACKEND_URL;
 
 export const CONFIG = {
   APP_NAME: "GRAMVIKAS AI",
   TAGLINE: "Every Citizen Informed. Every Village Progress Tracked.",
   API_BASE: API_BASE,
+  RENDER_BACKEND_URL: RENDER_BACKEND_URL,
   DEFAULT_LANGUAGE: "ta",
   SUPPORTED_LANGUAGES: ["en", "ta", "hi"],
   DEMO_USERS: {

@@ -344,7 +344,7 @@ function resolveFallback(endpoint, options = {}) {
 
 class ApiClient {
   constructor() {
-    this.baseUrl = API_BASE || CONFIG.API_BASE || "";
+    this.baseUrl = (API_BASE || CONFIG.API_BASE || "").replace(/\/+$/, "");
   }
 
   getToken() {
@@ -360,7 +360,8 @@ class ApiClient {
   }
 
   async request(endpoint, options = {}) {
-    const url = `${this.baseUrl}${endpoint}`;
+    const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+    const url = `${this.baseUrl}${cleanEndpoint}`;
     const headers = options.headers || {};
 
     const token = this.getToken();
@@ -372,7 +373,8 @@ class ApiClient {
       headers["Content-Type"] = "application/json";
     }
 
-    const timeoutMs = options.timeout || 8000;
+    const isAiEndpoint = endpoint.includes("/crop-doctor") || endpoint.includes("/assistant");
+    const timeoutMs = options.timeout || (isAiEndpoint ? 35000 : 20000);
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
@@ -397,6 +399,10 @@ class ApiClient {
       }
 
       if (!response.ok) {
+        if (endpoint.includes("/api/crop-doctor/analyze")) {
+          const errData = await response.json().catch(() => ({ detail: response.statusText }));
+          throw new Error(errData.detail || `Crop AI service returned error (${response.status})`);
+        }
         console.warn(`[API Server Response ${response.status}] for ${endpoint} -> Falling back to offline client mirror.`);
         return resolveFallback(endpoint, options);
       }
@@ -409,6 +415,9 @@ class ApiClient {
       }
     } catch (err) {
       clearTimeout(timeoutId);
+      if (endpoint.includes("/api/crop-doctor/analyze")) {
+        throw err;
+      }
       console.warn(`[API Network / Timeout] ${endpoint}: ${err.message} -> Falling back to offline client mirror.`);
       return resolveFallback(endpoint, options);
     }
